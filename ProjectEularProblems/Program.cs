@@ -8,6 +8,7 @@ using System.Numerics;
 using System.Speech.Synthesis;
 using System.Speech.Recognition;
 using System.Speech.AudioFormat;
+using System.Threading.Tasks;
 
 namespace ProjectEularProblems
 {
@@ -18,7 +19,8 @@ namespace ProjectEularProblems
         //Project Eular
         static void Main ( string[] args )
         {
-            DigitFifthPowers();
+
+            LetterCount();
             Console.ReadLine ();
         }
 
@@ -388,11 +390,60 @@ namespace ProjectEularProblems
             Console.WriteLine($"{res} has {max} nums in sequence.");
         }
 
-        //NOT WORKING
         //PROBLEM 15 <by moving only right & down in a 20x20 grid. how many possible moves are there>
-        public static void MovesInGrid()
+        public static async void MovesInGrid(int grid)
         {
+            //Stopwatch sp = new Stopwatch();
+            //sp.Start();
 
+            //use the combination formula [n! / r! (n - r)!]
+            /*
+                 n!                       40!                              40!
+            ___________    ====>   ________________      ====>         ___________
+
+            r! (n - r)!              20! (40 - 20)!                     20! x 20!
+
+            */
+
+            string n = "1";
+            Task t = new Task(() => { 
+			for ( int i = grid * 2; i > 1; i-- )
+			    {
+                    n = MultiplyLongNums(i.ToString(), n);
+			    }
+                });
+            t.Start();
+            await t;
+
+            string r = "1";
+            string rbyr = "";
+
+            Task t2 = new Task(() => { 
+                for ( int i = grid; i > 1; i-- )
+                {
+                    r = MultiplyLongNums(i.ToString(), r);
+                }
+                rbyr = MultiplyLongNums(r, r);
+            });
+            t2.Start();
+            await t2;
+
+            if ( t.IsCompleted && t2.IsCompleted )
+			{
+
+                n = n.Insert(n.Length - ( rbyr.Length - 1 ), ".");
+                rbyr = rbyr.Insert(1, ".");
+
+                double d = double.Parse(n) / double.Parse(rbyr);
+
+			    //Console.WriteLine(n);
+                //Console.WriteLine(rbyr );
+                Console.ForegroundColor = ConsoleColor.Green;
+                Console.WriteLine(d);
+
+            //sp.Stop();
+            //Console.WriteLine("\n" + sp.ElapsedMilliseconds);
+			}
         }
 
         //PROBLEM 16 < sum of digits produced by 2^100 >
@@ -465,36 +516,77 @@ namespace ProjectEularProblems
         }
         
         //PROBLEM 17 <writing a number in words and counting number of letters>
-        //NOT WORKING
         public static void LetterCount()
         {
-            //SpeechSynthesizer s = new SpeechSynthesizer();
-            // s.SetOutputToWaveFile("../1.wav",new SpeechAudioFormatInfo(100000,AudioBitsPerSample.Eight,AudioChannel.Mono));
-            // s.Speak("1");
+            int output = 0;
 
+            string result = null;
 
-            SpeechRecognitionEngine speechRecognizer = new SpeechRecognitionEngine();
+            string[] ones = { "one", "two", "three", "four", "five", "six", "seven", "eight", "nine", "ten" };
+            string[] tens = { "eleven", "twelve", "thirteen", "fourteen", "fifteen", "sixteen", "seventeen", "eighteen", "nineteen" };
+            string[] hundreds = { "twenty", "thirty", "forty", "fifty", "sixty", "seventy", "eighty", "ninety" };
 
-            Grammar dictation = new DictationGrammar();
-
-
-            speechRecognizer.LoadGrammar(dictation);
-
-        speechRecognizer.SetInputToWaveFile("../1.wav");
-            
-            speechRecognizer.RecognizeAsync();
-
-            speechRecognizer.SpeechRecognized += ( sender, e ) =>
+            for ( int number = 1; number <= 1000; number++ )
             {
-
-                if ( e.Result != null && e.Result.Text != null )
+                if ( number <= 10 )
                 {
-                    //Console.WriteLine(path);
-                    speechRecognizer.Dispose();
-			        Console.WriteLine(e.Result.Text);
-                    
+                    result = ones[ number - 1 ];
                 }
-            };
+                else if ( number <= 19 )
+                {
+                    result = tens[ number - 11 ];
+                }
+                else if ( number <= 99 )
+                {
+                    string num = number.ToString();
+                    result = num[ 1 ] == '0' ? $"{hundreds[ int.Parse(num[ 0 ].ToString()) - 2 ] }" : $"{hundreds[ int.Parse(num[ 0 ].ToString()) - 2 ] } {ones[ int.Parse(num[ 1 ].ToString()) - 1 ]}";
+                }
+                else if ( number <= 999 )
+                {
+                    string num = number.ToString();
+                    string first_part = ones[ int.Parse(num[ 0 ].ToString()) - 1 ] + " hundred";
+                    string second_part = "";
+
+                    if ( num.Substring(1, 2) != "00" )
+                    {
+
+                        if ( num[ 1 ] == '0' )
+                        {
+                            second_part = "and " + $"{ones[ int.Parse(num[ 2 ].ToString()) - 1 ]}";
+
+                        }
+                        else if ( num[ 2 ] == '0' )
+                        {
+                            second_part = num[ 1 ] == '1' ? $"and {ones[ 9 ]}" : "and " + $"{hundreds[ int.Parse(num[ 1 ].ToString()) - 2 ] }";
+                        }
+
+                        else
+                        {
+                            int n = int.Parse(num.Substring(1, 2));
+                            if ( n <= 19 )
+                            {
+                                second_part = $"and {tens[ n - 11 ]}";
+                            }
+                            else if ( n <= 99 )
+                            {
+                                second_part = $"and {hundreds[ int.Parse(num[ 1 ].ToString()) - 2 ] } {ones[ int.Parse(num[ 2 ].ToString()) - 1 ]}";
+                            }
+                        }
+                    }
+
+                    result = $"{first_part} {second_part}";
+
+                }
+                else if ( number == 1000 )
+                {
+                    result = "one thousand";
+                }
+
+				Console.WriteLine(number +". " +result);
+                output += result.Replace(" ", "").Length;
+            }
+            Console.ForegroundColor = ConsoleColor.Green;
+			Console.WriteLine("\n" + output + " words.");
         }
 
 
