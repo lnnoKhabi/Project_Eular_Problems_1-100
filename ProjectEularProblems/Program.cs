@@ -1113,64 +1113,61 @@ namespace ProjectEularProblems
         How many different ways can £2 be made using any number of coins? */
         public static void CoinSums()
 		{
-			//PairNumber(50, 1, 2, coins);
+			List<int> coins = new List<int> { 100, 50, 20, 10, 5, 2, 1 };
+            List<int> total = new List<int>();
 
-			for ( int i = 1; i <= 7 - 6; i++ )
+			for ( int j = 1; j <= 7; j++ )
 			{
-				//pair each coin in 
-				//1,2,3,4,5,6,7 ==> 100
-				//1,2,3,4,5,6   ==> 50
-				//1,2,3,4,5     ==> 20
-				//1,2,3,4,      ==> 10
-				//1,2,3         ==> 5
-				//1,2           ==> 2
-				//1             ==> 1
-				List<int> coins = new List<int> { 100, 50, 20, 10, 5, 2, 1 };
-				int coin = coins[ i ];
-				int pairIn = coins.Count - i;
-
-				for ( int j = 3; j <= 3; j++ )
-				{
-					Console.WriteLine(PairNumber(coin, i, j, coins));
-				}
-				Console.WriteLine();
+                int res = PairNumber(j, coins);
+                Console.WriteLine(res);
+                total.Add(res);
 			}
-			//p31();
-		}
+            Console.ForegroundColor = ConsoleColor.Green;
+			Console.WriteLine($"Total ways ==> {total.Sum()}");
 
-        private static int PairNumber(int number,int index, int pair_in, List<int> coins)
+        }
+        private static int PairNumber(int pair_in, List<int> coins)
 		{
             int res = 0;
 
             //for pairing each coin by itself
             if(pair_in == 1 )
-            { 
-				Console.WriteLine($"{200/number}x{number}p");
-                return 1;
+            {
+				//Console.WriteLine($"1x200p");
+				//for ( int i = 0; i < coins.Count; i++ )
+    //            {
+				//    Console.WriteLine($"{200/coins[i]}x{coins[i]}p");
+				//}
+                return coins.Count + 1;
 			}
             //for pairing every coin by 1 other coin
             else if(pair_in == 2 )
 			{
-                int n = 200 - number; //n is what remains when we subtract main number to pair with
-                for ( int j = 1; j <= n / number; j++ ) //j is for total pairing of main number we need eg 1x50p,2x50p,3x50p
+                for ( int a = 0; a < coins.Count - 1; a++ )
                 {
-                    for ( int i = index + 1; i < coins.Count; i++ ) // i iterates the remaining numbers to be paired with main number
+                    for ( int b = a + 1; b < coins.Count ; b++ )
                     {
-                        int n2 = number * j; // n2 is sum of j main numbers eg 3 50p coins == 150p ..... 
-
-                        //if 200p - n2 divided by coins to pair with
-                        //res += (200 - n2) % coins[ i ] == 0 ? 1 : 0; 
-                        if ( (200 - n2) % coins[ i ] == 0 )
+                        int iend = 200 / coins[ a ];
+                        for ( int i = 1; i <= iend; i++ )
                         {
-                            res++;
-                            Console.WriteLine($"{j}x{number}p + {(200 - n2) / coins[ i ]}x{coins[ i ]}p");
+                            int jend = ( 200 - ( coins[ a ] * i ) ) / coins[ b ];
+                            for ( int j = 1; j <= jend; j++ )
+                            {
+                                int sum = ( coins[ a ] * i ) + ( coins[ b ] * j ) ;
+                                if ( sum == 200 )
+                                {
+                                    res++;
+                                    //Console.WriteLine($"{i}x{coins[ a ]}p + {j}x{coins[ b ]}p");
+                                }
+                            }
                         }
                     }
                 }
+
                 return res;
 			}
 
-            else if(pair_in == 3 && index <= 4 )
+            else if(pair_in == 3 )
 			{
                     for ( int a = 0; a < coins.Count - 2; a++ )
                     {
@@ -1178,266 +1175,105 @@ namespace ProjectEularProblems
                         {
                             for ( int c = b + 1; c < coins.Count ; c++ )
                             {
-                                //res += all_coins[ a ] + all_coins[ b ] + all_coins[ c ] == 200 ? 1 : 0;
                                 int iend = 200 / coins[a];
-                                //iend = coins[a] * iend == 200 ? iend - 1 : iend;
                                 for ( int i = 1; i <= iend; i++ )
                                 {
-                                int jend = ( 200 - ( coins[ a ] * i ) ) / coins[ b ];  
-
+                                    int jend = ( 200 - ( coins[ a ] * i ) ) / coins[ b ];  
 									for ( int j = 1; j <= jend; j++ )
 									{
-                                    int kend = ( 200 - ( coins[ a ] * i ) - ( coins[ b ] * j ) ) / coins[ c ];
-
+                                        int kend = ( 200 - ( coins[ a ] * i ) - ( coins[ b ] * j ) ) / coins[ c ];
                                         for ( int k = 1; k <= kend; k++ )
 									    {
-                                        int sum = ( coins[ a ] * i ) + ( coins[ b ] * j ) + ( coins[ c ] * k );
+                                            int sum = ( coins[ a ] * i ) + ( coins[ b ] * j ) + ( coins[ c ] * k );
                                             if(sum == 200 )
-										{
-                                            res++;
-											Console.WriteLine($"{i}x{coins[a]} + {j}x{coins[ b ]} + {k}x{coins[ c ]}");
-										}
+										    {
+                                                res++;
+											    //Console.WriteLine($"{i}x{coins[a]}p + {j}x{coins[ b ]}p + {k}x{coins[ c ]}p");
+										    }
 									    }
 									}
                                 }
                             }
                         }
                     }
-
-                //for ( int phase = 0; phase <= (7 - index)- pair_in; phase++ )
-                //{
-                    //for ( int i = 1; i <= ( 200 - number ) / number; i++ ) //iteration of first number
-                    //{
-                    //    for ( int j = 1; j <= ( 200 - ( number * i ) ) / coins[ index + 1 ]; j++ )//second number
-                    //    {
-                    //        if ( ( number * i ) + ( coins[ index + 1 ] * j ) != 200 )//only if theres room for last number
-                    //        {
-                    //            for ( int k = index + 2; k < coins.Count; k++ )//last number
-                    //            {
-                    //                int sum = ( number * i ) + ( coins[ index + 1 ] * j );
-                    //                if ( ( 200 - sum ) % coins[ k ] == 0 )
-                    //                {
-                    //                    res++;
-                    //                    Console.WriteLine($"{i}x{number}p + {j}x{coins[ index + 1 ]}p + {( 200 - sum ) / coins[ k ]}x{coins[ k ]}p");
-                    //                }
-                    //            }
-                    //        }
-                    //    }
-                    //}
-                    //coins.RemoveAt(index + 1);
-                //}
                 return res;
             }
 
-            else if(pair_in == 4 && index <= 3 )
+            else if(pair_in == 4  )
 			{
-                for ( int phase = 1; phase < 7 - index; phase++ )
+                for ( int a = 0; a < coins.Count - 3; a++ )
                 {
-                    for ( int times = 0; times <= ( 7 - index ) - pair_in; times++ )//to skip following terms in array
+                    for ( int b = a + 1; b < coins.Count - 2; b++ )
                     {
-                        //times 1st num can be multiplied which is < 200 eg (200-50)/50 = 3
-                        // therefore 1st num can be multiplied 3 times i.e 50 + 50 + 50 = 150
-                        for ( int i = 1; i <= ( 200 - number ) / number; i++ )
+                        for ( int c = b + 1; c < coins.Count - 1; c++ )
                         {
-                            //sec_n <= eg ( (200-50*1) - 20 )/ 20 = 6
-                            //int sec_n = ( ( 200 - number * i ) - coins[ index + 1 ] ) / coins[ index + 1 ];
-                            int sec_n = ( 200 - ( number * i ) ) / coins[ index + 1 ];
-                            for ( int j = 1; j <= sec_n; j++ )
-                            {
-                                int dif = 200 - ( ( number * i ) + ( coins[ index + 1 ] * j ) );
-
-                                for ( int k = 1; k <= dif / coins[ index + 2 ]; k++ )
+							for ( int d = c + 1; d < coins.Count; d++ )
+							{
+                                int iend = 200 / coins[ a ];
+                                for ( int i = 1; i <= iend; i++ )
                                 {
-                                    if ( ( number * i ) + ( coins[ index + 1 ] * j ) + ( coins[ index + 2 ] * k ) != 200 )
+                                    int jend = ( 200 - ( coins[ a ] * i ) ) / coins[ b ];
+                                    for ( int j = 1; j <= jend; j++ )
                                     {
-                                        for ( int l = index + 3; l < coins.Count; l++ )
+                                        int kend = ( 200 - ( coins[ a ] * i ) - ( coins[ b ] * j ) ) / coins[ c ];
+                                        for ( int k = 1; k <= kend; k++ )
                                         {
-                                            res++;
-                                            int sum = ( number * i ) + ( coins[ index + 1 ] * j ) + ( coins[ index + 2 ] * k );
-                                            Console.WriteLine($"{i}x{number}p + {j}x{coins[ index + 1 ]}p + {k}x{coins[ index + 2 ]}p + {( 200 - sum ) / coins[ l ]}x{coins[ l ]}p");
+                                            int lend = ( 200 - ( coins[ a ] * i ) - ( coins[ b ] * j ) - ( coins[ c ] * k ) ) / coins[ d ];
+											for ( int l = 1; l <= lend; l++ )
+											{
+                                                int sum = ( coins[ a ] * i ) + ( coins[ b ] * j ) + ( coins[ c ] * k ) + ( coins[d] * l );
+                                                if ( sum == 200 )
+                                                {
+                                                    res++;
+                                                    //Console.WriteLine($"{i}x{coins[ a ]}p + {j}x{coins[ b ]}p + {k}x{coins[ c ]}p + {l}x{coins[ d ]}p");
+                                                }
+											}
                                         }
                                     }
                                 }
-                            }
+							}
                         }
-                        coins.RemoveAt(index + phase);
                     }
                 }
                 return res;
 			}
 
-            else if(pair_in == 5 && index <= 2 )
+            else if(pair_in == 5  )
 			{
-				//for ( int phase = 0; phase <= ( 7 - index ) - pair_in; phase++ )//to skip following terms in array
-				//{
-					//1st num <= eg (200 - 50)/50 = 3
-					int first_n = ( 200 - number ) / number;
-                    for ( int i = 1; i <= first_n; i++ )
+                for ( int a = 0; a < coins.Count - 4; a++ )
+                {
+                    for ( int b = a + 1; b < coins.Count - 3; b++ )
                     {
-                        int sec_n = ( 200 - (number * i) ) / coins[ index + 1 ];
-                        for ( int j = 1; j <= sec_n; j++ )
+                        for ( int c = b + 1; c < coins.Count - 2; c++ )
                         {
-                            int third_n = ( 200 - ( ( number * i ) + ( coins[ index + 1 ] * j ) ) ) / coins[ index + 2 ];
-                            for ( int k = 1; k <= third_n; k++ )
+                            for ( int d = c + 1; d < coins.Count - 1; d++ )
                             {
-                                int forth_n = ( 200 - ( ( number * i ) + ( coins[ index + 1 ] * j ) + ( coins[ index + 2 ] * k ) ) ) / coins[ index + 3 ];
-                                for ( int l = 1; l <= forth_n; l++ )
+                                for ( int e = d + 1; e < coins.Count; e++ )
                                 {
-                                        for ( int m = index + 4; m < coins.Count; m++ )
+                                    int iend = 200 / coins[ a ];
+                                    for ( int i = 1; i <= iend; i++ )
+                                    {
+                                        int jend = ( 200 - ( coins[ a ] * i ) ) / coins[ b ];
+                                        for ( int j = 1; j <= jend; j++ )
                                         {
-                                    if ( (number * i) + (coins[index + 1] * j) + ( coins[ index + 2 ] * k ) + ( coins[ index + 3 ] * l ) != 200 )
-                                    {
-                                            int stop = ( 200 - ( ( number * i ) + ( coins[ index + 1 ] * j ) + ( coins[ index + 2 ] * k ) + ( coins[ index + 3 ] * l ) )) / coins[ m ];
-
-                                            Console.WriteLine($"{i}x{number}p + {j}x{coins[ index + 1 ]}p + {k}x{coins[ index + 2 ]}p + {l}x{coins[ index + 3 ]}p + {stop}x{coins[ m ]}p");
-                                            res++;
-                                        }
-                                    }
-                                }
-                            }
-                        }
-                    }
-                    coins.RemoveAt(index + 1);
-                //}
-                return res;
-			}
-            return 0;
-		}
-
-        private static void p31()
-		{
-            int[] coins = { 200, 100, 50, 20, 10, 5, 2, 1 };
-            List<int> all_coins = new List<int>();
-			foreach ( int n in coins )
-			{
-				for ( int i = 0; i < 200 / n; i++ )
-				{
-                    all_coins.Add(n);
-				}
-			}
-
-			for ( int i = 6; i < 7; i++ )
-			{
-                int res = 0;
-                if(i == 1 )
-				{
-					for(int a = 0; a < all_coins.Count; a++ )
-					{
-                        res += all_coins[a] == 200 ? 1 : 0;
-					}
-	                Console.WriteLine($"{i} ==> { res}");
-				}
-                else if(i == 2 )
-				{
-                    for ( int a = 0; a < all_coins.Count - 1; a++ )
-                    {
-                        for ( int b = a + 1; b < all_coins.Count; b++ )
-                        {
-                            res += all_coins[ a ] + all_coins[ b ] == 200 ? 1 : 0;
-                        }
-                    }
-	                Console.WriteLine($"{i} ==> { res}");
-                }
-
-                else if ( i == 3 )
-                {
-                    for ( int a = 0; a < all_coins.Count - 6; a++ )
-                    {
-                        for ( int b = a + 1; b < all_coins.Count - 5; b++ )
-                        {
-                            for ( int c = b + 1; c < all_coins.Count - 4; c++ )
-                            {
-								res += all_coins[ a ] + all_coins[ b ] + all_coins[ c ] == 200 ? 1 : 0;
-								
-                            }
-                        }
-                    }
-	                Console.WriteLine($"{i} ==> { res}");
-                }
-
-                else if ( i == 4 )
-                {
-                    for ( int a = 0; a < all_coins.Count - 6; a++ )
-                    {
-                        for ( int b = a + 1; b < all_coins.Count - 5; b++ )
-                        {
-                            for ( int c = b + 1; c < all_coins.Count - 4; c++ )
-                            {
-                                for ( int d = c + 1; d < all_coins.Count - 3; d++ )
-                                {
-                                    res += all_coins[ a ] + all_coins[ b ] + all_coins[ c ] + all_coins[ d ] == 200 ? 1 : 0;
-                                }
-                            }
-                        }
-                    }
-	                Console.WriteLine($"{i} ==> { res}");
-                }
-
-                else if ( i == 5 )
-                {
-                    for ( int a = 0; a < all_coins.Count - 6; a++ )
-                    {
-                        for ( int b = a + 1; b < all_coins.Count - 5; b++ )
-                        {
-                            for ( int c = b + 1; c < all_coins.Count - 4; c++ )
-                            {
-                                for ( int d = c + 1; d < all_coins.Count - 3; d++ )
-                                {
-                                    for ( int e = d + 1; e < all_coins.Count - 2; e++ )
-                                    {
-                                        res += all_coins[ a ] + all_coins[ b ] + all_coins[ c ] + all_coins[ d ] + all_coins[ e ] == 200 ? 1 : 0;
-                                    }
-                                }
-                            }
-                        }
-                    }
-	                Console.WriteLine($"{i} ==> { res}");
-                }
-
-                else if ( i == 6 )
-                {
-                    for ( int a = 0; a < all_coins.Count - 6; a++ )
-                    {
-						Console.WriteLine(a);
-                        for ( int b = a + 1; b < all_coins.Count - 5; b++ )
-                        {
-                            for ( int c = b + 1; c < all_coins.Count - 4; c++ )
-                            {
-                                for ( int d = c + 1; d < all_coins.Count - 3; d++ )
-                                {
-                                    for ( int e = d + 1; e < all_coins.Count - 2; e++ )
-                                    {
-                                        for ( int f = e + 1; f < all_coins.Count - 1; f++ )
-                                        {
-                                            
-                                            res += all_coins[ a ] + all_coins[ b ] + all_coins[ c ] + all_coins[ d ] + all_coins[ e ] + all_coins[ f ] == 200 ? 1 : 0;
-                                            
-                                        }
-                                    }
-                                }
-                            }
-                        }
-                    }
-	                Console.WriteLine($"{i} ==> { res}");
-                }
-
-                else if(i == 7 )
-				{
-                    for ( int a = 0; a < all_coins.Count - 6; a++ )
-                    {
-                        for ( int b = a + 1; b < all_coins.Count - 5; b++ )
-                        {
-                            for ( int c = b + 1; c < all_coins.Count - 4; c++ )
-                            {
-                                for ( int d = c + 1; d < all_coins.Count - 3; d++ )
-                                {
-                                    for ( int e = d + 1; e < all_coins.Count - 2; e++ )
-                                    {
-                                        for ( int f = e + 1; f < all_coins.Count - 1; f++ )
-                                        {
-                                            for ( int g = f + 1; g < all_coins.Count; g++ )
+                                            int kend = ( 200 - ( coins[ a ] * i ) - ( coins[ b ] * j ) ) / coins[ c ];
+                                            for ( int k = 1; k <= kend; k++ )
                                             {
-                                                res += all_coins[ a ] + all_coins[ b ] + all_coins[ c ] + all_coins[ d ] + all_coins[ e ] + all_coins[ f ] + all_coins[ g ] == 200 ? 1 : 0;
+                                                int lend = ( 200 - ( coins[ a ] * i ) - ( coins[ b ] * j ) - ( coins[ c ] * k ) ) / coins[ d ];
+                                                for ( int l = 1; l <= lend; l++ )
+                                                {
+                                                    int mend = ( 200 - ( coins[ a ] * i ) - ( coins[ b ] * j ) - ( coins[ c ] * k ) - ( coins[ d ] * l ) ) / coins[ e ];
+													for ( int m = 1; m <= mend; m++ )
+													{
+
+                                                        int sum = ( coins[ a ] * i ) + ( coins[ b ] * j ) + ( coins[ c ] * k ) + ( coins[ d ] * l ) + ( coins[ e ] * m );
+                                                        if ( sum == 200 )
+                                                        {
+                                                            res++;
+                                                            //Console.WriteLine($"{i}x{coins[ a ]}p + {j}x{coins[ b ]}p + {k}x{coins[ c ]}p + {l}x{coins[ d ]}p + {m}x{coins[ e ]}p");
+                                                        }
+													}
+                                                }
                                             }
                                         }
                                     }
@@ -1445,10 +1281,134 @@ namespace ProjectEularProblems
                             }
                         }
                     }
-	                Console.WriteLine($"{i} ==> { res}");
                 }
+                return res;
+			}
+
+            else if ( pair_in == 6  )
+            {
+                for ( int a = 0; a < coins.Count - 5; a++ )
+                {
+                    for ( int b = a + 1; b < coins.Count - 4; b++ )
+                    {
+                        for ( int c = b + 1; c < coins.Count - 3; c++ )
+                        {
+                            for ( int d = c + 1; d < coins.Count - 2; d++ )
+                            {
+                                for ( int e = d + 1; e < coins.Count - 1; e++ )
+                                {
+                                    for ( int f = e + 1; f < coins.Count; f++ )
+                                    {
+
+                                        int iend = 200 / coins[ a ];
+                                        for ( int i = 1; i <= iend; i++ )
+                                        {
+                                            int jend = ( 200 - ( coins[ a ] * i ) ) / coins[ b ];
+                                            for ( int j = 1; j <= jend; j++ )
+                                            {
+                                                int kend = ( 200 - ( coins[ a ] * i ) - ( coins[ b ] * j ) ) / coins[ c ];
+                                                for ( int k = 1; k <= kend; k++ )
+                                                {
+                                                    int lend = ( 200 - ( coins[ a ] * i ) - ( coins[ b ] * j ) - ( coins[ c ] * k ) ) / coins[ d ];
+                                                    for ( int l = 1; l <= lend; l++ )
+                                                    {
+                                                        int mend = ( 200 - ( coins[ a ] * i ) - ( coins[ b ] * j ) - ( coins[ c ] * k ) - ( coins[ d ] * l ) ) / coins[ e ];
+                                                        for ( int m = 1; m <= mend; m++ )
+                                                        {
+                                                            int nend = ( 200 - ( coins[ a ] * i ) - ( coins[ b ] * j ) - ( coins[ c ] * k ) - ( coins[ d ] * l ) - ( coins[ e ] * m ) ) / coins[ f ];
+                                                            for ( int n = 1; n <= nend; n++ )
+                                                            {
+
+
+                                                                int sum = ( coins[ a ] * i ) + ( coins[ b ] * j ) + ( coins[ c ] * k ) + ( coins[ d ] * l ) + ( coins[ e ] * m ) + ( coins[ f ] * n );
+                                                                if ( sum == 200 )
+                                                                {
+                                                                    res++;
+                                                                    //Console.WriteLine($"{i}x{coins[ a ]}p + {j}x{coins[ b ]}p + {k}x{coins[ c ]}p + {l}x{coins[ d ]}p + {m}x{coins[ e ]}p + {n}x{coins[ f ]}p");
+                                                                }
+                                                            }
+                                                        }
+                                                    }
+                                                }
+                                            }
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+                return res;
             }
-			//Console.WriteLine($"Total ==> {res}");
+
+            else if ( pair_in == 7 )
+            {
+                for ( int a = 0; a < coins.Count - 6; a++ )
+                {
+                    for ( int b = a + 1; b < coins.Count - 5; b++ )
+                    {
+                        for ( int c = b + 1; c < coins.Count - 4; c++ )
+                        {
+                            for ( int d = c + 1; d < coins.Count - 3; d++ )
+                            {
+                                for ( int e = d + 1; e < coins.Count - 2; e++ )
+                                {
+									for ( int f = e + 1; f < coins.Count - 1; f++ )
+									{
+                                        for ( int g = f + 1; g < coins.Count; g++ )
+                                        {
+
+
+
+                                            int iend = 200 / coins[ a ];
+                                            for ( int i = 1; i <= iend; i++ )
+                                            {
+                                                int jend = ( 200 - ( coins[ a ] * i ) ) / coins[ b ];
+                                                for ( int j = 1; j <= jend; j++ )
+                                                {
+                                                    int kend = ( 200 - ( coins[ a ] * i ) - ( coins[ b ] * j ) ) / coins[ c ];
+                                                    for ( int k = 1; k <= kend; k++ )
+                                                    {
+                                                        int lend = ( 200 - ( coins[ a ] * i ) - ( coins[ b ] * j ) - ( coins[ c ] * k ) ) / coins[ d ];
+                                                        for ( int l = 1; l <= lend; l++ )
+                                                        {
+                                                            int mend = ( 200 - ( coins[ a ] * i ) - ( coins[ b ] * j ) - ( coins[ c ] * k ) - ( coins[ d ] * l ) ) / coins[ e ];
+                                                            for ( int m = 1; m <= mend; m++ )
+                                                            {
+                                                                int nend = ( 200 - ( coins[ a ] * i ) - ( coins[ b ] * j ) - ( coins[ c ] * k ) - ( coins[ d ] * l ) - ( coins[ e ] * m ) ) / coins[ f ];
+                                                                for ( int n = 1; n <= nend; n++ )
+                                                                {
+
+                                                                    int oend = ( 200 - ( coins[ a ] * i ) - ( coins[ b ] * j ) - ( coins[ c ] * k ) - ( coins[ d ] * l ) - ( coins[ e ] * m ) - ( coins[ f ] * n ) ) / coins[ g ];
+																	for ( int o = 1; o <= oend; o++ )
+																	{
+                                                                        int sum = ( coins[ a ] * i ) + ( coins[ b ] * j ) + ( coins[ c ] * k ) + ( coins[ d ] * l ) + ( coins[ e ] * m ) + ( coins[ f ] * n ) + ( coins[ g ] * o );
+                                                                        if ( sum == 200 )
+                                                                        {
+                                                                            res++;
+                                                                            //Console.WriteLine($"{i}x{coins[ a ]}p + {j}x{coins[ b ]}p + {k}x{coins[ c ]}p + {l}x{coins[ d ]}p + {m}x{coins[ e ]}p + {n}x{coins[ f ]}p");
+
+																	    }   
+
+
+                                                                    }
+                                                                }
+                                                            }
+                                                        }
+                                                    }
+                                                }
+                                            }
+                                        }
+									}
+                                }
+                            }
+                        }
+                    }
+                }
+                return res;
+            }
+
+            return 0;
 		}
     }
 }
