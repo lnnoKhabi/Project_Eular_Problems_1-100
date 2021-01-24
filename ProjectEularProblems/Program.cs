@@ -19,7 +19,6 @@ namespace ProjectEularProblems
         //Project Eular
         static void Main ( string[] args )
         {
-
             PandigitalProducts();
             Console.ReadLine ();
         }
@@ -1421,21 +1420,23 @@ namespace ProjectEularProblems
         HINT: Some products can be obtained in more than one way so be sure to only include it once in your sum.
         */
 
-        public static int PandigitalProducts()
+        public static void PandigitalProducts()
 		{
-            int sum = 0;
-            HashSet<int> Identity = new HashSet<int>();
+            Stopwatch clock = Stopwatch.StartNew();
 
-			for ( int i = 1; i <= 999; i++ )
+            HashSet<int> Identity = new HashSet<int>();
+            HashSet<int> sum = new HashSet<int>();
+
+            for ( int i = 1; i <= 99; i++ )
 			{
-				for ( int j = i + 1; j <= 999999; j++ )
+				for ( int j = i + 1; j <= 9999; j++ )
 				{
                     string i_num = i.ToString();
 					string j_num = j.ToString();
                     int product =  i * j;
                     string product_num = product.ToString();
                     string s = $"{i_num}{j_num}{product_num}";
-                    if(s.Contains("0") || s.Length > 9 )
+                    if(s.Contains("0") || s.Length < 9 )
 					{
                         goto end;
 					}
@@ -1470,10 +1471,9 @@ namespace ProjectEularProblems
 
                     bool isPanDig = Identity.Contains(0)? false : Identity.Sum() == 45 ? true:false;
 
-					if ( isPanDig )
+					if ( isPanDig && sum.Add(product))
 					{
 					    Console.WriteLine($"{i} x {j} = {product}");
-                        sum += product;
 					}
 					
 
@@ -1481,9 +1481,80 @@ namespace ProjectEularProblems
                     Identity.Clear();
                 }
 			}
-			Console.WriteLine($"sum of all pandigital products : {sum}");
-            return sum;
-		}
+			Console.WriteLine($"sum of all pandigital products : {sum.Sum()}");
+            Console.WriteLine("Solution took {0} ms", clock.ElapsedMilliseconds);
+        }
+
+        //faster way ( NOT MY SOLUTION)
+        public static void BruteForce()
+        {
+            Stopwatch clock = Stopwatch.StartNew();
+
+            List<long> products = new List<long>();
+            long sum = 0;
+            long prod, compiled;
+
+            for ( long m = 2; m < 100; m++ )
+            {
+                long nbegin = ( m > 9 ) ? 123 : 1234;
+                long nend = 10000 / m + 1;
+
+                for ( long n = nbegin; n < nend; n++ )
+                {
+                    prod = m * n;
+                    compiled = concat(concat(prod, n), m);
+                    if ( compiled >= 1E8 && compiled < 1E9 && isPandigital(compiled) )
+                    {
+                        if ( !products.Contains(prod) )
+                        {
+							Console.WriteLine($"{m} x {n} = {prod}");
+                            products.Add(prod);
+                        }
+                    }
+                }
+            }
+
+            for ( int i = 0; i < products.Count; i++ )
+            {
+                sum += products[ i ];
+            }
+
+            Console.WriteLine("The sum of all pan digital number from 1-9 is {0}", sum);
+            Console.WriteLine("Solution took {0} ms", clock.ElapsedMilliseconds);
+        }
+        private static long concat( long a, long b )
+        {
+
+            long c = b;
+            while ( c > 0 )
+            {
+                a *= 10;
+                c /= 10;
+            }
+
+            return a + b;
+        }
+        private static bool isPandigital( long n )
+        {
+            int digits = 0;
+            int count = 0;
+            int tmp;
+
+            while ( n > 0 )
+            {
+                tmp = digits;
+                digits = digits | 1 << ( int ) ( ( n % 10 ) - 1 ); //The minus one is there to make 1 fill the first bit and so on
+                if ( tmp == digits )
+                { //Check to see if the same digit is found multiple times
+                    return false;
+                }
+
+                count++;
+                n /= 10;
+            }
+
+            return digits == ( 1 << count ) - 1;
+        }
     }
 }
 
