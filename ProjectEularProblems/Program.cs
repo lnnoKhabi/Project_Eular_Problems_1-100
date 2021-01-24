@@ -1425,49 +1425,57 @@ namespace ProjectEularProblems
 		{
             int sum = 0;
             HashSet<int> Identity = new HashSet<int>();
-            int[] summation = { 1, 3, 6, 10, 15, 21, 28, 36, 45 };
 
-			for ( int i = 1; i < int.MaxValue; i++ )
+			for ( int i = 1; i <= 999; i++ )
 			{
-				for ( int j = i + 1; j < int.MaxValue; j++ )
+				for ( int j = i + 1; j <= 999999; j++ )
 				{
                     string i_num = i.ToString();
 					string j_num = j.ToString();
                     int product =  i * j;
-                    int s = 0;
+                    string product_num = product.ToString();
+                    string s = $"{i_num}{j_num}{product_num}";
+                    if(s.Contains("0") || s.Length > 9 )
+					{
+                        goto end;
+					}
 
-					foreach ( char num in i_num )
+                    //check if multiplicand is pandigital
+                    foreach ( char num in i_num )
 					{
                         int x = int.Parse(num.ToString());
-						if ( !Identity.Add( x))
+						if ( !Identity.Add(x))
 						{
                             goto end;
 						}
-                        s += x;
 					}
+                    //check if multiplier is pandigital
                     foreach ( char num in j_num )
                     {
                         int x = int.Parse(num.ToString());
-                        if ( !Identity.Add(int.Parse(num.ToString())) )
+                        if ( !Identity.Add(x) )
                         {
                             goto end;
-
                         }
-                        s += x;
                     }
-                    foreach ( char num in product.ToString() )
+                    //check if product is pandigital
+                    foreach ( char num in product_num )
                     {
                         int x = int.Parse(num.ToString());
-                        if ( !Identity.Add(int.Parse(num.ToString())) )
+                        if ( !Identity.Add(x) )
                         {
                             goto end;
                         }
-                        s += x;
                     }
 
-                    bool isPanDig = Identity.Contains(0)? false : s == summation[Identity.Count - 1]? true:false;
+                    bool isPanDig = Identity.Contains(0)? false : Identity.Sum() == 45 ? true:false;
 
-                    sum += isPanDig ? product : 0;
+					if ( isPanDig )
+					{
+					    Console.WriteLine($"{i} x {j} = {product}");
+                        sum += product;
+					}
+					
 
                     end:
                     Identity.Clear();
