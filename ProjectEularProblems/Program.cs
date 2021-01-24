@@ -20,7 +20,7 @@ namespace ProjectEularProblems
         static void Main ( string[] args )
         {
 
-            CoinSums();
+            PandigitalProducts();
             Console.ReadLine ();
         }
 
@@ -1409,6 +1409,72 @@ namespace ProjectEularProblems
             }
 
             return 0;
+		}
+
+        //PROBLEM 32
+        /* We shall say that an n-digit number is pandigital if it makes use of all the digits 1 to n exactly once; for example, the 5-digit number, 15234, is 1 through 5 pandigital.
+
+        The product 7254 is unusual, as the identity, 39 × 186 = 7254, containing multiplicand, multiplier, and product is 1 through 9 pandigital.
+
+        Find the sum of all products whose multiplicand/multiplier/product identity can be written as a 1 through 9 pandigital.
+
+        HINT: Some products can be obtained in more than one way so be sure to only include it once in your sum.
+        */
+
+        public static int PandigitalProducts()
+		{
+            int sum = 0;
+            HashSet<int> Identity = new HashSet<int>();
+            int[] summation = { 1, 3, 6, 10, 15, 21, 28, 36, 45 };
+
+			for ( int i = 1; i < int.MaxValue; i++ )
+			{
+				for ( int j = i + 1; j < int.MaxValue; j++ )
+				{
+                    string i_num = i.ToString();
+					string j_num = j.ToString();
+                    int product =  i * j;
+                    int s = 0;
+
+					foreach ( char num in i_num )
+					{
+                        int x = int.Parse(num.ToString());
+						if ( !Identity.Add( x))
+						{
+                            goto end;
+						}
+                        s += x;
+					}
+                    foreach ( char num in j_num )
+                    {
+                        int x = int.Parse(num.ToString());
+                        if ( !Identity.Add(int.Parse(num.ToString())) )
+                        {
+                            goto end;
+
+                        }
+                        s += x;
+                    }
+                    foreach ( char num in product.ToString() )
+                    {
+                        int x = int.Parse(num.ToString());
+                        if ( !Identity.Add(int.Parse(num.ToString())) )
+                        {
+                            goto end;
+                        }
+                        s += x;
+                    }
+
+                    bool isPanDig = Identity.Contains(0)? false : s == summation[Identity.Count - 1]? true:false;
+
+                    sum += isPanDig ? product : 0;
+
+                    end:
+                    Identity.Clear();
+                }
+			}
+			Console.WriteLine($"sum of all pandigital products : {sum}");
+            return sum;
 		}
     }
 }
