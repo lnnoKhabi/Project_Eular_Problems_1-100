@@ -1555,6 +1555,64 @@ namespace ProjectEularProblems
 
             return digits == ( 1 << count ) - 1;
         }
+
+        //PROBLEM 33
+        /*
+          The fraction 49/98 is a curious fraction, as an inexperienced mathematician in attempting to simplify it may incorrectly believe that 49/98 = 4/8, which is correct, is obtained by cancelling the 9s.
+
+            We shall consider fractions like, 30/50 = 3/5, to be trivial examples.
+
+            There are exactly four non-trivial examples of this type of fraction, less than one in value, and containing two digits in the numerator and denominator.
+
+            If the product of these four fractions is given in its lowest common terms, find the value of the denominator.
+         */
+        public static double DigitCancellingFracts()
+        {
+            double res = 1.0d;
+            for ( int n = 10; n < 100; n++ )//numerator
+            {
+                for ( int d = n + 1; d < 100; d++ )//denominator
+                {
+                    if ( n % 10 == 0 || d % 10 == 0 )//If the numerator or denominator are mod 10, skip it
+                    {
+                        continue;
+                    }
+                    //if the numerator and denominator share a common digit
+                    char common = 'a';
+                    bool shares = false;
+                    string[] n_d = new string[] { n.ToString(), d.ToString() };
+                    foreach ( char item in n_d[ 0 ] )
+                    {
+                        if ( n_d[ 1 ].Contains(item) )
+                        {
+                            shares = true;
+                            common = item;
+                            break;
+                        }
+                    }
+                    if ( shares )
+                    {
+                        //divide numerator and denominator and store the result in ‘expected’
+                        double expected = ( double ) n / ( double ) d;
+                        //remove the common digit from numerator and denominator (generating num’ and denom’)
+                        n_d[ 0 ] = n_d[ 0 ].Remove(n_d[ 0 ].IndexOf(common), 1);
+                        n_d[ 1 ] = n_d[ 1 ].Remove(n_d[ 1 ].IndexOf(common), 1);
+
+                        //divide num’ and denom’ and compare the result to ‘expected
+                        double exp = double.Parse(n_d[ 0 ]) / double.Parse(n_d[ 1 ]);
+                        if ( expected == exp )//if the results match then I have found one of the four answers
+                        {
+                            Console.WriteLine($"{n}/{d}");
+                            res *= exp;
+                        }
+                    }
+                }
+            }
+            //report answer
+            Console.ForegroundColor = ConsoleColor.Green;
+            Console.WriteLine("product of all four curious fracts is: " + res);
+            return res;
+        }
     }
 }
 
