@@ -19,7 +19,7 @@ namespace ProjectEularProblems
         //Project Eular
         static void Main ( string[] args )
         {
-            PandigitalProducts();
+            DigitFactorials();
             Console.ReadLine ();
         }
 
@@ -831,7 +831,7 @@ namespace ProjectEularProblems
 
         private static int fact(int i )
         {
-            if (i == 1 )
+            if (i <= 1 )
             {
                 return 1;
             }
@@ -1613,6 +1613,45 @@ namespace ProjectEularProblems
             Console.WriteLine("product of all four curious fracts is: " + res);
             return res;
         }
+
+		//PROBLEM 34
+		/*
+		145 is a curious number, as 1! + 4! + 5! = 1 + 24 + 120 = 145.
+
+		Find the sum of all numbers which are equal to the sum of the factorial of their digits.
+
+		Note: As 1! = 1 and 2! = 2 are not sums they are not included.*/
+
+		public static void DigitFactorials()
+        {
+            //calculate factorials of 0 - 9
+            int[] facts = new int[ 10 ];
+			for ( int i = 0; i < 10; i++ )
+			{
+                facts[ i ] = fact( i );
+			}
+            int res = 0;
+            //find curious numbers
+			for ( int i = 10; i < 100000; i++ )
+			{
+                string num = i.ToString();
+                int sum = 0;
+                //add values
+				foreach ( char item in num )
+				{
+                    sum += facts[ int.Parse(item.ToString())];
+				}
+                if(sum == i )
+				{
+                    res += sum;
+					Console.WriteLine(i);
+				}
+			}
+            Console.ForegroundColor = ConsoleColor.Green;
+			Console.WriteLine("sum: " + res);
+        }
+
+
     }
 }
 
