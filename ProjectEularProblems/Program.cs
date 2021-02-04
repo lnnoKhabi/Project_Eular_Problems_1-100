@@ -1673,47 +1673,48 @@ namespace ProjectEularProblems
          */
         public static void CircularPrimes()
 		{
-            int[] primes = new int[1000000];
-            int count = 0;
             int max = 1000000;
+            int[] primes = new int[max];
+            int count = 0;
 			//find all primes below 1million
 			for ( int i = 2; i < max; i++ )
 			{
                 bool isp = true;
-				if ( primes[ i ] == i )
+				if ( primes[ i ] != i )
 				{
-					goto start;
+                    isp = betterPrime(i);
 				}
-                isp = betterPrime(i);
-				start:
+
 				if ( isp )
 				{
                     //store primes
                     primes[i] = i;
-                    //rotate the number
                     List<char> num = i.ToString().ToList();
-					for ( int j = 0; j < num.Count; j++ )
+                    for ( int j = 1; j < num.Count; j++ )
 					{
+                        //rotate the number
+                        num.Add(num[ 0 ]);
+                        num.RemoveAt(0);
+
                         //check if rotations are circular primes
                         int rot = int.Parse(new string(num.ToArray()));
-                        if(primes[rot] == 0 )//its in array and could be prime
+                        
+                        if(primes[rot] == 0 )//not in array and could be prime
 						{
-							if ( betterPrime(rot) )
+							if ( betterPrime(rot) )//is prime
 							{
-                                primes[rot] = rot;
+                                primes[rot] = rot;//add to array
 							}
-							else
+							else//not prime 
 							{
-                                break;
+                                break;//exit loop
 							}
 						}
                         count = j == num.Count - 1? count + 1: count;
-                        num.Add(num[ 0 ]);
-                        num.RemoveAt(0);
 					}
 				}
 			}
-			Console.WriteLine($"there are {count} circular primes below {max}.");
+			Console.WriteLine($"there are {count + 4} circular primes below {max}.");
 		}
         private static bool betterPrime( int number )
         {
