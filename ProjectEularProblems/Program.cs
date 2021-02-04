@@ -19,8 +19,17 @@ namespace ProjectEularProblems
         //Project Eular
         static void Main ( string[] args )
         {
-            DigitFactorials();
-            Console.ReadLine ();
+            //for ( int i = 1; i < 200; i++ )
+            //{
+            //	if ( is_prime(i) ) { Console.Write(i + " "); }
+            //}
+            //Console.WriteLine();
+            //for ( int i = 1; i < 200; i++ )
+            //{
+            //	if ( betterPrime(i) ) { Console.Write(i + " "); }
+            //}
+            CircularPrimes();
+			Console.ReadLine ();
         }
 
         //PROBLEM 1
@@ -987,7 +996,7 @@ namespace ProjectEularProblems
                     for ( int n = 0; ; n++ )
                     {
                         int res = Math.Abs(( n * n ) + ( a * n ) + b);
-                        if ( !is_prime(res) )
+                        if ( !betterPrime(res) )
                         {
                             bool is_big = primes > best_primes;
                             coe_a = is_big ? a : coe_a;
@@ -1005,6 +1014,7 @@ namespace ProjectEularProblems
         //is a number a prime
         private static bool is_prime( int res )
         {
+            
             int count = 0;
             for ( int i = 1; i <= res / 2; i++ )
             {
@@ -1015,6 +1025,8 @@ namespace ProjectEularProblems
             }
             return count >= 2 ? false : true;
         }
+
+       
 
         //PROBLEM 28 
         /*<Starting with the number 1 and moving to the right in a clockwise direction a 5 by 5 spiral is formed as follows:
@@ -1651,7 +1663,78 @@ namespace ProjectEularProblems
 			Console.WriteLine("sum: " + res);
         }
 
+        //PROBLEM 35
+        /*
+         The number, 197, is called a circular prime because all rotations of the digits: 197, 971, and 719, are themselves prime.
 
+            There are thirteen such primes below 100: 2, 3, 5, 7, 11, 13, 17, 31, 37, 71, 73, 79, and 97.
+
+            How many circular primes are there below one million?
+         */
+        public static void CircularPrimes()
+		{
+            int[] primes = new int[1000000];
+            int count = 0;
+            int max = 1000000;
+			//find all primes below 1million
+			for ( int i = 2; i < max; i++ )
+			{
+                bool isp = true;
+				if ( primes[ i ] == i )
+				{
+					goto start;
+				}
+                isp = betterPrime(i);
+				start:
+				if ( isp )
+				{
+                    //store primes
+                    primes[i] = i;
+                    //rotate the number
+                    List<char> num = i.ToString().ToList();
+					for ( int j = 0; j < num.Count; j++ )
+					{
+                        //check if rotations are circular primes
+                        int rot = int.Parse(new string(num.ToArray()));
+                        if(primes[rot] == 0 )//its in array and could be prime
+						{
+							if ( betterPrime(rot) )
+							{
+                                primes[rot] = rot;
+							}
+							else
+							{
+                                break;
+							}
+						}
+                        count = j == num.Count - 1? count + 1: count;
+                        num.Add(num[ 0 ]);
+                        num.RemoveAt(0);
+					}
+				}
+			}
+			Console.WriteLine($"there are {count} circular primes below {max}.");
+		}
+        private static bool betterPrime( int number )
+        {
+            if ( number == 2 )
+            {
+                return true;
+            }
+            if ( number % 2 == 0 )
+            {
+                return false;
+            }
+            double sq = Math.Sqrt(number);
+            for ( int i = 3; i <= sq; i += 2 )
+            {
+                if ( number % i == 0 )
+                {
+                    return false;
+                }
+            }
+            return true;
+        }
     }
 }
 
