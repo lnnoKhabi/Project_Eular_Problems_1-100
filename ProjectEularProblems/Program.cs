@@ -28,7 +28,7 @@ namespace ProjectEularProblems
             //{
             //	if ( betterPrime(i) ) { Console.Write(i + " "); }
             //}
-            CircularPrimes();
+            TrancactiblePrimes();
 			Console.ReadLine ();
         }
 
@@ -1722,7 +1722,7 @@ namespace ProjectEularProblems
             {
                 return true;
             }
-            if ( number % 2 == 0 )
+            if ( number % 2 == 0 || number == 1)
             {
                 return false;
             }
@@ -1735,6 +1735,111 @@ namespace ProjectEularProblems
                 }
             }
             return true;
+        }
+
+
+		//PROBLEM 36
+		/*The decimal number, 585 = 10010010012 (binary), is palindromic in both bases.
+
+        Find the sum of all numbers, less than one million, which are palindromic in base 10 and base 2.
+
+        (Please note that the palindromic number, in either base, may not include leading zeros.)*/
+		private static void DoubleBasePalindromes()
+		{
+            int sum = 0;
+			for ( int i = 0; i < 1000000; i++ )
+			{
+                string straight = i.ToString();
+				string reverse = null;
+				for ( int j = straight.Length - 1; j >= 0; j-- )//reverse number
+				{
+                    reverse += straight[ j ];
+				}
+
+                if(i == int.Parse(reverse) )//if palindromic in base 10
+				{
+                    string bin_straight = Convert.ToString(i, 2);
+                    string bin_reverse = null;
+					for ( int k = bin_straight.Length - 1; k >= 0; k-- )//reverse binary number
+					{
+                        bin_reverse += bin_straight[ k ];
+					}
+                    if ( i == Convert.ToInt32(bin_reverse, 2))//if palindromic in base 2
+                    {
+						Console.WriteLine($"{i} = {bin_straight}");
+                        sum += i;
+					}
+				}
+			}
+            Console.ForegroundColor = ConsoleColor.Green;
+			Console.WriteLine($"sum = {sum}");
+		}
+
+		//PROBLEM 37
+		/**/
+		public static void TrancactiblePrimes()
+		{
+            int max = 1000000;
+            int[] primes = new int[ max ];
+            int sum = 0;
+            //find all primes below 1million
+            for ( int i = 10; i < max; i++ )
+            {
+                bool isp = true;
+                if ( primes[ i ] != i )
+                {
+                    isp = betterPrime(i);
+                }
+
+                if ( isp )
+                {
+                    primes[ i ] = i;
+
+                    //remove digits left to right
+                    string num = i.ToString();
+					for ( int j = 0; j < num.Length - 1; j++ )
+					{
+                        string n = null;
+						for ( int k = j + 1; k < num.Length; k++ )
+						{
+							n += num[ k ];
+						}
+						int new_n = int.Parse(n);
+                        if (primes[new_n] == 0 )
+						{
+                            if ( betterPrime(new_n) )
+                            {
+                                primes[ new_n ] = new_n;
+                            }
+                            else goto end;
+						}
+					}
+                    //remove digits right to left
+                    for ( int j = 0; j < num.Length - 1 ; j++ )
+                    {
+                        string n = num.Remove(num.Length - 1 - j);
+                        if ( n != null )
+                        {
+                            int new_n = int.Parse(n);
+                            if ( primes[ new_n ] == 0 )//either not prime or not calculated
+                            {
+                                if ( betterPrime(new_n) )//is it prime
+                                {
+                                    primes[ new_n ] = new_n;
+                                }
+                                else goto end;
+                            }
+                        }
+                    }
+
+                    Console.WriteLine(i);
+                    sum += i;
+                }
+                end:
+                continue;
+            }
+            Console.ForegroundColor = ConsoleColor.Green;
+			Console.WriteLine($"sum of all trunctable primes = {sum}");
         }
     }
 }
