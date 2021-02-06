@@ -1899,6 +1899,8 @@ namespace ProjectEularProblems
 		For which value of p ≤ 1000, is the number of solutions maximised?*/
 		public static void IntegerRightTriangles()
 		{
+			Stopwatch sw = new Stopwatch();
+			sw.Start();
 			double res = 0;
 			double count = 0;
 			for ( int p = 1; p <= 1000; p++ )
@@ -1922,6 +1924,8 @@ namespace ProjectEularProblems
 			}
 			Console.ForegroundColor = ConsoleColor.Green;
 			Console.WriteLine(count + " has the most solutions.");
+			sw.Stop();
+			Console.WriteLine("took "+ sw.ElapsedMilliseconds + " ms");
 		}
 	}
 }
