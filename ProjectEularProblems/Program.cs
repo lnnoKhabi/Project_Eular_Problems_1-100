@@ -28,7 +28,7 @@ namespace ProjectEularProblems
 			//{
 			//	if ( betterPrime(i) ) { Console.Write(i + " "); }
 			//}
-			PandigitalMultiples();
+			IntegerRightTriangles();
 			Console.ReadLine();
 		}
 
@@ -1890,6 +1890,39 @@ namespace ProjectEularProblems
 			}
 		}
 
+
+		//PROBLEM 39
+		/*If p is the perimeter of a right angle triangle with integral length sides, {a,b,c}, there are exactly three solutions for p = 120.
+
+		{20,48,52}, {24,45,51}, {30,40,50}
+
+		For which value of p ≤ 1000, is the number of solutions maximised?*/
+		public static void IntegerRightTriangles()
+		{
+			double res = 0;
+			double count = 0;
+			for ( int p = 1; p <= 1000; p++ )
+			{
+				int solutions_count = 0;
+				for ( int a = p/6; a < p / 2; a++ )
+				{
+					for ( int b = a + 1; b < (p / 2) ; b++ )
+					{
+						double c = p - ( a + b );
+						if ( ( a * a ) + ( b * b ) == c * c )
+						{
+							solutions_count++;
+							//Console.WriteLine($"p: {p} ==> {{{a},{b},{c}}}");
+						}
+					}
+				}
+				count = solutions_count > res ? p : count;
+				res = solutions_count > res ? solutions_count : res;
+				
+			}
+			Console.ForegroundColor = ConsoleColor.Green;
+			Console.WriteLine(count + " has the most solutions.");
+		}
 	}
 }
 
