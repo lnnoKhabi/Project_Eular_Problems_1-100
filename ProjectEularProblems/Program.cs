@@ -9,6 +9,7 @@ using System.Speech.Synthesis;
 using System.Speech.Recognition;
 using System.Speech.AudioFormat;
 using System.Threading.Tasks;
+using System.Text;
 
 namespace ProjectEularProblems
 {
@@ -19,16 +20,11 @@ namespace ProjectEularProblems
 		//Project Eular
 		static void Main( string[] args )
 		{
-			//for ( int i = 1; i < 200; i++ )
-			//{
-			//	if ( is_prime(i) ) { Console.Write(i + " "); }
-			//}
-			//Console.WriteLine();
-			//for ( int i = 1; i < 200; i++ )
-			//{
-			//	if ( betterPrime(i) ) { Console.Write(i + " "); }
-			//}
-			IntegerRightTriangles();
+			Stopwatch sp = new Stopwatch();
+			sp.Start();
+			ChampernownesConstant();
+			sp.Stop();
+			Console.WriteLine(sp.ElapsedMilliseconds + "ms");
 			Console.ReadLine();
 		}
 
@@ -1899,8 +1895,7 @@ namespace ProjectEularProblems
 		For which value of p ≤ 1000, is the number of solutions maximised?*/
 		public static void IntegerRightTriangles()
 		{
-			Stopwatch sw = new Stopwatch();
-			sw.Start();
+			
 			double res = 0;
 			double count = 0;
 			for ( int p = 1; p <= 1000; p++ )
@@ -1924,8 +1919,51 @@ namespace ProjectEularProblems
 			}
 			Console.ForegroundColor = ConsoleColor.Green;
 			Console.WriteLine(count + " has the most solutions.");
-			sw.Stop();
-			Console.WriteLine("took "+ sw.ElapsedMilliseconds + " ms");
+		}
+
+
+		//PROBLEM 40
+		/*An irrational decimal fraction is created by concatenating the positive integers:
+
+		0.123456789101112131415161718192021...
+
+		It can be seen that the 12th digit of the fractional part is 1.
+
+		If dn represents the nth digit of the fractional part, find the value of the following expression.
+
+		d1 × d10 × d100 × d1000 × d10000 × d100000 × d1000000*/
+
+		public static void ChampernownesConstant()
+		{
+			
+			StringBuilder st = new StringBuilder(1000000);
+
+			int digits_count = 0;
+			int z = 1;
+			double end = 0;
+			//find how far we need to iterate to have 1 million terms
+			for ( int i = 9; i <= 99999; i = int.Parse($"{ i}9 ") )
+			{
+				int x = ( i.ToString().Length ) * ( i - z );
+				digits_count += x;
+				z *= 10;
+
+				end = i == 99999 ? Math.Ceiling(((1000000.0d - digits_count) * ( double.Parse($"{ i}9 ") - z) / (( double.Parse($"{ i}9 ") - z) * 6.0d))) + z : 0;
+			}
+
+			//store sequence of terms
+			for ( int i = 1;i <= end; i++ )
+			{
+				st.Append(i);
+			}
+
+			//get 10, 100, 1000, 10000, 1000000 term and multiply together
+			int res = 1;
+			for ( int i = 9; i <= 999999; i = int.Parse($"{ i}9 ") )
+			{
+				res *= int.Parse(st[ i ].ToString());
+			}
+			Console.WriteLine($"{st[0]}x{st[ 9 ]}x{st[ 99 ]}x{st[ 999 ]}x{st[ 9999 ]}x{st[ 99999 ]}x{st[ 999999 ]} ==> {res}");
 		}
 	}
 }
