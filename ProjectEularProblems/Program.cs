@@ -20,10 +20,13 @@ namespace ProjectEularProblems
 		//Project Eular
 		static void Main( string[] args )
 		{
+
 			Stopwatch sp = new Stopwatch();
 			sp.Start();
-			ChampernownesConstant();
+
+			PandigitalPrime();
 			sp.Stop();
+
 			Console.WriteLine(sp.ElapsedMilliseconds + "ms");
 			Console.ReadLine();
 		}
@@ -1964,6 +1967,58 @@ namespace ProjectEularProblems
 				res *= int.Parse(st[ i ].ToString());
 			}
 			Console.WriteLine($"{st[0]}x{st[ 9 ]}x{st[ 99 ]}x{st[ 999 ]}x{st[ 9999 ]}x{st[ 99999 ]}x{st[ 999999 ]} ==> {res}");
+		}
+
+		//PROBLEM 41
+		/*We shall say that an n-digit number is pandigital if it makes use of all the digits 1 to n exactly once. For example, 2143 is a 4-digit pandigital and is also prime.
+
+		What is the largest n-digit pandigital prime that exists?*/
+		public static void PandigitalPrime()
+		{
+			List<int> nums = new List<int>(1000);
+			string minus = "1111111111";
+			for ( int i = 123456789; i >= 10; i-=int.Parse(minus) )
+			{
+				stringPermutation(i.ToString(),0,i.ToString().Length-1,nums);
+
+				minus = minus.Remove(minus.Length - 1, 1);
+			}
+			Console.WriteLine($"Largest pandigital prime : {nums.Max()}");
+
+		}
+		//permutation algorithm not mine (need to study it)
+		private static void stringPermutation( string str, int left, int right , List<int> ls)
+		{
+			if ( left == right )
+			{
+				//Console.WriteLine(str);
+				if ( betterPrime(int.Parse(str)) )
+				{
+					ls.Add(int.Parse(str));
+					//Console.WriteLine($"Largest pandigital prime : {str}");
+					return;
+				}
+			}
+			else
+			{
+				for ( int i = left; i <= right; i++ )
+				{
+					//swap(str[ left ], str[ i ]);
+					char[] lft = str.ToCharArray();
+					char c = str[ i ];
+					lft[ i ] = lft[ left ];
+					lft[ left ] = c;
+					str = new string(lft);
+
+					stringPermutation(str, left + 1, right,ls);
+					//swap(str[ left ], str[ i ]); //swap back for backtracking
+					lft = str.ToCharArray();
+					c = str[ i ];
+					lft[ i ] = lft[ left ];
+					lft[ left ] = c;
+					str = new string(lft);
+				}
+			}
 		}
 	}
 }
