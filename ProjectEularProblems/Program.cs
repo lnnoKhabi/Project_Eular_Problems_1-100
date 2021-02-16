@@ -24,10 +24,10 @@ namespace ProjectEularProblems
 			Stopwatch sp = new Stopwatch();
 			sp.Start();
 
-			TriangularPentagonalHexagonal();
+			GoldbachOtherConjecture();
 			sp.Stop();
 
-			Console.WriteLine(sp.ElapsedMilliseconds + "ms");
+			Console.WriteLine("\nruntime: " + sp.ElapsedMilliseconds/1000.0 + "s");
 			Console.ReadLine();
 		}
 
@@ -2218,6 +2218,62 @@ namespace ProjectEularProblems
 			return !res.ToString().Contains('.');
 		}
 
+
+		//PROBLEM 46
+		/*It was proposed by Christian Goldbach that every odd composite number can be written as the sum of a prime and twice a square.
+
+		9 = 7 + 2 × 1^2
+		15 = 7 + 2 × 2^2
+		21 = 3 + 2 × 3^2
+		25 = 7 + 2 × 3^2
+		27 = 19 + 2 × 2^2
+		33 = 31 + 2 × 1^2
+
+		It turns out that the conjecture was false.
+
+		What is the smallest odd composite that cannot be written as the sum of a prime and twice a square?*/
+
+		public static void GoldbachOtherConjecture()
+		{
+			int[] primes = new int[ 1000000 ];
+			bool is_odd_combosite = false;
+			//find odd composite numbers e.g 9 , 15 21 (divisible by numbers other than 1 and itself, and odd)
+			for ( int i = 9; ; i++ )
+			{
+				is_odd_combosite = i % 2 != 0 ? !betterPrime(i) : false;
+				if ( is_odd_combosite )
+				{
+					for ( int j = 2; j < i; j++ )//loop prime numbers
+					{
+						bool pr = primes[ j ] != 0 ? true : betterPrime(j);
+						if ( pr )
+						{
+							primes[ j ] = j;
+							int sqr = (int)Math.Sqrt(i);
+							for ( int k = 1; k < sqr; k++ )//loop possible squares
+							{
+								if( j + ( ( k * k ) * 2 ) == i )
+								{
+									//Console.WriteLine($"{i} = {j} + 2 x {k}^2");
+									goto nxt_i;
+								}
+								if (j + ((k * k) * 2) != i && j == i-1 && k == sqr - 1)
+								{
+									Console.ForegroundColor = ConsoleColor.Green;
+									Console.WriteLine($"{i} cannot be written as the sum of a prime and twice a square.");
+									Console.ForegroundColor = ConsoleColor.White;
+									return;
+								}
+							}
+						}
+					}
+
+				}
+				primes[ i ] = i;
+			nxt_i:
+				continue;
+			}
+		}
 	}
 }
 
