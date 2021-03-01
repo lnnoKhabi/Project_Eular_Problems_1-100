@@ -24,7 +24,7 @@ namespace ProjectEularProblems
 			Stopwatch sp = new Stopwatch();
 			sp.Start();
 
-			DistinctPrimesFactors();
+			SelfPowers();
 			sp.Stop();
 
 			Console.WriteLine("\nruntime: " + sp.ElapsedMilliseconds/1000.0 + "s");
@@ -1038,8 +1038,8 @@ namespace ProjectEularProblems
 			}
 			Console.WriteLine($"{val_n}^2 + ({coe_a} * {val_n}) + {coe_b} = {best_primes} primes ==> {coe_a * coe_b}");
 		}
-		//is a number a prime
-		private static bool is_prime( int res )
+		//is a number a prime DEPRECATED
+		/*private static bool is_prime( int res )
 		{
 
 			int count = 0;
@@ -1051,7 +1051,7 @@ namespace ProjectEularProblems
 				}
 			}
 			return count >= 2 ? false : true;
-		}
+		}*/
 
 
 
@@ -2371,6 +2371,72 @@ namespace ProjectEularProblems
 				{ 
 					consecutive.Clear(); 
 				}
+			}
+		}
+
+		//PROBLEM 48 NOT WORKING
+		/*The series, 1^1 + 2^2 + 3^3 + ... + 10^10 = 10405071317.
+
+		Find the last ten digits of the series, 1^1 + 2^2 + 3^3 + ... + 1000^1000.*/
+
+		public static void SelfPowers()
+		{
+			long a = 1000000 * 1000000;
+			Console.WriteLine(a);
+		}
+
+		//PROBLEM 49
+		/*The arithmetic sequence, 1487, 4817, 8147, in which each of the terms increases by 3330, is unusual in two ways: (i) each of the three terms are prime, and, (ii) each of the 4-digit numbers are permutations of one another.
+
+		There are no arithmetic sequences made up of three 1-, 2-, or 3-digit primes, exhibiting this property, but there is one other 4-digit increasing sequence.
+
+		What 12-digit number do you form by concatenating the three terms in this sequence?*/
+
+		public static void PrimePermutations()
+		{
+			//find the first 1k primes
+			int[] primes = new int[9999];
+			for ( int i = 2; i < primes.Length; i++ )
+			{
+				primes[ i ] = isPrime(i) ? i : 0;
+			}
+			for ( int one = 1001; one < primes.Length; one++ )
+			{
+				if(primes[one] == 0 )
+				{
+					continue;
+				}
+				int end = ( primes.Max() - one ) / 2;
+				for ( int increment = 1; increment <= end; increment++ )
+				{
+					//add the possible increment value
+					int two = primes[ primes[ one ] + increment ] != 0 ? primes[ primes[ one ] + increment ] : 0;
+					if(two != 0 )
+					{
+						int three = primes[ two + increment ] != 0 ? primes[ two + increment ] : 0;
+						if(three != 0 )//if passed means all three are prime
+						{
+							//check if numbers are permutes
+							char[] first = one.ToString().ToCharArray().OrderBy(a=>a).ToArray();
+							char[] sec = two.ToString().ToCharArray().OrderBy(a => a).ToArray();
+							char[] third = three.ToString().ToCharArray().OrderBy(a => a).ToArray();
+							for ( int j = 0; j < 4; j++ )
+							{
+								if(first[j] != sec[j] || sec[j] != third[ j ] )
+								{
+									goto next;
+								}
+							}
+							//reaches here if above passed
+							Console.WriteLine($"{one}, {two}, {three} incr({increment}) ==> {one}{two}{three}");
+							goto end;
+						}
+					}
+				next:
+					continue;
+				}
+			end:
+				continue;
 			}
 		}
 	}
