@@ -24,7 +24,7 @@ namespace ProjectEularProblems
 			Stopwatch sp = new Stopwatch();
 			sp.Start();
 
-			SelfPowers();
+			ConsecutivePrimeSum();
 			sp.Stop();
 
 			Console.WriteLine("\nruntime: " + sp.ElapsedMilliseconds/1000.0 + "s");
@@ -2381,8 +2381,7 @@ namespace ProjectEularProblems
 
 		public static void SelfPowers()
 		{
-			long a = 1000000 * 1000000;
-			Console.WriteLine(a);
+
 		}
 
 		//PROBLEM 49
@@ -2391,7 +2390,6 @@ namespace ProjectEularProblems
 		There are no arithmetic sequences made up of three 1-, 2-, or 3-digit primes, exhibiting this property, but there is one other 4-digit increasing sequence.
 
 		What 12-digit number do you form by concatenating the three terms in this sequence?*/
-
 		public static void PrimePermutations()
 		{
 			//find the first 1k primes
@@ -2437,6 +2435,64 @@ namespace ProjectEularProblems
 				}
 			end:
 				continue;
+			}
+		}
+
+		//PROBLEM 50
+		/*The prime 41, can be written as the sum of six consecutive primes:
+
+		41 = 2 + 3 + 5 + 7 + 11 + 13
+		This is the longest sum of consecutive primes that adds to a prime below one-hundred.
+
+		The longest sum of consecutive primes below one-thousand that adds to a prime, contains 21 terms, and is equal to 953.
+
+		Which prime, below one-million, can be written as the sum of the most consecutive primes?*/
+		public static void ConsecutivePrimeSum()
+		{
+			int[] res = new int[2];
+			int[] primes = new int[ 1000000 ];
+			//get primes below 100
+			for ( int i = 0; i < primes.Length; i++ )
+			{
+				primes[ i ] = isPrime(i) ? i : 0;
+			}
+			int[] stripped_primes = primes.Where(a => a != 0).ToArray();//remove zeros for easy iteration
+
+			for ( int k = 2; ; k++ )//add consecutive numbers in pairs of k till biggest sum is found
+			{
+				for ( int i = 0; i < stripped_primes.Length; i++ )//iterate primes
+				{
+					int sum = 0;
+					sum += stripped_primes[ i ];
+
+					for ( int j = i; j < i + k - 1; j++ )
+					{
+						if(j == stripped_primes.Length - 1 )//dont add to sum when j == number of items in array
+						{
+							sum = 0;
+							break; 
+						}
+						sum += stripped_primes[ j + 1];
+					}
+					if ( sum <= stripped_primes[ stripped_primes.Length - 1 ])//if sum is less the biggest prime
+					{
+						if ( sum == primes[ sum ] && sum != 0 )
+						{
+							res[ 0 ] = sum;//save total sum
+							res[ 1 ] = k;//save number of consecutive primes added
+						}
+					}
+					else if(i == 0)//if k consecutive primes where added starting from i = 0 and sum > biggest prime ==> its done.
+					{
+						Console.Write($"{res[ 0 ]} can be written as sum of {res[ 1 ]} consecutive primes.");
+						return;
+					}
+					else
+					{
+						break;//break i loop if sum > biggest prime
+					}
+
+				}
 			}
 		}
 	}
