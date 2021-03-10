@@ -24,7 +24,7 @@ namespace ProjectEularProblems
 			Stopwatch sp = new Stopwatch();
 			sp.Start();
 
-			ConsecutivePrimeSum();
+			PrimeDigitReplacements();
 			sp.Stop();
 
 			Console.WriteLine("\nruntime: " + sp.ElapsedMilliseconds/1000.0 + "s");
@@ -2458,8 +2458,8 @@ namespace ProjectEularProblems
 			}
 			int[] stripped_primes = primes.Where(a => a != 0).ToArray();//remove zeros for easy iteration
 
-			for ( int k = 2; ; k++ )//add consecutive numbers in pairs of k till biggest sum is found
-			{
+			for ( int k = 22; ; k++ )//add consecutive numbers in pairs of k till biggest sum is found
+			{//k starts from 22 because we know a sum of 21-terms was found already
 				for ( int i = 0; i < stripped_primes.Length; i++ )//iterate primes
 				{
 					int sum = 0;
@@ -2492,6 +2492,88 @@ namespace ProjectEularProblems
 						break;//break i loop if sum > biggest prime
 					}
 
+				}
+			}
+		}
+
+		//PROBLEM 51
+		/*By replacing the 1st digit of the 2-digit number *3, it turns out that six of the nine possible values: 13, 23, 43, 53, 73, and 83, are all prime.
+
+		By replacing the 3rd and 4th digits of 56**3 with the same digit, this 5-digit number is the first example having seven primes among the ten generated numbers, yielding the family: 56003, 56113, 56333, 56443, 56663, 56773, and 56993. Consequently 56003, being the first member of this family, is the smallest prime with this property.
+
+		Find the smallest prime which, by replacing part of the number (not necessarily adjacent digits) with the same digit, is part of an eight prime value family.*/
+
+		public static void PrimeDigitReplacements()
+		{
+			int[] primes = new int[ 1000000 ];
+			//get primes below 100
+			for ( int i = 10; i < primes.Length; i++ )
+			{
+				primes[ i ] = isPrime(i) ? i : 0;
+			}
+			int[] stripped_primes = primes.Where(a => a != 0).ToArray();//remove zeros for easy iteration
+
+			for ( int i = 0; i < stripped_primes.Length; i++ )
+			{
+
+				//replace 1 upto length - 1 digits
+				StringBuilder num_string = new StringBuilder(stripped_primes[ i ].ToString());
+
+				for ( int n = 1; n < num_string.Length; n++ )
+				{
+					int count_family = 0;
+
+					if ( n == 1 )
+					{
+						for ( int k = 0; k < num_string.Length; k++ )
+						{
+							count_family = 0;
+							for ( int m = 0; m < 10; m++ )
+							{
+								if(k == 0 && m == 0 ) { continue;}
+								if(m.ToString() == num_string[ k ].ToString() ) { continue; }
+								StringBuilder num_temp = new StringBuilder(num_string.ToString());
+								int new_num = int.Parse(num_temp.Replace(num_temp[ k ].ToString(), m.ToString(), k, n).ToString());
+
+								count_family = primes[ new_num ] != 0 ? count_family + 1 : count_family;
+							}
+							if ( count_family == 6 )
+							{
+								Console.WriteLine($"{stripped_primes[ i ]} is the smallest prime part of an eight prime value family. ");
+								return;
+							}
+						}
+					}
+					  
+					else if ( n == 2 )
+					{
+						for ( int k = 0; k < num_string.Length - 1; k++ )
+						{
+							for ( int l = k + 1; l < num_string.Length; l++ )
+							{
+								count_family = 0;
+
+
+								for ( int m = 0; m < 10; m++ )
+								{
+									if ( k == 0 && m == 0 ) { continue; }
+									if ( m.ToString() == num_string[ k ].ToString() && m.ToString() == num_string[ l ].ToString() ) { continue; }
+									StringBuilder num_temp = new StringBuilder(num_string.ToString());
+									int new_num = int.Parse(num_temp.Replace(num_temp[ k ].ToString(), m.ToString(), k, 1).Replace(num_temp[ l ].ToString(), m.ToString(), l, 1).ToString());
+									//int new_num = int.Parse(_num.Replace(_num[ k ].ToString(), m.ToString(), l, n).ToString());
+
+									count_family = primes[ new_num ] != 0 ? count_family + 1 : count_family;
+								}
+								if ( count_family == 6 )
+								{
+									Console.WriteLine($"{stripped_primes[ i ]} is the smallest prime part of an eight prime value family. ");
+									return;
+								}
+							}
+						}
+					}
+
+					
 				}
 			}
 		}
