@@ -16,7 +16,7 @@ namespace ProjectEularProblems
 	public class Problems
 	{
 
-//Summary:
+		//Summary:
 		//Project Eular
 		static void Main( string[] args )
 		{
@@ -27,7 +27,7 @@ namespace ProjectEularProblems
 			PrimeDigitReplacements();
 			sp.Stop();
 
-			Console.WriteLine("\nruntime: " + sp.ElapsedMilliseconds/1000.0 + "s");
+			Console.WriteLine("\nruntime: " + sp.ElapsedMilliseconds / 1000.0 + "s");
 			Console.ReadLine();
 		}
 
@@ -49,7 +49,7 @@ namespace ProjectEularProblems
 					sum += i;
 				}
 			}
-			Console.WriteLine($"sum of all the multiples of 3 or 5 below 1000 : {sum}"); 
+			Console.WriteLine($"sum of all the multiples of 3 or 5 below 1000 : {sum}");
 		}
 
 		//PROBLEM 2
@@ -82,7 +82,7 @@ namespace ProjectEularProblems
 					SumOfEvenNums += n;
 				}
 			}
-			Console.WriteLine($"the sum of the even-valued terms : {SumOfEvenNums}"); 
+			Console.WriteLine($"the sum of the even-valued terms : {SumOfEvenNums}");
 		}
 
 		//PROBLEN 3 <find the largest prime factor of 600 851 475 143 >
@@ -330,7 +330,7 @@ namespace ProjectEularProblems
 			Console.WriteLine(c);
 		}
 
-//PROBLEM 12 <triangle numbers>
+		//PROBLEM 12 <triangle numbers>
 		//1st triangle number with 500 factors
 		static public void TriangleNumWithOver500Factors()
 		{
@@ -354,7 +354,7 @@ namespace ProjectEularProblems
 			}
 		}
 
-//PROBLEM 13 
+		//PROBLEM 13 
 		//find the sum of a 100 50 digit nums and return the first 10 digits of the result 
 		static public void SumOfNumsinReverse()
 		{
@@ -479,7 +479,7 @@ namespace ProjectEularProblems
 			Console.WriteLine(Array.ConvertAll(R.ToArray(), a => int.Parse(a.ToString())).Sum());
 		}
 
-//Methods below were used for several problems in * & + big numbers
+		//Methods below were used for several problems in * & + big numbers
 		//method to multiply numbers of any size [even > long.max || BigInteger]
 		private static string MultiplyLongNums( string a, string b )
 		{
@@ -731,11 +731,11 @@ namespace ProjectEularProblems
 		}
 
 
-/*Let d(n) be defined as the sum of proper divisors of n (numbers less than n which divide evenly into n).
-          If d(a) = b and d(b) = a, where a ≠ b, then a and b are an amicable pair and each of a and b are called amicable numbers.
+		/*Let d(n) be defined as the sum of proper divisors of n (numbers less than n which divide evenly into n).
+				  If d(a) = b and d(b) = a, where a ≠ b, then a and b are an amicable pair and each of a and b are called amicable numbers.
 
-          For example, the proper divisors of 220 are 1, 2, 4, 5, 10, 11, 20, 22, 44, 55 and 110; therefore d(220) = 284. 
-          The proper divisors of 284 are 1, 2, 4, 71 and 142; so d(284) = 220.*/
+				  For example, the proper divisors of 220 are 1, 2, 4, 5, 10, 11, 20, 22, 44, 55 and 110; therefore d(220) = 284. 
+				  The proper divisors of 284 are 1, 2, 4, 71 and 142; so d(284) = 220.*/
 		//PROBLEM 21 <the sum of all the amicable numbers below 10000.>
 		public static void AmicableNumbers()
 		{
@@ -771,9 +771,9 @@ namespace ProjectEularProblems
 			Console.WriteLine($"{res}.");
 		}
 
-/*example, when the list is sorted into alphabetical order, COLIN, 
-         * which is worth 3 + 15 + 12 + 9 + 14 = 53, is the 938th name in the list. 
-         * So, COLIN would obtain a score of 938 × 53 = 49714.*/
+		/*example, when the list is sorted into alphabetical order, COLIN, 
+				 * which is worth 3 + 15 + 12 + 9 + 14 = 53, is the 938th name in the list. 
+				 * So, COLIN would obtain a score of 938 × 53 = 49714.*/
 		//PROBLEM 22 <the total of all the name scores in the file?>
 		public static void NameScores()
 		{
@@ -803,13 +803,13 @@ namespace ProjectEularProblems
 		}
 
 
-/*
-         * A number (n) is called abundant if the sum of it's divisors exceeds the number (n).
-           As 12 is the smallest abundant number, 1 + 2 + 3 + 4 + 6 = 16, the smallest number that can be written as the sum of two abundant numbers is 24. 
-           
-            By mathematical analysis, it can be shown that all integers greater than 28123 can be written as the sum of two abundant numbers.
-            However, this upper limit cannot be reduced any further by analysis even though it is known that the greatest number that cannot be expressed as the sum of two abundant numbers is less than this limit.
-            */
+		/*
+				 * A number (n) is called abundant if the sum of it's divisors exceeds the number (n).
+				   As 12 is the smallest abundant number, 1 + 2 + 3 + 4 + 6 = 16, the smallest number that can be written as the sum of two abundant numbers is 24. 
+
+					By mathematical analysis, it can be shown that all integers greater than 28123 can be written as the sum of two abundant numbers.
+					However, this upper limit cannot be reduced any further by analysis even though it is known that the greatest number that cannot be expressed as the sum of two abundant numbers is less than this limit.
+					*/
 
 		//PROBLEM 23 <the sum of all the positive integers which cannot be written as the sum of two abundant numbers.>
 		public static void Non_AbundantNumbers()
@@ -1056,14 +1056,14 @@ namespace ProjectEularProblems
 
 
 		//PROBLEM 28 
-/*<Starting with the number 1 and moving to the right in a clockwise direction a 5 by 5 spiral is formed as follows:
-        21 22 23 24 25
-        20  7  8  9 10
-        19  6  1  2 11
-        18  5  4  3 12
-        17 16 15 14 13
-        It can be verified that the sum of the numbers on the diagonals is 101.
-        What is the sum of the numbers on the diagonals in a 1001 by 1001 spiral formed in the same way?>*/
+		/*<Starting with the number 1 and moving to the right in a clockwise direction a 5 by 5 spiral is formed as follows:
+				21 22 23 24 25
+				20  7  8  9 10
+				19  6  1  2 11
+				18  5  4  3 12
+				17 16 15 14 13
+				It can be verified that the sum of the numbers on the diagonals is 101.
+				What is the sum of the numbers on the diagonals in a 1001 by 1001 spiral formed in the same way?>*/
 
 		public static void NumberSpiralDiagonals()
 		{
@@ -1083,17 +1083,17 @@ namespace ProjectEularProblems
 
 
 		//PROBLEM 29
-/*Consider all integer combinations of ab for 2 ≤ a ≤ 5 and 2 ≤ b ≤ 5:
+		/*Consider all integer combinations of ab for 2 ≤ a ≤ 5 and 2 ≤ b ≤ 5:
 
-        22=4, 23=8, 24=16, 25=32
-        32=9, 33=27, 34=81, 35=243
-        42=16, 43=64, 44=256, 45=1024
-        52=25, 53=125, 54=625, 55=3125
-        If they are then placed in numerical order, with any repeats removed, we get the following sequence of 15 distinct terms:
+				22=4, 23=8, 24=16, 25=32
+				32=9, 33=27, 34=81, 35=243
+				42=16, 43=64, 44=256, 45=1024
+				52=25, 53=125, 54=625, 55=3125
+				If they are then placed in numerical order, with any repeats removed, we get the following sequence of 15 distinct terms:
 
-        4, 8, 9, 16, 25, 27, 32, 64, 81, 125, 243, 256, 625, 1024, 3125
+				4, 8, 9, 16, 25, 27, 32, 64, 81, 125, 243, 256, 625, 1024, 3125
 
-        How many distinct terms are in the sequence generated by ab for 2 ≤ a ≤ 100 and 2 ≤ b ≤ 100?*/
+				How many distinct terms are in the sequence generated by ab for 2 ≤ a ≤ 100 and 2 ≤ b ≤ 100?*/
 		public static void DistinctPowers()
 		{
 			HashSet<double> res = new HashSet<double>();
@@ -1111,17 +1111,17 @@ namespace ProjectEularProblems
 
 
 		//PROBLEM 30
-/*Surprisingly there are only three numbers that can be written as the sum of fourth powers of their digits:
+		/*Surprisingly there are only three numbers that can be written as the sum of fourth powers of their digits:
 
-        1634 = 1^4 + 6^4 + 3^4 + 4^4
-        8208 = 8^4 + 2^4 + 0^4 + 8^4
-        9474 = 9^4 + 4^4 + 7^4 + 4^4
+				1634 = 1^4 + 6^4 + 3^4 + 4^4
+				8208 = 8^4 + 2^4 + 0^4 + 8^4
+				9474 = 9^4 + 4^4 + 7^4 + 4^4
 
-        As 1 = 1^4 is not a sum it is not included.
+				As 1 = 1^4 is not a sum it is not included.
 
-        The sum of these numbers is 1634 + 8208 + 9474 = 19316.
+				The sum of these numbers is 1634 + 8208 + 9474 = 19316.
 
-        Find the sum of all the numbers that can be written as the sum of fifth powers of their digits.*/
+				Find the sum of all the numbers that can be written as the sum of fifth powers of their digits.*/
 		public static void DigitFifthPowers()
 		{
 			string n = "";
@@ -1596,14 +1596,14 @@ namespace ProjectEularProblems
 		}
 
 		//PROBLEM 33
-          /*The fraction 49/98 is a curious fraction, as an inexperienced mathematician in attempting to simplify it may incorrectly believe that 49/98 = 4/8, which is correct, is obtained by cancelling the 9s.
+		/*The fraction 49/98 is a curious fraction, as an inexperienced mathematician in attempting to simplify it may incorrectly believe that 49/98 = 4/8, which is correct, is obtained by cancelling the 9s.
 
-            We shall consider fractions like, 30/50 = 3/5, to be trivial examples.
+		  We shall consider fractions like, 30/50 = 3/5, to be trivial examples.
 
-            There are exactly four non-trivial examples of this type of fraction, less than one in value, and containing two digits in the numerator and denominator.
+		  There are exactly four non-trivial examples of this type of fraction, less than one in value, and containing two digits in the numerator and denominator.
 
-            If the product of these four fractions is given in its lowest common terms, find the value of the denominator.
-         */
+		  If the product of these four fractions is given in its lowest common terms, find the value of the denominator.
+	   */
 		public static double DigitCancellingFracts()
 		{
 			double res = 1.0d;
@@ -1688,12 +1688,12 @@ namespace ProjectEularProblems
 		}
 
 		//PROBLEM 35
-/*The number, 197, is called a circular prime because all rotations of the digits: 197, 971, and 719, are themselves prime.
+		/*The number, 197, is called a circular prime because all rotations of the digits: 197, 971, and 719, are themselves prime.
 
-		   There are thirteen such primes below 100: 2, 3, 5, 7, 11, 13, 17, 31, 37, 71, 73, 79, and 97.
+				   There are thirteen such primes below 100: 2, 3, 5, 7, 11, 13, 17, 31, 37, 71, 73, 79, and 97.
 
-		   How many circular primes are there below one million?
-		*/
+				   How many circular primes are there below one million?
+				*/
 		public static void CircularPrimes()
 		{
 			int max = 1000000;
@@ -1887,13 +1887,13 @@ namespace ProjectEularProblems
 			{
 				for ( int n = 1; n < 10; n++ )
 				{
-					string prod = (i * n).ToString();
-					for ( int item = 0; item < prod.Length;item++ )
+					string prod = ( i * n ).ToString();
+					for ( int item = 0; item < prod.Length; item++ )
 					{
-						if(prod[item] == '0') { goto next; }
+						if ( prod[ item ] == '0' ) { goto next; }
 						if ( pandigits.Add(int.Parse(prod[ item ].ToString())) )
 						{
-							if ( pandigits.Count == 9 && item == prod.Length - 1)
+							if ( pandigits.Count == 9 && item == prod.Length - 1 )
 							{
 								Console.Write($"{i} when n == {n} : ");
 								foreach ( int num in pandigits )
@@ -1904,9 +1904,9 @@ namespace ProjectEularProblems
 								goto next;
 							}
 						}
-						else 
-						{ 
-							goto next; 
+						else
+						{
+							goto next;
 						}
 					}
 				}
@@ -1924,15 +1924,15 @@ namespace ProjectEularProblems
 		For which value of p ≤ 1000, is the number of solutions maximised?*/
 		public static void IntegerRightTriangles()
 		{
-			
+
 			double res = 0;
 			double count = 0;
 			for ( int p = 1; p <= 1000; p++ )
 			{
 				int solutions_count = 0;
-				for ( int a = p/6; a < p / 2; a++ )
+				for ( int a = p / 6; a < p / 2; a++ )
 				{
-					for ( int b = a + 1; b < (p / 2) ; b++ )
+					for ( int b = a + 1; b < ( p / 2 ); b++ )
 					{
 						double c = p - ( a + b );
 						if ( ( a * a ) + ( b * b ) == c * c )
@@ -1944,7 +1944,7 @@ namespace ProjectEularProblems
 				}
 				count = solutions_count > res ? p : count;
 				res = solutions_count > res ? solutions_count : res;
-				
+
 			}
 			Console.ForegroundColor = ConsoleColor.Green;
 			Console.WriteLine(count + " has the most solutions.");
@@ -1964,7 +1964,7 @@ namespace ProjectEularProblems
 
 		public static void ChampernownesConstant()
 		{
-			
+
 			StringBuilder st = new StringBuilder(1000000);
 
 			int digits_count = 0;
@@ -1977,11 +1977,11 @@ namespace ProjectEularProblems
 				digits_count += x;
 				z *= 10;
 
-				end = i == 99999 ? Math.Ceiling(((1000000.0d - digits_count) * ( double.Parse($"{ i}9 ") - z) / (( double.Parse($"{ i}9 ") - z) * 6.0d))) + z : 0;
+				end = i == 99999 ? Math.Ceiling(( ( 1000000.0d - digits_count ) * ( double.Parse($"{ i}9 ") - z ) / ( ( double.Parse($"{ i}9 ") - z ) * 6.0d ) )) + z : 0;
 			}
 
 			//store sequence of terms
-			for ( int i = 1;i <= end; i++ )
+			for ( int i = 1; i <= end; i++ )
 			{
 				st.Append(i);
 			}
@@ -1992,7 +1992,7 @@ namespace ProjectEularProblems
 			{
 				res *= int.Parse(st[ i ].ToString());
 			}
-			Console.WriteLine($"{st[0]}x{st[ 9 ]}x{st[ 99 ]}x{st[ 999 ]}x{st[ 9999 ]}x{st[ 99999 ]}x{st[ 999999 ]} ==> {res}");
+			Console.WriteLine($"{st[ 0 ]}x{st[ 9 ]}x{st[ 99 ]}x{st[ 999 ]}x{st[ 9999 ]}x{st[ 99999 ]}x{st[ 999999 ]} ==> {res}");
 		}
 
 		//PROBLEM 41
@@ -2003,9 +2003,9 @@ namespace ProjectEularProblems
 		{
 			List<int> nums = new List<int>(1000);
 			string minus = "1111111111";
-			for ( int i = 123456789; i >= 10; i-=int.Parse(minus) )
+			for ( int i = 123456789; i >= 10; i -= int.Parse(minus) )
 			{
-				stringPermutation(i.ToString(),0,i.ToString().Length-1,nums);
+				stringPermutation(i.ToString(), 0, i.ToString().Length - 1, nums);
 
 				minus = minus.Remove(minus.Length - 1, 1);
 			}
@@ -2013,7 +2013,7 @@ namespace ProjectEularProblems
 
 		}
 		//permutation algorithm not mine (need to study it)
-		private static void stringPermutation( string str, int left, int right , List<int> ls)
+		private static void stringPermutation( string str, int left, int right, List<int> ls )
 		{
 			if ( left == right )
 			{
@@ -2036,7 +2036,7 @@ namespace ProjectEularProblems
 					lft[ left ] = c;
 					str = new string(lft);
 
-					stringPermutation(str, left + 1, right,ls);
+					stringPermutation(str, left + 1, right, ls);
 					//swap(str[ left ], str[ i ]); //swap back for backtracking
 					lft = str.ToCharArray();
 					c = str[ i ];
@@ -2063,7 +2063,7 @@ namespace ProjectEularProblems
 			int[] sequence = new int[ 1300 ];
 			for ( int i = 1; i < 1300; i++ )
 			{
-				sequence[ i ] = (int)(( 1.0 / 2.0 *  i  ) * ( i + 1.0 ));
+				sequence[ i ] = ( int ) ( ( 1.0 / 2.0 * i ) * ( i + 1.0 ) );
 			}
 			using ( StreamReader sr = new StreamReader("./p042_words.txt") )
 			{
@@ -2098,16 +2098,16 @@ namespace ProjectEularProblems
 		{
 			List<string> PanDigits = new List<string>(3628800);
 			FindPanDig0_9("0123456789", 0, 9, PanDigits);
-			int[] primes = {0, 2, 3, 5, 7, 11, 13, 17 };
+			int[] primes = { 0, 2, 3, 5, 7, 11, 13, 17 };
 			string sum = "0";
-			bool passd = true ;
+			bool passd = true;
 			for ( int i = 0; i < PanDigits.Count; i++ )
 			{
 				passd = true;
-				for ( int j = 1; j < PanDigits[i].Length-2; j++ )
+				for ( int j = 1; j < PanDigits[ i ].Length - 2; j++ )
 				{
 					string substr = PanDigits[ i ].Substring(j, 3);
-					if(int.Parse(substr) % primes[j] != 0 )
+					if ( int.Parse(substr) % primes[ j ] != 0 )
 					{
 						passd = false;
 						break;
@@ -2118,7 +2118,7 @@ namespace ProjectEularProblems
 			Console.WriteLine($"Sum of 0 - 9 pandigital numbers: {sum}");
 		}
 
-		private static void FindPanDig0_9(string str, int left, int right, List<string> ls)
+		private static void FindPanDig0_9( string str, int left, int right, List<string> ls )
 		{
 			if ( left == right )
 			{
@@ -2167,24 +2167,24 @@ namespace ProjectEularProblems
 			{
 				pJ = ( i * ( ( ( 3 * i ) - 1 ) ) ) / 2;
 
-				for ( int j = i + 1; j < 3000 ; j++ )
+				for ( int j = i + 1; j < 3000; j++ )
 				{
 					pK = ( j * ( ( ( 3 * j ) - 1 ) ) ) / 2;
 					diff = pK - pJ;
 					sum = pJ + pK;
 
-					if( isPent(diff,ref p) && isPent(sum, ref p) )//check if the sum and diff are pentagon nums
+					if ( isPent(diff, ref p) && isPent(sum, ref p) )//check if the sum and diff are pentagon nums
 					{
 						Console.WriteLine($"D is p{i}(pJ - Pk)p{j} |{pJ} - {pK}|  = {Math.Abs(pJ - pK)}");
 						goto end;
 					}
 				}
 			}
-			end:
+		end:
 			return;
 		}
 
-		private static bool isPent(long sum_diff, ref double P)
+		private static bool isPent( long sum_diff, ref double P )
 		{
 			//use the quadratic expression to check is sum is a pantagon num
 			double a = 3.0d;
@@ -2194,7 +2194,7 @@ namespace ProjectEularProblems
 			double root = Math.Sqrt(( b * b ) - ( 4 * a * c ));
 
 			//note use minus on (+ / -)
-			double res = ( b - root ) / (2 * a) ;
+			double res = ( b - root ) / ( 2 * a );
 			P = !res.ToString().Contains('.') ? res : 0;
 
 			return !res.ToString().Contains('.');
@@ -2211,25 +2211,25 @@ namespace ProjectEularProblems
 		Find the next triangle number that is also pentagonal and hexagonal.*/
 		public static void TriangularPentagonalHexagonal()
 		{
-			long  T = 0;
+			long T = 0;
 			bool P = false;
 			bool H = false;
 			double h = 0;
 			double p = 0;
-			
+
 			for ( long n = 286; ; n++ )// Tn
 			{
 				T = ( n * ( n + 1 ) ) / 2;//triangular num
-				P = isPent(T,ref p) ? true : false;//is it a pentagonal num too
-				H = P ? isHexa(T,ref h) : false;//is it hexagonal too
-				if ( H ) 
-				{ 
+				P = isPent(T, ref p) ? true : false;//is it a pentagonal num too
+				H = P ? isHexa(T, ref h) : false;//is it hexagonal too
+				if ( H )
+				{
 					Console.WriteLine($"T{n} = P{Math.Abs(p)} = H{Math.Abs(h)} = {Math.Abs(T)}");
-					break; 
+					break;
 				}
 			}
 		}
-		private static bool isHexa( long num , ref double H )
+		private static bool isHexa( long num, ref double H )
 		{
 			//use the quadratic expression to check is sum is a pantagon num
 			double a = 2.0d;
@@ -2240,7 +2240,7 @@ namespace ProjectEularProblems
 
 			//note use minus on (+ / -)
 			double res = ( b + root ) / ( 2 * a );
-			H = !res.ToString().Contains('.') ? res : 0; 
+			H = !res.ToString().Contains('.') ? res : 0;
 			return !res.ToString().Contains('.');
 		}
 
@@ -2275,15 +2275,15 @@ namespace ProjectEularProblems
 						if ( pr )
 						{
 							primes[ j ] = j;
-							int sqr = (int)Math.Sqrt(i);
+							int sqr = ( int ) Math.Sqrt(i);
 							for ( int k = 1; k < sqr; k++ )//loop possible squares
 							{
-								if( j + ( ( k * k ) * 2 ) == i )
+								if ( j + ( ( k * k ) * 2 ) == i )
 								{
 									//Console.WriteLine($"{i} = {j} + 2 x {k}^2");
 									goto nxt_i;
 								}
-								if (j + ((k * k) * 2) != i && j == i-1 && k == sqr - 1)
+								if ( j + ( ( k * k ) * 2 ) != i && j == i - 1 && k == sqr - 1 )
 								{
 									Console.ForegroundColor = ConsoleColor.Green;
 									Console.WriteLine($"{i} cannot be written as the sum of a prime and twice a square.");
@@ -2335,11 +2335,11 @@ namespace ProjectEularProblems
 				//first find the prime factors of i
 				for ( int n = 0; n < p.Length; )//iterate all primes below i (then divide them into i) 
 				{
-					if(division_result % p[n] == 0 )//if prime can divide into i
+					if ( division_result % p[ n ] == 0 )//if prime can divide into i
 					{
-						divisors.Add(p[n]);
+						divisors.Add(p[ n ]);
 						division_result = division_result / p[ n ];
-						if( division_result == 1 )//if the division result is 1 (we are done finding the prime factors)
+						if ( division_result == 1 )//if the division result is 1 (we are done finding the prime factors)
 						{
 							break;
 						}
@@ -2347,12 +2347,12 @@ namespace ProjectEularProblems
 					else { n++; }
 				}
 
-				if(divisors.Count == distinct_count )//if has required amount of divisors 
+				if ( divisors.Count == distinct_count )//if has required amount of divisors 
 				{
 					consecutive.Add(i);
-					if(consecutive.Count == distinct_count )//if has required amount of consecutive numbers 
+					if ( consecutive.Count == distinct_count )//if has required amount of consecutive numbers 
 					{
-						
+
 						if ( consecutive.Max() - consecutive.Min() + 1 == consecutive.Count() )//if numbers are consecutive
 						{
 							foreach ( int item in consecutive )
@@ -2361,15 +2361,15 @@ namespace ProjectEularProblems
 							}
 							return;
 						}
-						else 
+						else
 						{
 							consecutive.Clear();
 						}
 					}
 				}
 				else
-				{ 
-					consecutive.Clear(); 
+				{
+					consecutive.Clear();
 				}
 			}
 		}
@@ -2393,14 +2393,14 @@ namespace ProjectEularProblems
 		public static void PrimePermutations()
 		{
 			//find the first 1k primes
-			int[] primes = new int[9999];
+			int[] primes = new int[ 9999 ];
 			for ( int i = 2; i < primes.Length; i++ )
 			{
 				primes[ i ] = isPrime(i) ? i : 0;
 			}
 			for ( int one = 1001; one < primes.Length; one++ )
 			{
-				if(primes[one] == 0 )
+				if ( primes[ one ] == 0 )
 				{
 					continue;
 				}
@@ -2409,18 +2409,18 @@ namespace ProjectEularProblems
 				{
 					//add the possible increment value
 					int two = primes[ primes[ one ] + increment ] != 0 ? primes[ primes[ one ] + increment ] : 0;
-					if(two != 0 )
+					if ( two != 0 )
 					{
 						int three = primes[ two + increment ] != 0 ? primes[ two + increment ] : 0;
-						if(three != 0 )//if passed means all three are prime
+						if ( three != 0 )//if passed means all three are prime
 						{
 							//check if numbers are permutes
-							char[] first = one.ToString().ToCharArray().OrderBy(a=>a).ToArray();
+							char[] first = one.ToString().ToCharArray().OrderBy(a => a).ToArray();
 							char[] sec = two.ToString().ToCharArray().OrderBy(a => a).ToArray();
 							char[] third = three.ToString().ToCharArray().OrderBy(a => a).ToArray();
 							for ( int j = 0; j < 4; j++ )
 							{
-								if(first[j] != sec[j] || sec[j] != third[ j ] )
+								if ( first[ j ] != sec[ j ] || sec[ j ] != third[ j ] )
 								{
 									goto next;
 								}
@@ -2449,7 +2449,7 @@ namespace ProjectEularProblems
 		Which prime, below one-million, can be written as the sum of the most consecutive primes?*/
 		public static void ConsecutivePrimeSum()
 		{
-			int[] res = new int[2];
+			int[] res = new int[ 2 ];
 			int[] primes = new int[ 1000000 ];
 			//get primes below 100
 			for ( int i = 0; i < primes.Length; i++ )
@@ -2467,14 +2467,14 @@ namespace ProjectEularProblems
 
 					for ( int j = i; j < i + k - 1; j++ )
 					{
-						if(j == stripped_primes.Length - 1 )//dont add to sum when j == number of items in array
+						if ( j == stripped_primes.Length - 1 )//dont add to sum when j == number of items in array
 						{
 							sum = 0;
-							break; 
+							break;
 						}
-						sum += stripped_primes[ j + 1];
+						sum += stripped_primes[ j + 1 ];
 					}
-					if ( sum <= stripped_primes[ stripped_primes.Length - 1 ])//if sum is less the biggest prime
+					if ( sum <= stripped_primes[ stripped_primes.Length - 1 ] )//if sum is less the biggest prime
 					{
 						if ( sum == primes[ sum ] && sum != 0 )
 						{
@@ -2482,7 +2482,7 @@ namespace ProjectEularProblems
 							res[ 1 ] = k;//save number of consecutive primes added
 						}
 					}
-					else if(i == 0)//if k consecutive primes where added starting from i = 0 and sum > biggest prime ==> its done.
+					else if ( i == 0 )//if k consecutive primes where added starting from i = 0 and sum > biggest prime ==> its done.
 					{
 						Console.Write($"{res[ 0 ]} can be written as sum of {res[ 1 ]} consecutive primes.");
 						return;
@@ -2512,8 +2512,9 @@ namespace ProjectEularProblems
 				primes[ i ] = isPrime(i) ? i : 0;
 			}
 			int[] stripped_primes = primes.Where(a => a != 0).ToArray();//remove zeros for easy iteration
+			List<int> res = new List<int>(10);
 
-			for ( int i = 0; i < stripped_primes.Length; i++ )
+			for ( int i = stripped_primes.ToList().IndexOf(56003); i < stripped_primes.Length; i++ )
 			{
 
 				//replace 1 upto length - 1 digits
@@ -2528,52 +2529,110 @@ namespace ProjectEularProblems
 						for ( int k = 0; k < num_string.Length; k++ )
 						{
 							count_family = 0;
+							res.Clear();
 							for ( int m = 0; m < 10; m++ )
 							{
-								if(k == 0 && m == 0 ) { continue;}
-								if(m.ToString() == num_string[ k ].ToString() ) { continue; }
+								if ( k == 0 && m == 0 ) { continue; }
+								//if(m.ToString() == num_string[ k ].ToString() ) { continue; }
 								StringBuilder num_temp = new StringBuilder(num_string.ToString());
 								int new_num = int.Parse(num_temp.Replace(num_temp[ k ].ToString(), m.ToString(), k, n).ToString());
 
 								count_family = primes[ new_num ] != 0 ? count_family + 1 : count_family;
+								if ( primes[ new_num ] != 0 )
+								{
+
+									res.Add(new_num);
+								}
 							}
-							if ( count_family == 6 )
+							if ( count_family == 8 )
 							{
-								Console.WriteLine($"{stripped_primes[ i ]} is the smallest prime part of an eight prime value family. ");
+								Console.WriteLine($"{res[ 0 ]} is the smallest prime part of a 8 prime value family. ");
 								return;
 							}
 						}
 					}
-					  
+
 					else if ( n == 2 )
 					{
+
 						for ( int k = 0; k < num_string.Length - 1; k++ )
 						{
 							for ( int l = k + 1; l < num_string.Length; l++ )
 							{
-								count_family = 0;
 
+								count_family = 0;
+								res.Clear();
 
 								for ( int m = 0; m < 10; m++ )
 								{
 									if ( k == 0 && m == 0 ) { continue; }
-									if ( m.ToString() == num_string[ k ].ToString() && m.ToString() == num_string[ l ].ToString() ) { continue; }
+									//if ( m.ToString() == num_string[ k ].ToString() && m.ToString() == num_string[ l ].ToString() ) { continue; }
 									StringBuilder num_temp = new StringBuilder(num_string.ToString());
 									int new_num = int.Parse(num_temp.Replace(num_temp[ k ].ToString(), m.ToString(), k, 1).Replace(num_temp[ l ].ToString(), m.ToString(), l, 1).ToString());
 									//int new_num = int.Parse(_num.Replace(_num[ k ].ToString(), m.ToString(), l, n).ToString());
 
 									count_family = primes[ new_num ] != 0 ? count_family + 1 : count_family;
+									if ( primes[ new_num ] != 0 )
+									{
+
+										res.Add(new_num);
+									}
 								}
-								if ( count_family == 6 )
+								if ( count_family == 7 )
 								{
-									Console.WriteLine($"{stripped_primes[ i ]} is the smallest prime part of an eight prime value family. ");
+									foreach ( int item in res )
+									{
+										Console.WriteLine(item);
+									}
+									Console.WriteLine($"{res[ 0 ]} is the smallest prime part of a 7 prime value family. ");
 									return;
 								}
 							}
 						}
 					}
+					else if ( n == 3 )
+					{
 
-					
+						for ( int k = 0; k < num_string.Length - 2; k++ )
+						{
+							for ( int l = k + 1; l < num_string.Length - 1; l++ )
+							{
+								for ( int p = l + 1; p < num_string.Length; p++ )
+								{
+									count_family = 0;
+									res.Clear();
+
+									for ( int m = 0; m < 10; m++ )
+									{
+										if ( k == 0 && m == 0 ) { continue; }
+										//if ( m.ToString() == num_string[ k ].ToString() && m.ToString() == num_string[ l ].ToString() && m.ToString() == num_string[ p ].ToString() ) { continue; }
+
+										StringBuilder num_temp = new StringBuilder(num_string.ToString());
+
+										int new_num = int.Parse(num_temp.Replace(num_temp[ k ].ToString(), m.ToString(), k, 1).Replace(num_temp[ l ].ToString(), m.ToString(), l, 1).Replace(num_temp[ p ].ToString(), m.ToString(), p, 1).ToString());
+										//int new_num = int.Parse(_num.Replace(_num[ k ].ToString(), m.ToString(), l, n).ToString());
+
+										count_family = primes[ new_num ] != 0 ? count_family + 1 : count_family;
+										if ( primes[ new_num ] != 0 )
+										{
+
+											res.Add(new_num);
+										}
+									}
+									if ( count_family == 8 )
+									{
+										foreach ( int item in res )
+										{
+											Console.WriteLine(item);
+										}
+										Console.WriteLine($"{res[ 0 ]} is the smallest prime part of a 8 prime value family. ");
+										return;
+									}
+								}
+							}
+						}
+					}
+
 				}
 			}
 		}
