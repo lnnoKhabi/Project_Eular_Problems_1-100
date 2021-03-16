@@ -24,7 +24,7 @@ namespace ProjectEularProblems
 			Stopwatch sp = new Stopwatch();
 			sp.Start();
 
-			PrimeDigitReplacements();
+			PermutedMultiples();
 			sp.Stop();
 
 			Console.WriteLine("\nruntime: " + sp.ElapsedMilliseconds / 1000.0 + "s");
@@ -2497,7 +2497,7 @@ namespace ProjectEularProblems
 		}
 
 		//PROBLEM 51
-		/*By replacing the 1st digit of the 2-digit number *3, it turns out that six of the nine possible values: 13, 23, 43, 53, 73, and 83, are all prime.
+	/*By replacing the 1st digit of the 2-digit number *3, it turns out that six of the nine possible values: 13, 23, 43, 53, 73, and 83, are all prime.
 
 		By replacing the 3rd and 4th digits of 56**3 with the same digit, this 5-digit number is the first example having seven primes among the ten generated numbers, yielding the family: 56003, 56113, 56333, 56443, 56663, 56773, and 56993. Consequently 56003, being the first member of this family, is the smallest prime with this property.
 
@@ -2511,7 +2511,7 @@ namespace ProjectEularProblems
 			{
 				primes[ i ] = isPrime(i) ? i : 0;
 			}
-			int[] stripped_primes = primes.Where(a => a != 0).ToArray();//remove zeros for easy iteration
+			int[] stripped_primes = primes.Where(a => a != 0  && a > 1000).ToArray();//remove zeros for easy iteration
 			List<int> res = new List<int>(10);
 
 			for ( int i = stripped_primes.ToList().IndexOf(56003); i < stripped_primes.Length; i++ )
@@ -2520,11 +2520,12 @@ namespace ProjectEularProblems
 				//replace 1 upto length - 1 digits
 				StringBuilder num_string = new StringBuilder(stripped_primes[ i ].ToString());
 
-				for ( int n = 1; n < num_string.Length; n++ )
-				{
+				//for ( int n = num_string.Length - 1; n > 2; n-- )
+				//if(num_string.Length > 3)
+				//{
 					int count_family = 0;
-
-					if ( n == 1 )
+					//ALL COMMENTED CODE IS FOR REPLACING 1 & 2 DIGITS (removed for perfomance reasons)
+					/*if ( n == 1 )
 					{
 						for ( int k = 0; k < num_string.Length; k++ )
 						{
@@ -2578,20 +2579,22 @@ namespace ProjectEularProblems
 										res.Add(new_num);
 									}
 								}
-								if ( count_family == 7 )
+								if ( count_family == 8 )
 								{
 									foreach ( int item in res )
 									{
 										Console.WriteLine(item);
 									}
-									Console.WriteLine($"{res[ 0 ]} is the smallest prime part of a 7 prime value family. ");
+									Console.ForegroundColor = ConsoleColor.Green;
+
+									Console.WriteLine($"{res[ 0 ]} is the smallest prime part of a 8 prime value family. ");
 									return;
 								}
 							}
 						}
-					}
-					else if ( n == 3 )
-					{
+					}*/
+					//if ( n == 3 )
+					//{
 
 						for ( int k = 0; k < num_string.Length - 2; k++ )
 						{
@@ -2605,7 +2608,6 @@ namespace ProjectEularProblems
 									for ( int m = 0; m < 10; m++ )
 									{
 										if ( k == 0 && m == 0 ) { continue; }
-										//if ( m.ToString() == num_string[ k ].ToString() && m.ToString() == num_string[ l ].ToString() && m.ToString() == num_string[ p ].ToString() ) { continue; }
 
 										StringBuilder num_temp = new StringBuilder(num_string.ToString());
 
@@ -2625,14 +2627,51 @@ namespace ProjectEularProblems
 										{
 											Console.WriteLine(item);
 										}
+										Console.ForegroundColor = ConsoleColor.Green;
+
 										Console.WriteLine($"{res[ 0 ]} is the smallest prime part of a 8 prime value family. ");
 										return;
 									}
 								}
 							}
 						}
-					}
+					//}
 
+				//}
+			}
+		}
+
+		//PROBLEM 52
+		/*It can be seen that the number, 125874, and its double, 251748, contain exactly the same digits, but in a different order.
+		Find the smallest positive integer, x, such that 2x, 3x, 4x, 5x, and 6x, contain the same digits.*/
+		public static void PermutedMultiples()
+		{
+			for ( int i = 125874; ; i++ )
+			{
+				if (new string(i.ToString().OrderBy(a => Convert.ToInt32(a)).ToArray()) == new string((i * 2).ToString().OrderBy(a => Convert.ToInt32(a)).ToArray()) )
+				{
+					if ( new string(( i * 2 ).ToString().OrderBy(a => Convert.ToInt32(a)).ToArray()) == new string(( i * 3 ).ToString().OrderBy(a => Convert.ToInt32(a)).ToArray()) )
+					{
+						if ( new string(( i * 3 ).ToString().OrderBy(a => Convert.ToInt32(a)).ToArray()) == new string(( i * 4 ).ToString().OrderBy(a => Convert.ToInt32(a)).ToArray()) )
+						{
+							if ( new string(( i * 4 ).ToString().OrderBy(a => Convert.ToInt32(a)).ToArray()) == new string(( i * 5 ).ToString().OrderBy(a => Convert.ToInt32(a)).ToArray()) )
+							{
+								if ( new string(( i * 5 ).ToString().OrderBy(a => Convert.ToInt32(a)).ToArray()) == new string(( i * 6 ).ToString().OrderBy(a => Convert.ToInt32(a)).ToArray()) )
+								{
+									Console.ForegroundColor = ConsoleColor.Green;
+									Console.WriteLine(i);
+									Console.ForegroundColor = ConsoleColor.White;
+									Console.WriteLine(i * 2);
+									Console.WriteLine(i * 3);
+									Console.WriteLine(i * 4);
+									Console.WriteLine(i * 5);
+									Console.WriteLine(i * 6);
+									//Console.WriteLine($"Smallest positive int containing the same digits is: {i}");
+									return;
+								}
+							}
+						}
+					}
 				}
 			}
 		}
