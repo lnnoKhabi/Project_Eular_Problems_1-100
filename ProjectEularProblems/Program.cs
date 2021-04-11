@@ -24,7 +24,7 @@ namespace ProjectEularProblems
 			Stopwatch sp = new Stopwatch();
 			sp.Start();
 
-			PermutedMultiples();
+			CombinatoricSelections();
 			sp.Stop();
 
 			Console.WriteLine("\nruntime: " + sp.ElapsedMilliseconds / 1000.0 + "s");
@@ -849,7 +849,7 @@ namespace ProjectEularProblems
 			Console.WriteLine(count);
 		}
 
-		private static int fact( int i )
+		private static long fact( long i )
 		{
 			if ( i <= 1 )
 			{
@@ -863,7 +863,7 @@ namespace ProjectEularProblems
 		public static void LexicographicPermutations()
 		{
 			int[] P = { 0, 1, 2, 3, 4, 5, 6, 7, 8, 9 };
-			int times = fact(P.Length);
+			int times = (int)fact((long)P.Length);
 
 			for ( int j = 0; j < times; j++ )
 			{
@@ -1664,7 +1664,7 @@ namespace ProjectEularProblems
 			int[] facts = new int[ 10 ];
 			for ( int i = 0; i < 10; i++ )
 			{
-				facts[ i ] = fact(i);
+				facts[ i ] = (int)fact((long)i);
 			}
 			int res = 0;
 			//find curious numbers
@@ -2263,7 +2263,7 @@ namespace ProjectEularProblems
 		{
 			int[] primes = new int[ 1000000 ];
 			bool is_odd_combosite = false;
-			//find odd composite numbers e.g 9 , 15 21 (divisible by numbers other than 1 and itself, and odd)
+			//find odd composite numbers e.g 9 , 15 , 21 (divisible by numbers other than 1 and itself, and odd)
 			for ( int i = 9; ; i++ )
 			{
 				is_odd_combosite = i % 2 != 0 ? !isPrime(i) : false;
@@ -2674,6 +2674,121 @@ namespace ProjectEularProblems
 					}
 				}
 			}
+		}
+
+		//PROBLEM 53
+		/*There are exactly ten ways of selecting three from five, 12345:
+
+		123, 124, 125, 134, 135, 145, 234, 235, 245, and 345
+
+		In combinatorics, we use the notation, 
+		.
+
+		In general, 
+ 
+		, where , , and .
+
+		It is not until , that a value exceeds one-million: 
+		.
+
+		How many, not necessarily distinct, values of 
+		 for , are greater than one-million?*/
+
+		public static void CombinatoricSelections()
+		{
+			int count = 0;
+			for ( int n = 23; n <= 100; n++ )
+			{
+				for ( int r = 1; r <= n; r++ )
+				{
+					if( FactBig(n) / ( FactBig(r) * FactBig(n - r) ) > 1000000 )
+					{
+						count++;
+					}
+				}
+			}
+			Console.WriteLine(count);
+		}
+
+		private static BigInteger FactBig(BigInteger n )
+		{
+			if(n <= 1 ) { return 1; }
+			return n * FactBig(n - 1);
+		}
+
+		private static string FactString(string n )
+		{
+			if(n == "1" || n == "0") { return "1"; }
+			return MultiplyLongNums(n, FactString(SubLongNumbers(n, "1")));
+		}
+
+		private static string SubLongNumbers(string first, string sec )
+		{
+			string res = "";
+			string big = "";
+			string small = "";
+
+			//determine   number
+			if (first.Length == sec.Length )
+			{
+				for ( int i = 0; i < first.Length; i++ )
+				{
+					if(first[i] > sec[ i ] )
+					{
+						big = first;
+						small = sec;
+						break;
+					}
+					else if ( first[ i ] < sec[ i ] )
+					{
+						big = sec;
+						small = first;
+						break;
+					}
+					else
+					{
+						if(i == first.Length - 1 )//numbers are the same
+						{
+							big = first;
+							small = sec;
+							break;
+						}
+					}
+				}
+			}
+			else
+			{
+				big = first.Length > sec.Length ? first : sec;
+				for ( int i = 0; i < Math.Max(first.Length ,sec.Length) - Math.Min(first.Length, sec.Length); i++ )
+				{
+					small += "0";
+				}
+				small += first.Length < sec.Length ? first : sec;
+			}
+
+			string[] bg = Array.ConvertAll( big.ToArray(),a=>a.ToString());
+			string[] sml = Array.ConvertAll(small.ToArray(), a => a.ToString());
+
+			//int carry = 0;
+			for ( int i = bg.Length - 1; i >= 0; i-- )
+			{
+
+
+				res += int.Parse(bg[ i ]) < int.Parse(sml[ i ]) ? ( Convert.ToInt32(bg[ i ]) + 10 ) - Convert.ToInt32(sml[ i ]) : Convert.ToInt32(bg[ i ]) - Convert.ToInt32(sml[ i ]);
+				if(i > 0 && int.Parse(bg[ i ]) < int.Parse(sml[ i ]) )
+				{
+
+					sml[i - 1] = int.Parse(bg[ i ]) < int.Parse(sml[ i ]) ? (1+ Convert.ToInt32( sml[i-1])).ToString() : "0";
+				}
+			}
+			res = new string(res.Reverse().ToArray());
+			while ( res.ElementAt(0) == '0' )
+			{
+
+				res = res.Remove(0, 1);
+			}
+
+			return res;
 		}
 	}
 }
