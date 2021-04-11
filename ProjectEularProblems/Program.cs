@@ -24,7 +24,7 @@ namespace ProjectEularProblems
 			Stopwatch sp = new Stopwatch();
 			sp.Start();
 
-			CombinatoricSelections();
+			SelfPowers();
 			sp.Stop();
 
 			Console.WriteLine("\nruntime: " + sp.ElapsedMilliseconds / 1000.0 + "s");
@@ -2374,14 +2374,20 @@ namespace ProjectEularProblems
 			}
 		}
 
-		//PROBLEM 48 NOT WORKING
+		//PROBLEM 48 
 		/*The series, 1^1 + 2^2 + 3^3 + ... + 10^10 = 10405071317.
 
 		Find the last ten digits of the series, 1^1 + 2^2 + 3^3 + ... + 1000^1000.*/
 
 		public static void SelfPowers()
 		{
-
+			BigInteger res = 0;
+			for ( int i = 1000; i > 0; i-- )
+			{
+				res += BigInteger.Pow(i,  i);
+			}
+			string s = res.ToString();
+			Console.WriteLine(s.Substring(s.Length - 10,10));
 		}
 
 		//PROBLEM 49
