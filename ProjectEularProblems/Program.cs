@@ -24,7 +24,7 @@ namespace ProjectEularProblems
 
 			Stopwatch sp = new Stopwatch();
 			sp.Start();
-			p055_LychrelNumbers();
+			p056_PowerfulDigitSum();
 			sp.Stop();
 			Console.WriteLine("\nruntime: " + sp.ElapsedMilliseconds / 1000.0 + "s");
 			Console.ReadLine();
@@ -3359,6 +3359,30 @@ namespace ProjectEularProblems
 			}
 			Console.WriteLine($"There are {lychrel} lychrel numbers below  ten-thousand.");
 		}
+
+		/// <summary>
+		/// PROBLEM 56.
+		/// A googol (10^100) is a massive number: one followed by one-hundred zeros; 100^100 is almost unimaginably large: one followed by two-hundred zeros. Despite their size, the sum of the digits in each number is only 1.
+		/// Considering natural numbers of the form, a^b, where a, b< 100, what is the maximum digital sum?
+		/// </summary>
+		public static void p056_PowerfulDigitSum()
+		{
+			BigInteger x;
+			int max_sum = 0;
+			int sum = 0;
+			for ( int i = 1; i < 100; i++ )
+			{
+				for ( int j = 0; j < 100; j++ )
+				{
+					x = BigInteger.Pow(i, j);
+					sum = x.ToString().Sum(a => int.Parse(a.ToString()));
+					max_sum = sum > max_sum ? sum : max_sum;
+				}
+			}
+			Console.WriteLine(max_sum); 
+		}
+
+
 	}
 }
 
