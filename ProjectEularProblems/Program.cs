@@ -24,7 +24,7 @@ namespace ProjectEularProblems
 
 			Stopwatch sp = new Stopwatch();
 			sp.Start();
-			p056_PowerfulDigitSum();
+			p057_SquareRootConvergents();
 			sp.Stop();
 			Console.WriteLine("\nruntime: " + sp.ElapsedMilliseconds / 1000.0 + "s");
 			Console.ReadLine();
@@ -3382,7 +3382,34 @@ namespace ProjectEularProblems
 			Console.WriteLine(max_sum); 
 		}
 
-
+		/// <summary>
+		/// PROBLEM 57.
+		/// It is possible to show that the square root of two can be expressed as an infinite continued fraction.
+		/// By expanding this for the first four iterations, we get:
+		/// but the eighth expansion, is the first example where the number of digits in the numerator exceeds the number of digits in the denominator.
+		/// In the first one-thousand expansions, how many fractions contain a numerator with more digits than the denominator?
+		/// </summary>
+		public static void p057_SquareRootConvergents()
+		{
+			//double prev = 1.0 / 2.0 ;
+			//for ( int i = 2; i <= 1000; i++ )
+			//{
+			//	double x = 2.0 + prev;
+			//	prev = 1.0 / x;
+			//	double calc = prev + 1.0;
+			//	Console.WriteLine($"iteration #{i}: {calc} ==> ");
+			//}
+			BigInteger count = 0;
+			BigInteger n = 3;
+			BigInteger d = 2;
+			for ( int i = 1; i < 1000; i++ )
+			{
+				n = n + 2 * d;
+				d = n - d;
+				count = n.ToString().Length > d.ToString().Length ? count + 1 : count;
+			}
+			Console.WriteLine(count);
+		}
 	}
 }
 
