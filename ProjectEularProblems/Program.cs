@@ -24,7 +24,7 @@ namespace ProjectEularProblems
 
 			Stopwatch sp = new Stopwatch();
 			sp.Start();
-			p057_SquareRootConvergents();
+			Console.WriteLine( p015(20,20,new Dictionary<string, UInt64>())); 
 			sp.Stop();
 			Console.WriteLine("\nruntime: " + sp.ElapsedMilliseconds / 1000.0 + "s");
 			Console.ReadLine();
@@ -482,6 +482,25 @@ namespace ProjectEularProblems
 				Console.ForegroundColor = ConsoleColor.Green;
 				Console.WriteLine(d);
 			}
+		}
+
+		public static UInt64 p015( UInt64 m, UInt64 n, Dictionary<string, UInt64> memo )
+		{
+			string key = $"{m},{n}";
+			if ( memo.ContainsKey(key) )
+			{
+				return memo[ key ];
+			}
+			if(m == 0 || n == 0 )
+			{
+				return 0;
+			}
+			if ( m == 1 && n == 1 )
+			{
+				return 1;
+			}
+			memo.Add(key, p015(m - 1, n,memo) + p015(m, n - 1,memo));
+			return memo[key];
 		}
 
 		/// <summary>
