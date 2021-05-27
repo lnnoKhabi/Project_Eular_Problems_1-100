@@ -24,7 +24,7 @@ namespace ProjectEularProblems
 
 			Stopwatch sp = new Stopwatch();
 			sp.Start();
-			Console.WriteLine( p015(20,20,new Dictionary<string, UInt64>())); 
+			p058_SpiralPrimes();
 			sp.Stop();
 			Console.WriteLine("\nruntime: " + sp.ElapsedMilliseconds / 1000.0 + "s");
 			Console.ReadLine();
@@ -3429,6 +3429,52 @@ namespace ProjectEularProblems
 			}
 			Console.WriteLine(count);
 		}
+
+		/// <summary>
+		/// PROBLEM 58.
+		/// Starting with 1 and spiralling anticlockwise in the following way, a square spiral with side length 7 is formed.
+		/// 37 36 35 34 33 32 31
+		/// 38 17 16 15 14 13 30
+		/// 39 18  5  4  3 12 29
+		/// 40 19  6  1  2 11 28
+		/// 41 20  7  8  9 10 27
+		/// 42 21 22 23 24 25 26
+		/// 43 44 45 46 47 48 49
+		/// It is interesting to note that the odd squares lie along the bottom right diagonal, but what is more interesting is that 8 out of the 13 numbers lying along both diagonals are prime; that is, a ratio of 8/13 ≈ 62%.
+		/// If one complete new layer is wrapped around the spiral above, a square spiral with side length 9 will be formed.If this process is continued, what is the side length of the square spiral for which the ratio of primes along both diagonals first falls below 10%?
+		/// </summary>
+		public static void p058_SpiralPrimes()
+		{
+
+			float res = 0;
+
+			float dia_count = 0;
+			float dia_prime = 0.0f;
+
+			int center = 1;
+			int adder = 2;
+			int counter = 0;
+			while ( true )
+			{
+				center = center + adder;
+				dia_prime = CheckPrime(center) ? dia_prime + 1 : dia_prime;
+
+				counter++;
+				adder = counter == 4 ? adder + 2 : adder;
+				dia_count = counter == 4 ? (float)( Math.Sqrt(center) * 2 ) - 1 : dia_count;
+				counter = counter == 4 ? 0 : counter;
+					
+				res = ( dia_prime / dia_count ) * 100;
+				if(res <= 10 )
+				{
+					double grid = Math.Sqrt(center);
+					Console.WriteLine($"a {grid} x {grid} grid has {res}% prime numbers");
+					break;
+				}
+			}
+			
+		}
+
 	}
 }
 
