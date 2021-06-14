@@ -24,7 +24,7 @@ namespace ProjectEularProblems
 
 			Stopwatch sp = new Stopwatch();
 			sp.Start();
-			p059_XORDecryption();
+			PrimePairSets();
 			sp.Stop();
 			Console.WriteLine("\nruntime: " + sp.ElapsedMilliseconds / 1000.0 + "s");
 			Console.ReadLine();
@@ -3493,7 +3493,7 @@ namespace ProjectEularProblems
 			{
 				int[] cipher = Array.ConvertAll( sr.ReadToEnd().Split(','), a => int.Parse(a));//text to be decrypted
 				string alphabet = "abcdefghijklmnopqrstuvwxyz";
-				List<string> keys = new List<string>();//for storing key permutations
+				List<string> keys = new List<string>(7);//for storing key permutations
 				string found = string.Empty;
 
 				//generate combinations in 3s then permute those combinations
@@ -3561,6 +3561,160 @@ namespace ProjectEularProblems
 				}
 			}
 		}
+
+		/// <summary>
+		/// PROBLEM 60.
+		/// The primes 3, 7, 109, and 673, are quite remarkable. By taking any two primes and concatenating them in any order the result will always be prime. For example, taking 7 and 109, both 7109 and 1097 are prime. The sum of these four primes, 792, represents the lowest sum for a set of four primes with this property.
+
+		/// Find the lowest sum for a set of five primes for which any two primes concatenate to produce another prime.
+		/// </summary>
+		public static void PrimePairSets()
+		{
+
+			//get primes
+			List<int> primes = new List<int>();
+			int[] mapped_primes = new int[ 1000000 ];
+			for ( int i = 0; i < 10000; i++ )
+			{
+				if ( CheckPrime(i) )
+				{
+					primes.Add( i );
+					mapped_primes[ i ] = i;
+				}
+			}
+			for ( int i = 10001; i < 1000000; i++ )
+			{
+				if ( CheckPrime(i) )
+				{
+					mapped_primes[ i ] = i;
+				}
+			}
+
+			int concat1, concat2 = 0;
+			int[] five = new int[ 5 ];
+
+			for ( int a = 0; a < primes.Count - 3; a++ )
+			{
+				for ( int b = a + 1; b < primes.Count - 2; b++ )
+				{
+					concat1 = int.Parse($"{primes[ a ]}{primes[ b ]}");
+					concat2 = int.Parse($"{primes[ b ]}{primes[ a ]}");
+
+					if ( concat1 < 1000000 && concat2 < 1000000 )
+					{
+						if ( mapped_primes[ concat1 ] != concat1 || mapped_primes[ concat2 ] != concat2 )
+						{
+							continue;//failed check next
+						}
+
+					}
+					else if ( !CheckPrime(concat1) || !CheckPrime(concat2) )
+					{
+						continue;//failed check next
+					}
+
+					for ( int c = b + 1; c < primes.Count - 1; c++ )
+					{
+						concat1 = int.Parse($"{primes[ b ]}{primes[ c ]}");
+						concat2 = int.Parse($"{primes[ c ]}{primes[ b ]}");
+
+						if ( concat1 < 1000000 && concat2 < 1000000 )
+						{
+							if ( mapped_primes[ concat1 ] != concat1 || mapped_primes[ concat2 ] != concat2 )
+							{
+								continue;//failed check next
+							}
+
+						}
+						else if ( !CheckPrime(concat1) || !CheckPrime(concat2) )
+						{
+							continue;//failed check next
+						}
+
+						for ( int d = c + 1; d < primes.Count; d++ )
+						{
+							concat1 = int.Parse($"{primes[ c ]}{primes[ d ]}");
+							concat2 = int.Parse($"{primes[ d ]}{primes[ c ]}");
+
+							if ( concat1 < 1000000 && concat2 < 1000000 )
+							{
+								if ( mapped_primes[ concat1 ] != concat1 || mapped_primes[ concat2 ] != concat2 )
+								{
+									continue;//failed check next
+								}
+
+							}
+							else if ( !CheckPrime(concat1) || !CheckPrime(concat2) )
+							{
+								continue;//failed check next
+							}
+
+							five[ 0 ] = primes[ a ];
+							five[ 1 ] = primes[ b ];
+							five[ 2 ] = primes[ c ];
+							five[ 3 ] = primes[ d ];
+							
+							//checking if the 4 numbers concact and still produce a prime
+							for ( int i = 0; i < five.Length -1; i++ )
+							{
+								for ( int j = i+2; j < five.Length-1; j++ )
+								{
+									//if ( i == j ) { continue; }
+									concat1 = int.Parse($"{five[ i ]}{five[ j ]}");
+									concat2 = int.Parse($"{five[ j ]}{five[ i ]}");
+									if ( concat1 < 1000000 && concat2 < 1000000 )
+									{
+										if ( mapped_primes[ concat1 ] != concat1 || mapped_primes[ concat2 ] != concat2 )
+										{
+											goto nxt;//failed check next
+										}
+									}
+									else if ( !CheckPrime(concat1) || !CheckPrime(concat2) )
+									{
+										goto nxt;//failed check next
+									}
+								}
+							}
+
+							//find the fifth prime
+							for ( int i = primes.IndexOf( primes[ d ]) + 1; i < primes.Count; i++ )
+							{
+								five[ 4 ] = primes[i];
+								//concat posible 5 primes 
+								for ( int k = 0; k < five.Length-1; k++ )
+								{
+									concat1 = int.Parse($"{five[ k ]}{five[ 4 ]}");
+									concat2 = int.Parse($"{five[ 4 ]}{five[ k ]}");
+									if(concat1 < 1000000 && concat2  < 1000000 )
+									{
+										if ( mapped_primes[concat1] != concat1 || mapped_primes[ concat2 ] != concat2)
+										{
+											goto nxts;//failed check next
+										}
+									}
+									else if(!CheckPrime(concat1) || !CheckPrime(concat2))
+									{
+										goto nxts;//failed check next
+									}
+								}
+								//quit if five primes are found
+								goto end;
+								
+							nxts:
+								continue;
+							}
+							nxt:
+								continue;
+						}
+					}
+				}
+			}
+		end:
+			Console.WriteLine($"Five primes are: {five[ 0 ]}, {five[ 1 ]}, {five[ 2 ]}, {five[ 3 ]}, {five[ 4 ]}");
+			Console.WriteLine($"Sum of primes: {five.Sum()}");
+		}
+
+
 	}
 }
 
