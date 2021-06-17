@@ -24,7 +24,7 @@ namespace ProjectEularProblems
 
 			Stopwatch sp = new Stopwatch();
 			sp.Start();
-			PrimePairSets();
+			p061_CyclicalFigurateNumbers();
 			sp.Stop();
 			Console.WriteLine("\nruntime: " + sp.ElapsedMilliseconds / 1000.0 + "s");
 			Console.ReadLine();
@@ -40,7 +40,7 @@ namespace ProjectEularProblems
 			int sum = 0;
 			for ( int i = 0; i < 1000; i++ )
 			{
-				sum = i % 3 == 0? sum + i : i % 5 == 0? sum + i: sum;
+				sum = i % 3 == 0 ? sum + i : i % 5 == 0 ? sum + i : sum;
 			}
 			Console.WriteLine($"sum of all the multiples of 3 or 5 below 1000 : {sum}");
 		}
@@ -491,7 +491,7 @@ namespace ProjectEularProblems
 			{
 				return memo[ key ];
 			}
-			if(m == 0 || n == 0 )
+			if ( m == 0 || n == 0 )
 			{
 				return 0;
 			}
@@ -499,8 +499,8 @@ namespace ProjectEularProblems
 			{
 				return 1;
 			}
-			memo.Add(key, p015(m - 1, n,memo) + p015(m, n - 1,memo));
-			return memo[key];
+			memo.Add(key, p015(m - 1, n, memo) + p015(m, n - 1, memo));
+			return memo[ key ];
 		}
 
 		/// <summary>
@@ -935,7 +935,7 @@ namespace ProjectEularProblems
 		public static void p024_LexicographicPermutations()
 		{
 			int[] P = { 0, 1, 2, 3, 4, 5, 6, 7, 8, 9 };
-			int times = (int)Factorial((long)P.Length);
+			int times = ( int ) Factorial(( long ) P.Length);
 
 			for ( int j = 0; j < times; j++ )
 			{
@@ -1218,9 +1218,9 @@ namespace ProjectEularProblems
 		/// <summary>
 		/// PROBLEM 31
 		/// In the United Kingdom the currency is made up of pound (£) and pence (p). There are eight coins in general circulation:
-        /// 1p, 2p, 5p, 10p, 20p, 50p, £1 (100p), and £2 (200p).
-        /// It is possible to make £2 in the following way:
-        /// 1×£1 + 1×50p + 2×20p + 1×5p + 1×2p + 3×1p.
+		/// 1p, 2p, 5p, 10p, 20p, 50p, £1 (100p), and £2 (200p).
+		/// It is possible to make £2 in the following way:
+		/// 1×£1 + 1×50p + 2×20p + 1×5p + 1×2p + 3×1p.
 		/// How many different ways can £2 be made using any number of coins?
 		/// </summary>
 		public static void p031_CoinSums()
@@ -1732,7 +1732,7 @@ namespace ProjectEularProblems
 			int[] facts = new int[ 10 ];
 			for ( int i = 0; i < 10; i++ )
 			{
-				facts[ i ] = (int)Factorial((long)i);
+				facts[ i ] = ( int ) Factorial(( long ) i);
 			}
 			int res = 0;
 			//find curious numbers
@@ -1837,7 +1837,7 @@ namespace ProjectEularProblems
 		/// PROBLEM 36.
 		/// The decimal number, 585 = 10010010012 (binary), is palindromic in both bases.
 		/// Find the sum of all numbers, less than one million, which are palindromic in base 10 and base 2.
-        /// (Please note that the palindromic number, in either base, may not include leading zeros.)
+		/// (Please note that the palindromic number, in either base, may not include leading zeros.)
 		/// </summary>
 		private static void p036_DoubleBasePalindromes()
 		{
@@ -2297,7 +2297,7 @@ namespace ProjectEularProblems
 		/// </summary>
 		/// <param name="triangular">The triangular number</param>
 		/// <param name="P">the resulting number</param>
-		/// <returns>True if the number is a pantagonal number else False.</returns>
+		/// <returns>True if the number is a pantagonal number else False and stores 'n' in referenced int P</returns>
 		private static bool isPent( long triangular, ref double P )
 		{
 			//use the quadratic expression to check is sum is a pantagon num
@@ -2305,7 +2305,7 @@ namespace ProjectEularProblems
 			double b = -1.0d;
 			double c = -( triangular * 2.0 );
 
-			double root = Math.Sqrt(( b * b ) - ( 4 * a * c ));
+			double root = Math.Sqrt(( b * b ) - ( 4 * a * c ));//quadratic equation
 
 			//note use minus on (+ / -)
 			double res = ( b - root ) / ( 2 * a );
@@ -2470,10 +2470,10 @@ namespace ProjectEularProblems
 			BigInteger res = 0;
 			for ( int i = 1000; i > 0; i-- )
 			{
-				res += BigInteger.Pow(i,  i);
+				res += BigInteger.Pow(i, i);
 			}
 			string s = res.ToString();
-			Console.WriteLine(s.Substring(s.Length - 10,10));
+			Console.WriteLine(s.Substring(s.Length - 10, 10));
 		}
 
 		/// <summary>
@@ -2601,7 +2601,7 @@ namespace ProjectEularProblems
 			{
 				primes[ i ] = CheckPrime(i) ? i : 0;
 			}
-			int[] stripped_primes = primes.Where(a => a != 0  && a > 1000).ToArray();//remove zeros for easy iteration
+			int[] stripped_primes = primes.Where(a => a != 0 && a > 1000).ToArray();//remove zeros for easy iteration
 			List<int> res = new List<int>(10);
 
 			for ( int i = stripped_primes.ToList().IndexOf(56003); i < stripped_primes.Length; i++ )
@@ -2613,20 +2613,54 @@ namespace ProjectEularProblems
 				//for ( int n = num_string.Length - 1; n > 2; n-- )
 				//if(num_string.Length > 3)
 				//{
-					int count_family = 0;
-					//ALL COMMENTED CODE IS FOR REPLACING 1 & 2 DIGITS (removed for perfomance reasons)
-					/*if ( n == 1 )
+				int count_family = 0;
+				//ALL COMMENTED CODE IS FOR REPLACING 1 & 2 DIGITS (removed for perfomance reasons)
+				/*if ( n == 1 )
+				{
+					for ( int k = 0; k < num_string.Length; k++ )
 					{
-						for ( int k = 0; k < num_string.Length; k++ )
+						count_family = 0;
+						res.Clear();
+						for ( int m = 0; m < 10; m++ )
 						{
+							if ( k == 0 && m == 0 ) { continue; }
+							//if(m.ToString() == num_string[ k ].ToString() ) { continue; }
+							StringBuilder num_temp = new StringBuilder(num_string.ToString());
+							int new_num = int.Parse(num_temp.Replace(num_temp[ k ].ToString(), m.ToString(), k, n).ToString());
+
+							count_family = primes[ new_num ] != 0 ? count_family + 1 : count_family;
+							if ( primes[ new_num ] != 0 )
+							{
+
+								res.Add(new_num);
+							}
+						}
+						if ( count_family == 8 )
+						{
+							Console.WriteLine($"{res[ 0 ]} is the smallest prime part of a 8 prime value family. ");
+							return;
+						}
+					}
+				}
+
+				else if ( n == 2 )
+				{
+
+					for ( int k = 0; k < num_string.Length - 1; k++ )
+					{
+						for ( int l = k + 1; l < num_string.Length; l++ )
+						{
+
 							count_family = 0;
 							res.Clear();
+
 							for ( int m = 0; m < 10; m++ )
 							{
 								if ( k == 0 && m == 0 ) { continue; }
-								//if(m.ToString() == num_string[ k ].ToString() ) { continue; }
+								//if ( m.ToString() == num_string[ k ].ToString() && m.ToString() == num_string[ l ].ToString() ) { continue; }
 								StringBuilder num_temp = new StringBuilder(num_string.ToString());
-								int new_num = int.Parse(num_temp.Replace(num_temp[ k ].ToString(), m.ToString(), k, n).ToString());
+								int new_num = int.Parse(num_temp.Replace(num_temp[ k ].ToString(), m.ToString(), k, 1).Replace(num_temp[ l ].ToString(), m.ToString(), l, 1).ToString());
+								//int new_num = int.Parse(_num.Replace(_num[ k ].ToString(), m.ToString(), l, n).ToString());
 
 								count_family = primes[ new_num ] != 0 ? count_family + 1 : count_family;
 								if ( primes[ new_num ] != 0 )
@@ -2637,95 +2671,61 @@ namespace ProjectEularProblems
 							}
 							if ( count_family == 8 )
 							{
+								foreach ( int item in res )
+								{
+									Console.WriteLine(item);
+								}
+								Console.ForegroundColor = ConsoleColor.Green;
+
 								Console.WriteLine($"{res[ 0 ]} is the smallest prime part of a 8 prime value family. ");
 								return;
 							}
 						}
 					}
+				}*/
+				//if ( n == 3 )
+				//{
 
-					else if ( n == 2 )
+				for ( int k = 0; k < num_string.Length - 2; k++ )
+				{
+					for ( int l = k + 1; l < num_string.Length - 1; l++ )
 					{
-
-						for ( int k = 0; k < num_string.Length - 1; k++ )
+						for ( int p = l + 1; p < num_string.Length; p++ )
 						{
-							for ( int l = k + 1; l < num_string.Length; l++ )
+							count_family = 0;
+							res.Clear();
+
+							for ( int m = 0; m < 10; m++ )
 							{
+								if ( k == 0 && m == 0 ) { continue; }
 
-								count_family = 0;
-								res.Clear();
+								StringBuilder num_temp = new StringBuilder(num_string.ToString());
 
-								for ( int m = 0; m < 10; m++ )
+								int new_num = int.Parse(num_temp.Replace(num_temp[ k ].ToString(), m.ToString(), k, 1).Replace(num_temp[ l ].ToString(), m.ToString(), l, 1).Replace(num_temp[ p ].ToString(), m.ToString(), p, 1).ToString());
+								//int new_num = int.Parse(_num.Replace(_num[ k ].ToString(), m.ToString(), l, n).ToString());
+
+								count_family = primes[ new_num ] != 0 ? count_family + 1 : count_family;
+								if ( primes[ new_num ] != 0 )
 								{
-									if ( k == 0 && m == 0 ) { continue; }
-									//if ( m.ToString() == num_string[ k ].ToString() && m.ToString() == num_string[ l ].ToString() ) { continue; }
-									StringBuilder num_temp = new StringBuilder(num_string.ToString());
-									int new_num = int.Parse(num_temp.Replace(num_temp[ k ].ToString(), m.ToString(), k, 1).Replace(num_temp[ l ].ToString(), m.ToString(), l, 1).ToString());
-									//int new_num = int.Parse(_num.Replace(_num[ k ].ToString(), m.ToString(), l, n).ToString());
 
-									count_family = primes[ new_num ] != 0 ? count_family + 1 : count_family;
-									if ( primes[ new_num ] != 0 )
-									{
-
-										res.Add(new_num);
-									}
-								}
-								if ( count_family == 8 )
-								{
-									foreach ( int item in res )
-									{
-										Console.WriteLine(item);
-									}
-									Console.ForegroundColor = ConsoleColor.Green;
-
-									Console.WriteLine($"{res[ 0 ]} is the smallest prime part of a 8 prime value family. ");
-									return;
+									res.Add(new_num);
 								}
 							}
-						}
-					}*/
-					//if ( n == 3 )
-					//{
-
-						for ( int k = 0; k < num_string.Length - 2; k++ )
-						{
-							for ( int l = k + 1; l < num_string.Length - 1; l++ )
+							if ( count_family == 8 )
 							{
-								for ( int p = l + 1; p < num_string.Length; p++ )
+								foreach ( int item in res )
 								{
-									count_family = 0;
-									res.Clear();
-
-									for ( int m = 0; m < 10; m++ )
-									{
-										if ( k == 0 && m == 0 ) { continue; }
-
-										StringBuilder num_temp = new StringBuilder(num_string.ToString());
-
-										int new_num = int.Parse(num_temp.Replace(num_temp[ k ].ToString(), m.ToString(), k, 1).Replace(num_temp[ l ].ToString(), m.ToString(), l, 1).Replace(num_temp[ p ].ToString(), m.ToString(), p, 1).ToString());
-										//int new_num = int.Parse(_num.Replace(_num[ k ].ToString(), m.ToString(), l, n).ToString());
-
-										count_family = primes[ new_num ] != 0 ? count_family + 1 : count_family;
-										if ( primes[ new_num ] != 0 )
-										{
-
-											res.Add(new_num);
-										}
-									}
-									if ( count_family == 8 )
-									{
-										foreach ( int item in res )
-										{
-											Console.WriteLine(item);
-										}
-										Console.ForegroundColor = ConsoleColor.Green;
-
-										Console.WriteLine($"{res[ 0 ]} is the smallest prime part of a 8 prime value family. ");
-										return;
-									}
+									Console.WriteLine(item);
 								}
+								Console.ForegroundColor = ConsoleColor.Green;
+
+								Console.WriteLine($"{res[ 0 ]} is the smallest prime part of a 8 prime value family. ");
+								return;
 							}
 						}
-					//}
+					}
+				}
+				//}
 
 				//}
 			}
@@ -2740,7 +2740,7 @@ namespace ProjectEularProblems
 		{
 			for ( int i = 125874; ; i++ )
 			{
-				if (new string(i.ToString().OrderBy(a => Convert.ToInt32(a)).ToArray()) == new string((i * 2).ToString().OrderBy(a => Convert.ToInt32(a)).ToArray()) )
+				if ( new string(i.ToString().OrderBy(a => Convert.ToInt32(a)).ToArray()) == new string(( i * 2 ).ToString().OrderBy(a => Convert.ToInt32(a)).ToArray()) )
 				{
 					if ( new string(( i * 2 ).ToString().OrderBy(a => Convert.ToInt32(a)).ToArray()) == new string(( i * 3 ).ToString().OrderBy(a => Convert.ToInt32(a)).ToArray()) )
 					{
@@ -2784,7 +2784,7 @@ namespace ProjectEularProblems
 			{
 				for ( int r = 1; r <= n; r++ )
 				{
-					if( FactBig(n) / ( FactBig(r) * FactBig(n - r) ) > 1000000 )
+					if ( FactBig(n) / ( FactBig(r) * FactBig(n - r) ) > 1000000 )
 					{
 						count++;
 					}
@@ -2798,9 +2798,9 @@ namespace ProjectEularProblems
 		/// </summary>
 		/// <param name="n">Number to calculate.</param>
 		/// <returns>The factorial of a number: (n x n-1 x n - 2 x ... x 1).</returns>
-		private static BigInteger FactBig(BigInteger n )
+		private static BigInteger FactBig( BigInteger n )
 		{
-			if(n <= 1 ) { return 1; }
+			if ( n <= 1 ) { return 1; }
 			return n * FactBig(n - 1);
 		}
 
@@ -2809,9 +2809,9 @@ namespace ProjectEularProblems
 		/// </summary>
 		/// <param name="n">Number to calculate as string.</param>
 		/// <returns>The factorial of a number: (n x n-1 x n - 2 x ... x 1).</returns>
-		private static string FactString(string n )
+		private static string FactString( string n )
 		{
-			if(n == "1" || n == "0") { return "1"; }
+			if ( n == "1" || n == "0" ) { return "1"; }
 			return MultiplyLongNums(n, FactString(SubLongNumbers(n, "1")));
 		}
 
@@ -2822,18 +2822,18 @@ namespace ProjectEularProblems
 		/// <param name="first">First number.</param>
 		/// <param name="sec">Second number.</param>
 		/// <returns>Subtraction of two numbers.</returns>
-		private static string SubLongNumbers(string first, string sec )
+		private static string SubLongNumbers( string first, string sec )
 		{
 			string res = "";
 			string big = "";
 			string small = "";
 
 			//determine   number
-			if (first.Length == sec.Length )
+			if ( first.Length == sec.Length )
 			{
 				for ( int i = 0; i < first.Length; i++ )
 				{
-					if(first[i] > sec[ i ] )
+					if ( first[ i ] > sec[ i ] )
 					{
 						big = first;
 						small = sec;
@@ -2847,7 +2847,7 @@ namespace ProjectEularProblems
 					}
 					else
 					{
-						if(i == first.Length - 1 )//numbers are the same
+						if ( i == first.Length - 1 )//numbers are the same
 						{
 							big = first;
 							small = sec;
@@ -2859,14 +2859,14 @@ namespace ProjectEularProblems
 			else
 			{
 				big = first.Length > sec.Length ? first : sec;
-				for ( int i = 0; i < Math.Max(first.Length ,sec.Length) - Math.Min(first.Length, sec.Length); i++ )
+				for ( int i = 0; i < Math.Max(first.Length, sec.Length) - Math.Min(first.Length, sec.Length); i++ )
 				{
 					small += "0";
 				}
 				small += first.Length < sec.Length ? first : sec;
 			}
 
-			string[] bg = Array.ConvertAll( big.ToArray(),a=>a.ToString());
+			string[] bg = Array.ConvertAll(big.ToArray(), a => a.ToString());
 			string[] sml = Array.ConvertAll(small.ToArray(), a => a.ToString());
 
 			//int carry = 0;
@@ -2875,10 +2875,10 @@ namespace ProjectEularProblems
 
 
 				res += int.Parse(bg[ i ]) < int.Parse(sml[ i ]) ? ( Convert.ToInt32(bg[ i ]) + 10 ) - Convert.ToInt32(sml[ i ]) : Convert.ToInt32(bg[ i ]) - Convert.ToInt32(sml[ i ]);
-				if(i > 0 && int.Parse(bg[ i ]) < int.Parse(sml[ i ]) )
+				if ( i > 0 && int.Parse(bg[ i ]) < int.Parse(sml[ i ]) )
 				{
 
-					sml[i - 1] = int.Parse(bg[ i ]) < int.Parse(sml[ i ]) ? (1+ Convert.ToInt32( sml[i-1])).ToString() : "0";
+					sml[ i - 1 ] = int.Parse(bg[ i ]) < int.Parse(sml[ i ]) ? ( 1 + Convert.ToInt32(sml[ i - 1 ]) ).ToString() : "0";
 				}
 			}
 			res = new string(res.Reverse().ToArray());
@@ -2898,16 +2898,16 @@ namespace ProjectEularProblems
 		/// </summary>
 		public static void p054_PokerHands()
 		{
-			string[] hands = new string[2];
+			string[] hands = new string[ 2 ];
 			string s = null;
 			int player1_wins = 0;
 			string cards_seq = "23456789TJQKA";
 			using ( StreamReader sr = new StreamReader("./p054_poker.txt") )
 			{
-				while ( (s = sr.ReadLine() ) != null )
+				while ( ( s = sr.ReadLine() ) != null )
 				{
-					hands[0] = s.Replace(" ","").Substring(0,10);
-					hands[1] = s.Replace(" ","").Substring(10,10);
+					hands[ 0 ] = s.Replace(" ", "").Substring(0, 10);
+					hands[ 1 ] = s.Replace(" ", "").Substring(10, 10);
 
 					int p1_hands_points = CheckHand(hands[ 0 ]);
 					int p2_hands_points = CheckHand(hands[ 1 ]);
@@ -2915,9 +2915,9 @@ namespace ProjectEularProblems
 					if ( p1_hands_points > p2_hands_points )
 					{
 						player1_wins++;
-						
+
 					}
-					else if( p1_hands_points == p2_hands_points )
+					else if ( p1_hands_points == p2_hands_points )
 					{
 						if ( p1_hands_points < 0 )
 						{
@@ -2935,12 +2935,12 @@ namespace ProjectEularProblems
 								if ( cards_seq.IndexOf(h1[ j ]) > cards_seq.IndexOf(h2[ j ]) )//player 1 has high card
 								{
 									player1_wins++;
-									
+
 									goto end;
 								}
 								else if ( cards_seq.IndexOf(h2[ j ]) > cards_seq.IndexOf(h1[ j ]) )//player 2 has high card
 								{
-									
+
 									goto end;
 								}
 							}
@@ -2959,7 +2959,7 @@ namespace ProjectEularProblems
 								p2 = p2.Remove(i, 1);//remove suits
 							}
 
-							for (int k = cards_seq.Length - 1;k>=0;k-- )
+							for ( int k = cards_seq.Length - 1; k >= 0; k-- )
 							{
 								char suit = cards_seq[ k ];
 
@@ -2968,13 +2968,13 @@ namespace ProjectEularProblems
 								{
 									if ( p1.Contains(suit) && !p2.Contains(suit) )
 									{
-										
+
 										player1_wins++;
 										goto end;
 									}
 									else if ( !p1.Contains(suit) && p2.Contains(suit) )
 									{
-										
+
 										goto end;
 									}
 								}
@@ -2988,29 +2988,29 @@ namespace ProjectEularProblems
 										{
 											p1 = p1.Replace(suit.ToString(), "");
 											p2 = p2.Replace(suit.ToString(), "");
-											if(cards_seq.IndexOf(p1[0]) > cards_seq.IndexOf(p2[ 0 ]) )
+											if ( cards_seq.IndexOf(p1[ 0 ]) > cards_seq.IndexOf(p2[ 0 ]) )
 											{
 												player1_wins++;
-												
+
 												goto end;
 											}
 											else
 											{
-												
+
 												goto end;
 											}
 										}
 										else
 										{
 											player1_wins++;
-											
+
 											goto end;
 										}
-									
+
 									}
 									else if ( p2.Count(a => a == suit) == 4 )
 									{
-										
+
 										goto end;
 									}
 								}
@@ -3027,37 +3027,37 @@ namespace ProjectEularProblems
 											p1 = p1.Replace(suit.ToString(), "");
 											if ( p1[ 0 ] > p2[ 0 ] )
 											{
-												
+
 												player1_wins++;
 												goto end;
 											}
 										}
 										else
 										{
-											
+
 											player1_wins++;
 											goto end;
 										}
 									}
 									else if ( p2.Count(a => a == suit) == 3 )
 									{
-										
+
 										goto end;
 									}
 								}
 
 								//check higher flush (all cards of the same suit)
-								else if (p1_hands_points == 6 )
+								else if ( p1_hands_points == 6 )
 								{
-									if(p1.Contains(suit) && !p2.Contains(suit) )
+									if ( p1.Contains(suit) && !p2.Contains(suit) )
 									{
-						
+
 										player1_wins++;
 										goto end;
 									}
 									else if ( !p1.Contains(suit) && p2.Contains(suit) )
 									{
-										
+
 										goto end;
 									}
 								}
@@ -3067,13 +3067,13 @@ namespace ProjectEularProblems
 								{
 									if ( p1.Contains(suit) && !p2.Contains(suit) )
 									{
-										
+
 										player1_wins++;
 										goto end;
 									}
 									else if ( !p1.Contains(suit) && p2.Contains(suit) )
 									{
-										
+
 										goto end;
 									}
 								}
@@ -3090,27 +3090,27 @@ namespace ProjectEularProblems
 											p2 = p2.Replace(suit.ToString(), "");
 											if ( cards_seq.IndexOf(p1[ 0 ]) > cards_seq.IndexOf(p2[ 0 ]) || cards_seq.IndexOf(p1[ 0 ]) > cards_seq.IndexOf(p2[ 1 ]) )
 											{
-						
+
 												player1_wins++;
 												goto end;
 											}
 											else if ( cards_seq.IndexOf(p1[ 1 ]) > cards_seq.IndexOf(p2[ 0 ]) || cards_seq.IndexOf(p1[ 1 ]) > cards_seq.IndexOf(p2[ 1 ]) )
 											{
-						
+
 												player1_wins++;
 												goto end;
 											}
 										}
 										else
 										{
-						
+
 											player1_wins++;
 											goto end;
 										}
 									}
 									else if ( p2.Count(a => a == suit) == 3 )
 									{
-						
+
 										goto end;
 									}
 								}
@@ -3121,12 +3121,12 @@ namespace ProjectEularProblems
 									if ( p1.Count(a => a == suit) == 2 && p2.Count(a => a == suit) != 2 )
 									{
 										player1_wins++;
-										
+
 										goto end;
 									}
 									else if ( p2.Count(a => a == suit) == 2 && p1.Count(a => a == suit) != 2 )
 									{
-										
+
 										goto end;
 									}
 									else if ( p2.Count(a => a == suit) == 2 && p1.Count(a => a == suit) == 2 )
@@ -3140,12 +3140,12 @@ namespace ProjectEularProblems
 											if ( p1.Count(a => a == st) == 2 && p2.Count(a => a == st) != 2 )
 											{
 												player1_wins++;
-												
+
 												goto end;
 											}
 											else if ( p2.Count(a => a == st) == 2 && p1.Count(a => a == st) != 2 )
 											{
-												
+
 												goto end;
 											}
 											else if ( p2.Count(a => a == st) == 2 && p1.Count(a => a == st) == 2 )
@@ -3155,12 +3155,12 @@ namespace ProjectEularProblems
 												if ( cards_seq.IndexOf(p1[ 0 ]) > cards_seq.IndexOf(p2[ 0 ]) )
 												{
 													player1_wins++;
-													
+
 													goto end;
 												}
 												else if ( cards_seq.IndexOf(p1[ 0 ]) < cards_seq.IndexOf(p2[ 0 ]) )
 												{
-													
+
 													goto end;
 												}
 												else goto end;
@@ -3180,29 +3180,29 @@ namespace ProjectEularProblems
 											p2 = p2.Replace(suit.ToString(), "");
 											for ( int i = cards_seq.Length - 1; i >= 0; i-- )
 											{
-												if(p1.Contains(cards_seq[i]) && !p2.Contains(cards_seq[ i ]) )
+												if ( p1.Contains(cards_seq[ i ]) && !p2.Contains(cards_seq[ i ]) )
 												{
-						
+
 													player1_wins++;
 													goto end;
 												}
 												if ( p2.Contains(cards_seq[ i ]) && !p1.Contains(cards_seq[ i ]) )
 												{
-						
+
 													goto end;
 												}
 											}
 										}
 										else
 										{
-											
+
 											player1_wins++;
 											goto end;
 										}
 									}
 									else if ( p2.Count(a => a == suit) == 2 )
 									{
-						
+
 										goto end;
 									}
 								}
@@ -3214,23 +3214,23 @@ namespace ProjectEularProblems
 					}
 					else
 					{
-						
+
 					}
 				end:
 					continue;
 				}
 			}
 			Console.ForegroundColor = ConsoleColor.Green;
-			Console.WriteLine("Player 1 won {0} hands.",player1_wins);
+			Console.WriteLine("Player 1 won {0} hands.", player1_wins);
 			Console.ForegroundColor = ConsoleColor.White;
 		}
-	
+
 		/// <summary>
 		/// Determines what a given hand in a game of poker is.
 		/// </summary>
 		/// <param name="hand">The string of the five cards separarted by a single space eg "AD TH 2S 2C QD".</param>
 		/// <returns>Score between 10 to 2 or -1 to -13, positive score is One Pair - Royal Flush, nagative score is a High Card (-1 for Ace, -13 for 2). </returns>
-		private static int CheckHand(string hand )
+		private static int CheckHand( string hand )
 		{
 			//int points = 0;
 			string cards_seq = "23456789TJQKA";
@@ -3247,7 +3247,7 @@ namespace ProjectEularProblems
 				//check straight flush
 				string p1_ = new string(hand.Replace(hand[ 1 ].ToString(), "").ToArray());
 				string p1_hand = string.Empty;
-				for ( int i = 0 ; i < cards_seq.Length; i++ )
+				for ( int i = 0; i < cards_seq.Length; i++ )
 				{
 					int c = hand.Count(a => a == cards_seq[ i ]);
 					for ( int j = 0; j < c; j++ )
@@ -3257,7 +3257,7 @@ namespace ProjectEularProblems
 				}
 				int index = cards_seq.IndexOf(p1_hand[ 0 ]);
 				int count = 13 - index >= 5 ? 5 : 13 - index;
-				string compare = cards_seq.Substring(index,count);
+				string compare = cards_seq.Substring(index, count);
 				if ( p1_hand == compare )
 				{
 					return 9;//straight flush (all cards are consecutive values of same suit)
@@ -3299,7 +3299,7 @@ namespace ProjectEularProblems
 					char suit = cards_seq[ k ];
 
 					if ( p1_hand.Count(a => a == suit) == 3 )
-						{
+					{
 						//check if theres a pair
 						string new_p1 = p1_hand.Replace(suit.ToString(), "");
 						if ( new_p1[ 0 ] == new_p1[ 1 ] )
@@ -3316,7 +3316,7 @@ namespace ProjectEularProblems
 					if ( p1_hand.Count(a => a == suit) == 2 )
 					{
 						string new_p1 = p1_hand.Replace(suit.ToString(), "");
-						if ( new_p1.Count(a => a == new_p1[0]) == 2 )
+						if ( new_p1.Count(a => a == new_p1[ 0 ]) == 2 )
 						{
 							return 3; //two pairs
 						}
@@ -3328,11 +3328,11 @@ namespace ProjectEularProblems
 					}
 				}
 				//check high card
-				for ( int i = cards_seq.Length-1; i >= 0; i-- )
+				for ( int i = cards_seq.Length - 1; i >= 0; i-- )
 				{
 					if ( hand.Contains(cards_seq[ i ]) )
 					{
-						return i-13;
+						return i - 13;
 					}
 				}
 			}
@@ -3398,7 +3398,7 @@ namespace ProjectEularProblems
 					max_sum = sum > max_sum ? sum : max_sum;
 				}
 			}
-			Console.WriteLine(max_sum); 
+			Console.WriteLine(max_sum);
 		}
 
 		/// <summary>
@@ -3461,18 +3461,18 @@ namespace ProjectEularProblems
 
 				counter++;
 				adder = counter == 4 ? adder + 2 : adder;
-				dia_count = counter == 4 ? (float)( Math.Sqrt(center) * 2 ) - 1 : dia_count;
+				dia_count = counter == 4 ? ( float ) ( Math.Sqrt(center) * 2 ) - 1 : dia_count;
 				counter = counter == 4 ? 0 : counter;
-					
+
 				res = ( dia_prime / dia_count ) * 100;
-				if(res <= 10 )
+				if ( res <= 10 )
 				{
 					double grid = Math.Sqrt(center);
 					Console.WriteLine($"a {grid} x {grid} grid has {res}% prime numbers");
 					break;
 				}
 			}
-			
+
 		}
 
 		/// <summary>
@@ -3489,21 +3489,21 @@ namespace ProjectEularProblems
 		/// </summary>
 		public static void p059_XORDecryption()
 		{
-			using(StreamReader sr = new StreamReader("p059_cipher.txt") )
+			using ( StreamReader sr = new StreamReader("p059_cipher.txt") )
 			{
-				int[] cipher = Array.ConvertAll( sr.ReadToEnd().Split(','), a => int.Parse(a));//text to be decrypted
+				int[] cipher = Array.ConvertAll(sr.ReadToEnd().Split(','), a => int.Parse(a));//text to be decrypted
 				string alphabet = "abcdefghijklmnopqrstuvwxyz";
 				List<string> keys = new List<string>(7);//for storing key permutations
 				string found = string.Empty;
 
 				//generate combinations in 3s then permute those combinations
-				for ( int i = 0; i < alphabet.Length-2; i++ )
+				for ( int i = 0; i < alphabet.Length - 2; i++ )
 				{
 					for ( int j = i + 1; j < alphabet.Length - 1; j++ )
 					{
 						for ( int k = j + 1; k < alphabet.Length; k++ )
 						{
-							Permutation($"{alphabet[i]}{alphabet[ j ]}{alphabet[ k ]}", 0, 2, keys);//permutation of the combination
+							Permutation($"{alphabet[ i ]}{alphabet[ j ]}{alphabet[ k ]}", 0, 2, keys);//permutation of the combination
 							foreach ( string key in keys )
 							{
 								string sb = "";
@@ -3530,11 +3530,11 @@ namespace ProjectEularProblems
 						}
 					}
 				}
-				end:
+			end:
 				Console.WriteLine(found.ToCharArray().Sum(a => a));
 			}
 		}
-		private static void Permutation( string str, int left, int right, List<string> res)
+		private static void Permutation( string str, int left, int right, List<string> res )
 		{
 			if ( left == right )
 			{
@@ -3568,7 +3568,7 @@ namespace ProjectEularProblems
 
 		/// Find the lowest sum for a set of five primes for which any two primes concatenate to produce another prime.
 		/// </summary>
-		public static void PrimePairSets()
+		public static void p060_PrimePairSets()
 		{
 
 			//get primes
@@ -3578,7 +3578,7 @@ namespace ProjectEularProblems
 			{
 				if ( CheckPrime(i) )
 				{
-					primes.Add( i );
+					primes.Add(i);
 					mapped_primes[ i ] = i;
 				}
 			}
@@ -3653,11 +3653,11 @@ namespace ProjectEularProblems
 							five[ 1 ] = primes[ b ];
 							five[ 2 ] = primes[ c ];
 							five[ 3 ] = primes[ d ];
-							
+
 							//checking if the 4 numbers concact and still produce a prime
-							for ( int i = 0; i < five.Length -1; i++ )
+							for ( int i = 0; i < five.Length - 1; i++ )
 							{
-								for ( int j = i+2; j < five.Length-1; j++ )
+								for ( int j = i + 2; j < five.Length - 1; j++ )
 								{
 									//if ( i == j ) { continue; }
 									concat1 = int.Parse($"{five[ i ]}{five[ j ]}");
@@ -3677,34 +3677,34 @@ namespace ProjectEularProblems
 							}
 
 							//find the fifth prime
-							for ( int i = primes.IndexOf( primes[ d ]) + 1; i < primes.Count; i++ )
+							for ( int i = primes.IndexOf(primes[ d ]) + 1; i < primes.Count; i++ )
 							{
-								five[ 4 ] = primes[i];
+								five[ 4 ] = primes[ i ];
 								//concat posible 5 primes 
-								for ( int k = 0; k < five.Length-1; k++ )
+								for ( int k = 0; k < five.Length - 1; k++ )
 								{
 									concat1 = int.Parse($"{five[ k ]}{five[ 4 ]}");
 									concat2 = int.Parse($"{five[ 4 ]}{five[ k ]}");
-									if(concat1 < 1000000 && concat2  < 1000000 )
+									if ( concat1 < 1000000 && concat2 < 1000000 )
 									{
-										if ( mapped_primes[concat1] != concat1 || mapped_primes[ concat2 ] != concat2)
+										if ( mapped_primes[ concat1 ] != concat1 || mapped_primes[ concat2 ] != concat2 )
 										{
 											goto nxts;//failed check next
 										}
 									}
-									else if(!CheckPrime(concat1) || !CheckPrime(concat2))
+									else if ( !CheckPrime(concat1) || !CheckPrime(concat2) )
 									{
 										goto nxts;//failed check next
 									}
 								}
 								//quit if five primes are found
 								goto end;
-								
+
 							nxts:
 								continue;
 							}
-							nxt:
-								continue;
+						nxt:
+							continue;
 						}
 					}
 				}
@@ -3714,7 +3714,116 @@ namespace ProjectEularProblems
 			Console.WriteLine($"Sum of primes: {five.Sum()}");
 		}
 
+		/// <summary>
+		/// PROBLEM 61.
+		/// Triangle, square, pentagonal, hexagonal, heptagonal, and octagonal numbers are all figurate (polygonal) numbers and are generated by the following formulae:
 
+		/// Triangle P3, n = n(n + 1) / 2	 	1, 3, 6, 10, 15, ...
+		/// Square P4, n = n2	 	1, 4, 9, 16, 25, ...
+		/// Pentagonal P5, n = n(3n−1) / 2	 	1, 5, 12, 22, 35, ...
+		/// Hexagonal P6, n = n(2n−1)	 	1, 6, 15, 28, 45, ...
+		/// Heptagonal P7, n = n(5n−3) / 2	 	1, 7, 18, 34, 55, ...
+		/// Octagonal P8, n = n(3n−2)	 	1, 8, 21, 40, 65, ...
+		/// The ordered set of three 4-digit numbers: 8128, 2882, 8281, has three interesting properties.
+
+		/// The set is cyclic, in that the last two digits of each number is the first two digits of the next number( including the last number with the first).
+		/// Each polygonal type: triangle( P3,127=8128), square( P4,91=8281), and pentagonal( P5,44=2882), is represented by a different number in the set.
+		/// This is the only set of 4-digit numbers with this property.
+		/// Find the sum of the only ordered set of six cyclic 4-digit numbers for which each polygonal type: triangle, square, pentagonal, hexagonal, heptagonal, and octagonal, is represented by a different number in the set.
+		/// </summary>
+		public static void p061_CyclicalFigurateNumbers()
+		{
+			string tri, sqr, pent, hex, hept, oct = String.Empty;
+			string[] container = new string[6];
+			HashSet<string> validator1 = new HashSet<string>();
+			HashSet<string> validator2 = new HashSet<string>();
+
+			for ( int a = 45; a <= 140; a++ )
+			{
+				//triangle
+				tri = ( ( a * ( a + 1 ) ) / 2 ).ToString();
+				container[ 0 ] = tri;
+
+				for ( int b = 32; b <= 99; b++ )
+				{
+					//square
+					sqr = ( b * b ).ToString();
+					container[ 1 ] = sqr;
+
+					for ( int c = 26; c <= 81; c++ )
+					{
+						//pentagonal
+						pent = ( ( c * ( ( 3 * c ) - 1 ) ) / 2 ).ToString();
+						container[ 2 ] = pent;
+
+						foreach ( string value in container )
+						{
+							if ( value != null )
+							{
+								validator1.Add(value.Substring(0, 2));
+								validator2.Add(value.Substring(2, 2));
+							}
+						}
+						validator1.IntersectWith(validator2);
+						if ( validator1.Count != 3 )
+						{
+							validator1.Clear();
+							validator2.Clear();
+							continue;
+						}
+
+						for ( int d = 23; d <= 70; d++ )
+						{
+							//hexagonal
+							hex = (d * ((d * 2) - 1) ).ToString();
+							container[ 3 ] = hex;
+
+							for ( int e = 21; e <= 63; e++ )
+								{
+								//heptagonal
+								hept = ( ( e * ( ( 5 * e ) - 3 ) ) / 2 ).ToString();
+								container[ 4 ] = hept;
+
+								for ( int f = 19; f <= 58; f++ )
+								{
+									//octagonal
+									oct = (  f * ( ( 3 * f ) - 2 ) ).ToString();
+									container[ 5 ] = oct;
+
+									foreach ( string value in container )
+									{
+										if( value.Substring(0, 2)  == value.Substring(2, 2) )
+										{
+											goto nxt;
+										}
+										validator1.Add(value.Substring(0, 2));
+										validator2.Add(value.Substring(2, 2));
+									}
+									validator1.IntersectWith(validator2);
+									if ( validator1.Count == 6 )
+									{
+										Console.WriteLine($"P3,{a} = {tri}");
+										Console.WriteLine($"P4,{b} = {sqr}");
+										Console.WriteLine($"P5,{c} = {pent}");
+										Console.WriteLine($"P6,{d} = {hex}");
+										Console.WriteLine($"P7,{e} = {hept}");
+										Console.WriteLine($"P8,{f} = {oct}");
+										Console.WriteLine($"sum: {Array.ConvertAll(new string[] { tri, sqr, pent, hex, hept, oct }, num => int.Parse(num)).Sum()}");
+										goto end;
+									}
+									nxt:
+									validator1.Clear();
+									validator2.Clear();
+								}
+							}
+						}
+						
+					}
+				}
+			}
+			end:
+			Console.WriteLine();
+		}
 	}
 }
 
