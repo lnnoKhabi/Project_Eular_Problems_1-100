@@ -24,7 +24,7 @@ namespace ProjectEularProblems
 
 			Stopwatch sp = new Stopwatch();
 			sp.Start();
-			p061_CyclicalFigurateNumbers();
+			p062_CubicPermutations();
 			sp.Stop();
 			Console.WriteLine("\nruntime: " + sp.ElapsedMilliseconds / 1000.0 + "s");
 			Console.ReadLine();
@@ -3478,13 +3478,9 @@ namespace ProjectEularProblems
 		/// <summary>
 		/// PROBLEM 59.
 		/// Each character on a computer is assigned a unique code and the preferred standard is ASCII (American Standard Code for Information Interchange). For example, uppercase A = 65, asterisk (*) = 42, and lowercase k = 107.
-
 		/// A modern encryption method is to take a text file, convert the bytes to ASCII, then XOR each byte with a given value, taken from a secret key.The advantage with the XOR function is that using the same encryption key on the cipher text, restores the plain text; for example, 65 XOR 42 = 107, then 107 XOR 42 = 65.
-
 		/// For unbreakable encryption, the key is the same length as the plain text message, and the key is made up of random bytes.The user would keep the encrypted message and the encryption key in different locations, and without both "halves", it is impossible to decrypt the message.
-
 		/// Unfortunately, this method is impractical for most users, so the modified method is to use a password as a key. If the password is shorter than the message, which is likely, the key is repeated cyclically throughout the message.The balance for this method is using a sufficiently long password key for security, but short enough to be memorable.
-
 		/// Your task has been made easy, as the encryption key consists of three lower case characters.Using p059_cipher.txt( right click and 'Save Link/Target As...'), a file containing the encrypted ASCII codes, and the knowledge that the plain text must contain common English words, decrypt the message and find the sum of the ASCII values in the original text.
 		/// </summary>
 		public static void p059_XORDecryption()
@@ -3552,6 +3548,38 @@ namespace ProjectEularProblems
 					str = new string(lft);
 
 					Permutation(str, left + 1, right, res);
+					//swap(str[ left ], str[ i ]); //swap back for backtracking
+					lft = str.ToCharArray();
+					c = str[ i ];
+					lft[ i ] = lft[ left ];
+					lft[ left ] = c;
+					str = new string(lft);
+				}
+			}
+		}
+
+		private static void Permutation( string str, int left, int right, HashSet<ulong> res, string original_number, string n )
+		{
+			if ( left == right )
+			{
+				//ulong i = ulong.Parse(str);
+				if (str[0] >= original_number[0] &&  Math.Pow(ulong.Parse(str), ( double ) 1 / 3).ToString().Length == n.Length ){
+
+					res.Add(ulong.Parse(str));
+				}
+			}
+			else
+			{
+				for ( int i = left; i <= right; i++ )
+				{
+					//swap(str[ left ], str[ i ]);
+					char[] lft = str.ToCharArray();
+					char c = str[ i ];
+					lft[ i ] = lft[ left ];
+					lft[ left ] = c;
+					str = new string(lft);
+
+					Permutation(str, left + 1, right, res, original_number, n);
 					//swap(str[ left ], str[ i ]); //swap back for backtracking
 					lft = str.ToCharArray();
 					c = str[ i ];
@@ -3824,6 +3852,62 @@ namespace ProjectEularProblems
 			end:
 			Console.WriteLine();
 		}
+
+		/// <summary>
+		/// PROBLEM 62.
+		/// The cube, 41063625 (3453), can be permuted to produce two other cubes: 56623104 (3843) and 66430125 (4053). In fact, 41063625 is the smallest cube which has exactly three permutations of its digits which are also cube.
+		/// Find the smallest cube for which exactly five permutations of its digits are cube.
+		/// </summary>
+		public static void p062_CubicPermutations()
+		{
+			string cube1,cube2,cube3,cube4,cube5,cube6 = "";
+			for ( BigInteger i = 5000;  ; i++ )
+			{
+				cube1 = new string(( i * i * i ).ToString().OrderBy(a => a).ToArray());
+				for ( BigInteger j = i+1; ; j++ )
+				{
+					cube2 = new string(( j * j * j ).ToString().OrderBy(a => a).ToArray());
+					if(cube2.Length > cube1.Length ) { break; }
+					if(cube1 == cube2 )
+					{
+						for ( BigInteger k = j+1;  ; k++ )
+						{
+							cube3 = new string(( k * k * k ).ToString().OrderBy(a => a).ToArray());
+							if(cube3.Length > cube1.Length ) { break; }
+							if(cube2 == cube3 )
+							{
+								for ( BigInteger l = k+1; ; l++ )
+								{
+									cube4 = new string(( l * l * l ).ToString().OrderBy(a => a).ToArray());
+									if ( cube4.Length > cube1.Length ) { break; }
+									if ( cube3 == cube4 )
+									{
+										for ( BigInteger m = l + 1; ; m ++ )
+										{
+											cube5 = new string(( m * m * m ).ToString().OrderBy(a => a).ToArray());
+											if ( cube5.Length > cube1.Length ) { break; }
+											if ( cube4 == cube5 )
+											{
+												Console.WriteLine($"{i}^3 ==> {i * i * i}");
+												Console.WriteLine($"{j}^3 ==> {j * j * j}");
+												Console.WriteLine($"{k}^3 ==> {k * k * k}");
+												Console.WriteLine($"{l}^3 ==> {l * l * l}");
+												Console.WriteLine($"{m}^3 ==> {m * m * m}");
+												goto end;
+											}
+										}
+									}
+								}
+							}
+						}
+					}
+				}
+			}
+			end:
+			Console.WriteLine();
+		}
 	}
+
 }
+
 
