@@ -24,7 +24,7 @@ namespace ProjectEularProblems
 
 			Stopwatch sp = new Stopwatch();
 			sp.Start();
-			p062_CubicPermutations();
+			p063_PowerfulDigitCounts();
 			sp.Stop();
 			Console.WriteLine("\nruntime: " + sp.ElapsedMilliseconds / 1000.0 + "s");
 			Console.ReadLine();
@@ -3905,6 +3905,32 @@ namespace ProjectEularProblems
 			}
 			end:
 			Console.WriteLine();
+		}
+
+		/// <summary>
+		/// PROBLEM 63.
+		/// The 5-digit number, 16807=75, is also a fifth power. Similarly, the 9-digit number, 134217728=89, is a ninth power.
+		/// How many n-digit positive integers exist which are also an nth power?
+		/// </summary>
+		public static void p063_PowerfulDigitCounts()
+		{
+			BigInteger res = 0;
+			int count = 0;
+			for ( int bas = 1; bas <= 10; bas++ )
+			{
+				for ( int exp = 1; exp <= 50; exp++ )
+				{
+
+					res = BigInteger.Pow(bas, exp) ;
+					if( res.ToString().Length == exp )
+					{
+						count++;
+						Console.WriteLine($"{bas} ^ {exp} = {res}");
+					}
+					
+				}
+			}
+			Console.WriteLine(count) ;
 		}
 	}
 
