@@ -24,7 +24,7 @@ namespace ProjectEularProblems
 
 			Stopwatch sp = new Stopwatch();
 			sp.Start();
-			p063_PowerfulDigitCounts();
+			p064_OddPeriodSquareRoots();
 			sp.Stop();
 			Console.WriteLine("\nruntime: " + sp.ElapsedMilliseconds / 1000.0 + "s");
 			Console.ReadLine();
@@ -3860,7 +3860,7 @@ namespace ProjectEularProblems
 		/// </summary>
 		public static void p062_CubicPermutations()
 		{
-			string cube1,cube2,cube3,cube4,cube5,cube6 = "";
+			string cube1,cube2,cube3,cube4,cube5 = "";
 			for ( BigInteger i = 5000;  ; i++ )
 			{
 				cube1 = new string(( i * i * i ).ToString().OrderBy(a => a).ToArray());
@@ -3925,12 +3925,60 @@ namespace ProjectEularProblems
 					if( res.ToString().Length == exp )
 					{
 						count++;
-						Console.WriteLine($"{bas} ^ {exp} = {res}");
+						//Console.WriteLine($"{bas} ^ {exp} = {res}");
 					}
 					
 				}
 			}
 			Console.WriteLine(count) ;
+		}
+
+		/// <summary>
+		/// PROBLEM 64.
+		/// All square roots are periodic when written as continued fractions and can be written in the form:
+		/// Exactly four continued fractions, for N < 13, have an odd period.
+		/// How many continued fractions for N < 10000 have an odd period?
+		/// </summary>
+		public static void p064_OddPeriodSquareRoots()
+		{
+			//SEE: https://en.wikipedia.org/wiki/Periodic_continued_fraction for algorithm.
+
+			//S => initial number
+			//m => 0
+			//d => 1
+			//a => |root of S| (a number when squared is less than S)
+
+			double m, d, a = 0;
+			double count = 0;
+			List<double> a_values = new List<double>(100);
+
+			for ( int S = 2; S < 10000; S++ )
+			{
+				double root_S = Math.Sqrt(S);
+				if (root_S.ToString().Contains('.') )//if (irrational) square root
+				{
+					m = 0;//default
+					d = 1;//default
+					a = ( int ) root_S;
+					
+					double a1 = a;//save first a
+
+					//find next m, d, a
+					while(a != a1 * 2 )//stop when current (a) is twice the first value of (a)
+					{
+						m = (d * a) - m;
+						d = ( S - (m * m)) / d;
+						a = (int)(( a1 + m ) / d);
+
+						a_values.Add(a);
+					}
+
+					//count odd terms in list
+					count = a_values.Count % 2 != 0 ? count + 1 : count;
+					a_values.Clear();
+				}
+			}
+			Console.WriteLine($"{count} continued fractions have an odd period");
 		}
 	}
 
