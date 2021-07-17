@@ -24,7 +24,7 @@ namespace ProjectEularProblems
 
 			Stopwatch sp = new Stopwatch();
 			sp.Start();
-			p064_OddPeriodSquareRoots();
+			p065_ConvergentsOfE();
 			sp.Stop();
 			Console.WriteLine("\nruntime: " + sp.ElapsedMilliseconds / 1000.0 + "s");
 			Console.ReadLine();
@@ -3950,7 +3950,7 @@ namespace ProjectEularProblems
 
 			double m, d, a = 0;
 			double count = 0;
-			List<double> a_values = new List<double>(100);
+			List<double> a_values = new List<double>(50);
 
 			for ( int S = 2; S < 10000; S++ )
 			{
@@ -3979,6 +3979,47 @@ namespace ProjectEularProblems
 				}
 			}
 			Console.WriteLine($"{count} continued fractions have an odd period");
+		}
+
+		/// <summary>
+		/// PROBLEM 65.
+		/// Find the sum of digits in the numerator of the 100th convergent of the continued fraction for e.
+		/// </summary>
+		public static void p065_ConvergentsOfE()
+		{
+			List<BigInteger> e_conv = new List<BigInteger>(100);
+
+			e_conv.Add(2);
+			e_conv.Add(1);
+
+			int n = 2;
+			e_conv.Add(n);
+
+			//get first 100 convergents of e, 
+			//e convergents follows this pattern ==> 2,1,2,1,1,4,1,1,6,1,1,8...
+			while ( e_conv.Count <= 100 )
+			{
+				e_conv.Add(1);
+				e_conv.Add(1);
+				e_conv.Add(n + 2);
+				n += 2;
+			}
+
+			//compute values of continued fractions of e
+			//this algorithm starts from the last part of the continued fraction and ripples back up.
+
+			BigInteger numerator = 1 / e_conv[ 99 ] + e_conv[ 98 ];
+			BigInteger denomenator = 1;
+			BigInteger prev_numerator = numerator;
+
+			for ( int i = 97; i >= 0; i-- )
+			{
+				numerator = numerator * e_conv[i] + denomenator; // prev numerator x i-th convergent (next convergent) + prev denomenator
+				denomenator = prev_numerator;
+				prev_numerator = numerator;
+			}
+
+			Console.WriteLine($"100th convergent of e, {numerator} / {denomenator} ==> {numerator.ToString().ToCharArray().Sum(a => int.Parse(a.ToString()))}");
 		}
 	}
 
