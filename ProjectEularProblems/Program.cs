@@ -24,7 +24,7 @@ namespace ProjectEularProblems
 
 			Stopwatch sp = new Stopwatch();
 			sp.Start();
-			p066_DiophantineEquation();
+			p067_MaxPathSum_2();
 			sp.Stop();
 			Console.WriteLine("\nruntime: " + sp.ElapsedMilliseconds / 1000.0 + "s");
 			Console.ReadLine();
@@ -749,8 +749,7 @@ namespace ProjectEularProblems
 
 			Console.ForegroundColor = ConsoleColor.Green;
 			Console.Write("sum: " + best_res);
-			Console.ReadLine();
-
+			Console.ForegroundColor = ConsoleColor.White;
 		}
 
 		/// <summary>
@@ -4126,6 +4125,63 @@ namespace ProjectEularProblems
 
 		}
 
+		/// <summary>
+		/// PROBLEM 67.
+		/// By starting at the top of the triangle below and moving to adjacent numbers on the row below, the maximum total from top to bottom is 23.
+		///    3
+		///   7 4
+		///  2 4 6
+		/// 8 5 9 3
+		/// That is, 3 + 7 + 4 + 9 = 23.
+		/// Find the maximum total from top to bottom in triangle.txt(right click and 'Save Link/Target As...'), a 15K text file containing a triangle with one-hundred rows.
+		///NOTE: This is a much more difficult version of Problem 18. It is not possible to try every route to solve this problem, as there are 299 altogether! If you could check one trillion (1012) routes every second it would take over twenty billion years to check them all.There is an efficient algorithm to solve it. ; o
+		/// </summary>
+		public static void p067_MaxPathSum_2()
+		{
+			List<int[]> numbers = new List<int[]>();
+			using(StreamReader sr = new StreamReader("./Problem67.txt") )
+			{
+				string text = "";
+				while((text = sr.ReadLine()) != null )
+				{
+					numbers.Add(Array.ConvertAll(text.Split(' '), n => int.Parse(n)));
+				}
+			}
+
+			List<int[]> new_numbers = new List<int[]>();
+
+			for ( int i = 0; i < numbers.Count-1; i++ )
+			{
+				List<int> neww = new List<int>();
+				for ( int r = 0; r < numbers[i].Length; r++ )//current row
+				{
+					for ( int R = r; R < r + 2; R++ )//next row
+					{
+						neww.Add(numbers[ i ][ r ] + numbers[ i + 1 ][ R ]);
+					}
+				}
+
+				List<int> nu = new List<int>();
+				if ( neww.Count > 2 )//get max for inbetween numbers
+				{
+					nu.Add(neww[ 0 ]);
+					for ( int j = 1; j <= neww.Count - 2; j += 2 )
+					{
+						nu.Add(Math.Max(neww[ j ], neww[ j + 1 ]));
+					}
+					nu.Add(neww[ neww.Count - 1 ]);
+					numbers[ i + 1 ] = nu.ToArray();
+				}
+				else
+				{
+					numbers[ i + 1 ] = neww.ToArray();
+				}
+			}
+			Console.ForegroundColor = ConsoleColor.Green;
+			Console.WriteLine("MAX: " + numbers[numbers.Count-1].Max());
+			Console.ForegroundColor = ConsoleColor.White;
+
+		}
 	}
 
 }
