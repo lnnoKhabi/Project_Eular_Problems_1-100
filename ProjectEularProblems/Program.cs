@@ -24,7 +24,7 @@ namespace ProjectEularProblems
 
 			Stopwatch sp = new Stopwatch();
 			sp.Start();
-			p067_MaxPathSum_2();
+			p068_Magic_5gon_Ring();
 			sp.Stop();
 			Console.WriteLine("\nruntime: " + sp.ElapsedMilliseconds / 1000.0 + "s");
 			Console.ReadLine();
@@ -4181,6 +4181,205 @@ namespace ProjectEularProblems
 			Console.WriteLine("MAX: " + numbers[numbers.Count-1].Max());
 			Console.ForegroundColor = ConsoleColor.White;
 
+		}
+
+		/// <summary>
+		/// PROBLEM 68.
+		/// Consider the following "magic" 3-gon ring, filled with the numbers 1 to 6, and each line adding to nine.
+		/// Working clockwise, and starting from the group of three with the numerically lowest external node(4,3,2 in this example), each solution can be described uniquely.For example, the above solution can be described by the set: 4,3,2; 6,2,1; 5,1,3.
+		/// It is possible to complete the ring with four different totals: 9, 10, 11, and 12. There are eight solutions in total.
+		/// Total Solution Set
+		/// 9	4,2,3; 5,3,1; 6,1,2
+		/// 9	4,3,2; 6,2,1; 5,1,3
+		/// 10	2,3,5; 4,5,1; 6,1,3
+		/// 10	2,5,3; 6,3,1; 4,1,5
+		/// 11	1,4,6; 3,6,2; 5,2,4
+		/// 11	1,6,4; 5,4,2; 3,2,6
+		/// 12	1,5,6; 2,6,4; 3,4,5
+		/// 12	1,6,5; 3,5,4; 2,4,6
+		/// By concatenating each group it is possible to form 9-digit strings; the maximum string for a 3-gon ring is 432621513.
+		/// Using the numbers 1 to 10, and depending on arrangements, it is possible to form 16- and 17-digit strings.What is the maximum 16-digit string for a "magic" 5-gon ring?
+		/// </summary>
+		public static void p068_Magic_5gon_Ring()
+		{
+			//get every permutation of 5 digits [in 1 - 10 set] that has the lowest first digit
+			//List<string> perm = new List<string>();
+			int[] nums = { 1, 2, 3, 4, 5, 6, 7, 8, 9, 0 };
+			List<string> FinalPerms = new List<string>();
+			for ( int a = 0; a < nums.Length-4; a++ )
+			{
+				for ( int b = a+1; b < nums.Length-3; b++ )
+				{
+					for ( int c = b+1; c < nums.Length-2; c++ )
+					{
+						for ( int d = c+1; d < nums.Length-1; d++ )
+						{
+							for ( int e = d+1; e < nums.Length; e++ )
+							{
+								MagicPermutation($"{nums[a]}{nums[ b ]}{nums[ c ]}{nums[ d ]}{nums[ e ]}", 0,4, FinalPerms);
+							}
+						}
+					}
+				}
+			}
+
+			FinalPerms = FinalPerms.Where(a => a.Contains('0')).ToList();//only take the ones with a 0(10) because answer should have a ten
+			for ( int p = FinalPerms.Count-1; p >=0 ; p-- )
+			{
+
+				string perm = FinalPerms[ p ];
+				int[] used = Array.ConvertAll(perm.ToCharArray().ToArray(), a => int.Parse(a.ToString()));
+				int[] not_used = nums.Except(used).ToArray();
+				for ( int i = 0; i < not_used.Length; i++ )
+				{
+					if(used[i] == 0 )
+					{
+						used[ i ] = 10;
+					}
+
+					if ( not_used[ i ] == 0 )
+					{
+						not_used[ i ] = 10;
+					}
+				}
+
+				List<int[]> possible20 = new List<int[]>();
+
+				for ( int i = 0; i < not_used.Length; i++ )
+				{
+					for ( int j = 0; j < not_used.Length; j++ )
+					{
+						if ( i == j ) { continue; }
+						possible20.Add(new int[] { nums[ i ] , nums[j]});
+						//Console.WriteLine($"{nums[i]}, {nums[j]}");
+					}
+				}
+				int maxvalue = 0;
+				int minvalue = int.MaxValue;
+				
+				List<Dictionary<string, int>> container = new List<Dictionary<string, int>>();
+				foreach ( int item in used )
+				{
+					Dictionary<string, int> res = new Dictionary<string, int>();
+					foreach ( int[] twent in possible20 )
+					{
+						if ( item + twent[ 0 ] + twent[ 1 ] > 12 )//12 bcoz example ended at 12
+						{
+							res.Add($"{item}{twent[ 0 ]}{twent[ 1 ]}", item + twent[ 0 ] + twent[ 1 ]);
+						}
+					}
+					
+					maxvalue = res.Values.Max() > maxvalue ? res.Values.Max() : maxvalue;
+					minvalue = res.Values.Min() < minvalue ? res.Values.Min() : minvalue;
+					container.Add(new Dictionary<string, int>(res));
+					
+				}
+				//remove sums that are not in other groups
+				for ( int i = minvalue; i <= maxvalue; i++ )
+				{
+					for ( int j = 0; j < 5; j++ )
+					{
+						//Dictionary<string, int> d = container[ j ];
+						if ( container[ j ].Values.Where(a => a == i).Count() == 0 )
+						{
+							container[0] = container[ 0 ].Where(a => a.Value != i).ToDictionary(b=>b.Key,c=>c.Value);
+							container[1] = container[ 1 ].Where(a => a.Value != i).ToDictionary(b=>b.Key,c=>c.Value);
+							container[2] = container[ 2 ].Where(a => a.Value != i).ToDictionary(b=>b.Key,c=>c.Value);
+							container[3] = container[ 3 ].Where(a => a.Value != i).ToDictionary(b=>b.Key,c=>c.Value);
+							container[4] = container[ 4 ].Where(a => a.Value != i).ToDictionary(b=>b.Key,c=>c.Value);
+						}
+						
+					}
+				}
+				//find correct pairing 
+				for ( int a = 0; a < container[0].Count; a++ )
+				{
+					for ( int b = 0; b < container[1].Count; b++ )
+					{
+						if(container[0].Values.ElementAt(a) != container[ 1 ].Values.ElementAt(b) ) { continue; }
+						for ( int c = 0; c < container[2].Count; c++ )
+						{
+							if(container[1].Values.ElementAt(b) != container[ 2 ].Values.ElementAt(c) ) { continue; }
+							for ( int d = 0; d < container[3].Count; d++ )
+							{
+								if(container[2].Values.ElementAt(c) != container[ 3 ].Values.ElementAt(d) ) { continue; }
+								for ( int e = 0; e < container[4].Count; e++ )
+								{
+									if ( container[ 3].Values.ElementAt(d) != container[ 4 ].Values.ElementAt(e) ) { continue; }
+
+									string aa = container[ 0 ].Keys.ElementAt(a);
+									string bb = container[ 1 ].Keys.ElementAt(b);
+									string cc = container[ 2 ].Keys.ElementAt(c);
+									string dd = container[ 3 ].Keys.ElementAt(d);
+									string ee = container[ 4 ].Keys.ElementAt(e);
+									string mainstr = $"{aa}{bb}{cc}{dd}{ee}";
+
+									if(aa[aa.Length-1] == bb[ bb.Length - 2 ] && mainstr.Where(x=>x == aa[aa.Length-1]).Count() == 2)
+									{
+										if ( bb[ bb.Length - 1 ] == cc[ cc.Length - 2 ] && mainstr.Where(x => x == bb[ bb.Length - 1 ]).Count() == 3 )
+										{
+											if ( cc[ cc.Length - 1 ] == dd[ dd.Length - 2 ] && mainstr.Where(x => x == cc[ cc.Length - 1 ]).Count() == 2 )
+											{
+												if ( dd[ dd.Length - 1 ] == ee[ ee.Length - 2 ] && mainstr.Where(x => x == dd[ dd.Length - 1 ]).Count() == 2 )
+												{
+													if ( mainstr.Where(x => x == ee[ ee.Length - 1 ]).Count() == 2 )
+													{
+														Console.WriteLine($"{aa} {bb} {cc} {dd} {ee}");
+														goto end;
+													}
+												}
+											}
+										}
+									}
+								}
+							}
+						}
+					}
+				}
+			}
+			end:
+			Console.WriteLine();
+		}
+		//for p68
+		private static void MagicPermutation( string str, int left, int right, List<string> res )
+		{
+			if ( left == right )
+			{
+				string zero = str[ 0 ] == '0' ? "10" : str[ 0 ].ToString();
+				string current = "";
+				foreach ( char item in str )
+				{
+					current = item == '0' ? "10" : item.ToString();
+					if ( int.Parse(zero) > int.Parse(current) )
+					{
+						goto jump;
+					}
+				}
+				//Console.WriteLine(str);
+				res.Add(str);
+			jump:
+				zero = "";
+			}
+			else
+			{
+				for ( int i = left; i <= right; i++ )
+				{
+					//swap(str[ left ], str[ i ]);
+					char[] lft = str.ToCharArray();
+					char c = str[ i ];
+					lft[ i ] = lft[ left ];
+					lft[ left ] = c;
+					str = new string(lft);
+
+					MagicPermutation(str, left + 1, right, res);
+					//swap(str[ left ], str[ i ]); //swap back for backtracking
+					lft = str.ToCharArray();
+					c = str[ i ];
+					lft[ i ] = lft[ left ];
+					lft[ left ] = c;
+					str = new string(lft);
+				}
+			}
 		}
 	}
 
