@@ -24,7 +24,7 @@ namespace ProjectEularProblems
 
 			Stopwatch sp = new Stopwatch();
 			sp.Start();
-			p068_Magic_5gon_Ring();
+			p069_TotientMaximum();
 			sp.Stop();
 			Console.WriteLine("\nruntime: " + sp.ElapsedMilliseconds / 1000.0 + "s");
 			Console.ReadLine();
@@ -4381,6 +4381,109 @@ namespace ProjectEularProblems
 				}
 			}
 		}
+
+		/// <summary>
+		/// PROBLEM 69.
+		/// Euler's Totient function, φ(n) [sometimes called the phi function], is used to determine the number of numbers less than n which are relatively prime to n. For example, as 1, 2, 4, 5, 7, and 8, are all less than nine and relatively prime to nine, φ(9)=6.
+		/// n Relatively Prime φ( n)    n/φ( n)
+		/// 2	1	1	2
+		/// 3	1,2	2	1.5
+		/// 4	1,3	2	2
+		/// 5	1,2,3,4	4	1.25
+		/// 6	1,5	2	3
+		/// 7	1,2,3,4,5,6	6	1.1666...
+		/// 8	1,3,5,7	4	2
+		/// 9	1,2,4,5,7,8	6	1.5
+		/// 10	1,3,7,9	4	2.5
+		/// It can be seen that n = 6 produces a maximum n/φ( n) for n ≤ 10.
+		/// Find the value of n ≤ 1,000,000 for which n/φ( n) is a maximum.
+		/// </summary>
+		public static void p069_TotientMaximum()
+		{
+			//try only looking at even numbers
+			double max = 0;
+			int num = 0;
+			int[][] facts = new int[ 1000001 ][]; 
+			List<int> primes = new List<int>( 20 ); 
+			for ( int i = 2; i <= 20; i++ )//have at least a thousand primes (just a guess)
+			{
+				if ( CheckPrime(i) ) 
+				{
+					primes.Add(i); 
+				}
+			}
+
+			for ( int n = 2; n < 1_000_001; n+=2 )
+			{
+				double totient_func = 1;
+				//get factors of n
+				HashSet<int> n_factors = GetFactors(n, primes, facts);
+				for ( int i = 0; i < n_factors.Count; i++ )
+				{
+					totient_func *= ( 1 - (1 / (double)n_factors.ElementAt(i)) );
+				}
+				;
+				totient_func = Math.Round(totient_func * n);
+				//Console.WriteLine($"{n} / {totient_func} ==> {(double)n/totient_func}");
+
+				num = n/(double)totient_func > max ? n : num;
+				max = n/(double)totient_func > max ? n / ( double ) totient_func : max;
+			}
+			
+			Console.WriteLine($"Max: {max}, AT n = {num}");
+		}
+
+		//for p69 & p70
+		/// <summary>
+		/// Gets the factors of a number.
+		/// </summary>
+		/// <param name="number">Number to evaluate.</param>
+		/// <param name="primes_container">Array of primes used to calculate the factors.</param>
+		/// <param name="facts">Contatiner for storing found factors of a certain number.</param>
+		/// <returns>Unique factors of the given number (without duplicates)</returns>
+		private static HashSet<int> GetFactors(int number, List<int> primes_container, int[][] facts)
+		{
+			List<int> divisors = new List<int>(); //store the divisors for i
+
+			//int[] p = primes_contatiners.Where(a => a <= number / 2 && a > 0).ToArray();//store prime below i
+			int division_result = number;//store the division result
+
+			//first find the prime factors of i
+			for ( int n = 0; n < primes_container.Count; )//iterate all primes below i (then divide them into i) 
+			{
+				if ( facts[ division_result ] == null )
+				{
+					if ( division_result % primes_container[ n ] == 0 )//if prime can divide into i
+					{
+						divisors.Add(primes_container[ n ]);
+						if ( division_result / primes_container[ n ] == 1 )//if the division result is 1 (we are done finding the prime factors)
+						{
+							facts[ number ] = divisors.ToArray();
+							break;
+						}
+						division_result = division_result / primes_container[ n ];
+					}
+					else
+					{
+						if ( CheckPrime(division_result) )
+						{
+							divisors.Add(division_result);
+							break;
+						}
+						n++; 
+					}
+				}
+				else
+				{
+					divisors.AddRange(facts[ division_result ]);
+					facts[ number ] = divisors.ToArray();
+					break;
+				}
+			}
+
+			return new HashSet<int>(divisors);
+		}
+
 	}
 
 }
