@@ -24,7 +24,7 @@ namespace ProjectEularProblems
 
 			Stopwatch sp = new Stopwatch();
 			sp.Start();
-			p069_TotientMaximum();
+			p070_TotientPermutation();
 			sp.Stop();
 			Console.WriteLine("\nruntime: " + sp.ElapsedMilliseconds / 1000.0 + "s");
 			Console.ReadLine();
@@ -4484,6 +4484,101 @@ namespace ProjectEularProblems
 			return new HashSet<int>(divisors);
 		}
 
+
+		/// <summary>
+		/// Find the greatest common divisor of two numbers.
+		/// </summary>
+		/// <param name="a">First number.</param>
+		/// <param name="b">Second number.</param>
+		/// <returns>The highest common factor of two numbers.</returns>
+		public static int hcf( int a, int b )
+		{
+			if ( b == 0 )
+			{
+				return a;
+			}
+			else return hcf(b, a % b);
+		}
+
+		/// <summary>
+		/// PROBLEM 70.
+		/// 
+		/// </summary>
+		public static void p070_TotientPermutation()
+		{
+			int num = 0;
+			int[][] facts = new int[ 10000001 ][];
+			Dictionary<int, int> totatives = new Dictionary<int, int>(4001);
+
+			List<int> primes = new List<int>(2600);
+
+			for ( int i = 2; i <= 2500; i++ )
+			{
+				if ( CheckPrime(i) )
+				{
+					primes.Add(i);
+				}
+			}
+			double totient = -1;
+
+			// only look at odd numbers
+			for ( int n = 1001; n <= 4001; n += 2 )
+			{
+				double totient_func = 1.0;
+
+				//get factors of n
+				HashSet<int> n_factors = GetFactors(n, primes, facts);
+				for ( int i = 0; i < n_factors.Count; i++ )
+				{
+					totient_func *= ( 1 - ( 1 / ( double ) n_factors.ElementAt(i) ) );// Eulers Product Formula
+				}
+
+				totatives.Add(n, ( int ) Math.Round(totient_func * n));
+
+				if ( totient_func > totient && totient_func != 1 )//if has minimun ratio
+				{
+					if ( new string(Math.Round(totient_func * n).ToString().OrderBy(a => a).ToArray()) ==
+						new string(n.ToString().OrderBy(a => a).ToArray()) )//if is a permutation
+					{
+						totient = totient_func;
+
+						num = n;
+						Console.WriteLine($"n({n}) = , ({totient})");
+					}
+				}
+				if ( n >= 4000 )//calculate other totients using the 4000 totients found (faster)
+				{
+					for ( int i = 0; i < totatives.Keys.Count(); i++ )
+					{
+						for ( int j = i + 1; j < totatives.Keys.Count() - 1; j++ )
+						{
+							//phi(mn) = phi(m) x phi(n)
+							int n_ = totatives.Keys.ElementAt(i) * totatives.Keys.ElementAt(j);
+							if ( n_ < 10_000_000 && n_ > 1_000_000 )
+							{
+								int tot = totatives.Values.ElementAt(i) * totatives.Values.ElementAt(j);
+								totient_func = ( tot ) / ( double ) n_;
+
+								if ( totient_func > totient && totient_func != 1 )//if has minimum ratio
+								{
+									if ( new string(tot.ToString().OrderBy(a => a).ToArray()) ==
+										new string(n_.ToString().OrderBy(a => a).ToArray()) )//if its a permutation
+									{
+										totient = totient_func;
+										num = n_;
+										Console.WriteLine($"n({n_}) = {tot}, ({totient})");
+									}
+								}
+							}
+						}
+					}
+
+				}
+			}
+
+
+			Console.WriteLine($"Min ratio: AT n = {num}");
+		}
 	}
 
 }
