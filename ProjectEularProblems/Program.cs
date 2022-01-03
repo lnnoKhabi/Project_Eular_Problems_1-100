@@ -24,7 +24,7 @@ namespace ProjectEularProblems
 
 			Stopwatch sp = new Stopwatch();
 			sp.Start();
-			p071_OrderedFractions();
+			p072_CountingFractions();
 			sp.Stop();
 			Console.WriteLine("\nruntime: " + sp.ElapsedMilliseconds / 1000.0 + "s");
 			Console.ReadLine();
@@ -4622,7 +4622,52 @@ namespace ProjectEularProblems
 			Console.WriteLine($"{numerator} / {denominator} is left of 3/7");
 		}
 
-		
+		/// <summary>
+		/// PROBLEM 72.
+		/// Consider the fraction, n/d, where n and d are positive integers. If n<d and HCF(n,d)=1, it is called a reduced proper fraction.
+		/// If we list the set of reduced proper fractions for d ≤ 8 in ascending order of size, we get:
+		/// 1/8, 1/7, 1/6, 1/5, 1/4, 2/7, 1/3, 3/8, 2/5, 3/7, 1/2, 4/7, 3/5, 5/8, 2/3, 5/7, 3/4, 4/5, 5/6, 6/7, 7/8
+		/// It can be seen that there are 21 elements in this set.
+		/// How many elements would be contained in the set of reduced proper fractions for d ≤ 1,000,000?
+		/// </summary>
+		public static void p072_CountingFractions()
+		{
+			//you get the answer by adding totients of all numbers <= d
+			double max = 0;
+			BigInteger num = 0;
+			int d = 1000000;
+			int[][] facts = new int[ d + 1 ][];
+			List<int> primes = new List<int>(d);
+			double totient_;
+
+			for ( int i = 2; i <= d; i++ )//have at least a thousand primes (just a guess)
+			{
+				if ( CheckPrime(i) )
+				{
+					primes.Add(i);
+					facts[ i ] = new int[] { i };
+					num += i - 1;//if a number is prime the totient is number - 1
+				}
+				else
+				{
+					totient_ = 1;
+					//get factors of n
+					HashSet<int> n_factors = GetFactors(i, primes, facts);
+					for ( int j = 0; j < n_factors.Count; j++ )
+					{
+						totient_ *= ( 1 - ( 1 / ( double ) n_factors.ElementAt(j) ) );//the formulae
+					}
+
+					totient_ = Math.Round(totient_ * i);
+					num += ( int ) totient_;//add totient
+				}
+			}
+			Console.Write($"Number of elements <= {d}: ");
+			Console.ForegroundColor = ConsoleColor.Green;
+			Console.Write(num);
+			Console.ForegroundColor = ConsoleColor.White;
+
+		}
 
 
 	}
