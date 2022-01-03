@@ -24,7 +24,7 @@ namespace ProjectEularProblems
 
 			Stopwatch sp = new Stopwatch();
 			sp.Start();
-			p070_TotientPermutation();
+			p071_OrderedFractions();
 			sp.Stop();
 			Console.WriteLine("\nruntime: " + sp.ElapsedMilliseconds / 1000.0 + "s");
 			Console.ReadLine();
@@ -97,7 +97,7 @@ namespace ProjectEularProblems
 		/// PROBLEM 4.
 		/// 
 		/// </summary>
-		public static int p004_HighestPalindrome()
+		public static void p004_HighestPalindrome()
 		{
 			int i;
 			List<int> PalindromNums = new List<int>();
@@ -114,15 +114,14 @@ namespace ProjectEularProblems
 				}
 			}
 
-			int BiggestPalindrom = PalindromNums.Max();
-			return BiggestPalindrom;
+			Console.WriteLine(PalindromNums.Max());
 		}
 
 		/// <summary>
 		/// PROBLEM 5.
 		/// 
 		/// </summary>
-		public static int p005_SmallestMultipleBy1_20()
+		public static void p005_SmallestMultipleBy1_20()
 		{
 			int x = 10;
 			while ( true )
@@ -149,7 +148,8 @@ namespace ProjectEularProblems
 					x % 19 == 0 &&
 					x % 20 == 0 )
 				{
-					return ( x );
+					Console.WriteLine(x);
+					break;
 				}
 				x++;
 			}
@@ -1235,6 +1235,7 @@ namespace ProjectEularProblems
 			}
 			Console.ForegroundColor = ConsoleColor.Green;
 			Console.WriteLine($"Total ways ==> {total.Sum()}");
+			Console.ForegroundColor = ConsoleColor.White;
 
 		}
 
@@ -4451,7 +4452,7 @@ namespace ProjectEularProblems
 			//first find the prime factors of i
 			for ( int n = 0; n < primes_container.Count; )//iterate all primes below i (then divide them into i) 
 			{
-				if ( facts[ division_result ] == null )
+				if ( facts[ division_result ] == null )//if facts of current num hasnt been found yet
 				{
 					if ( division_result % primes_container[ n ] == 0 )//if prime can divide into i
 					{
@@ -4502,7 +4503,10 @@ namespace ProjectEularProblems
 
 		/// <summary>
 		/// PROBLEM 70.
-		/// 
+		/// Euler's Totient function, φ(n) [sometimes called the phi function], is used to determine the number of positive numbers less than or equal to n which are relatively prime to n. For example, as 1, 2, 4, 5, 7, and 8, are all less than nine and relatively prime to nine, φ(9)=6.
+		/// The number 1 is considered to be relatively prime to every positive number, so φ(1)=1.
+		/// Interestingly, φ(87109)=79180, and it can be seen that 87109 is a permutation of 79180.
+		/// Find the value of n, 1 < n< 107, for which φ(n) is a permutation of n and the ratio n/φ( n) produces a minimum.
 		/// </summary>
 		public static void p070_TotientPermutation()
 		{
@@ -4579,8 +4583,48 @@ namespace ProjectEularProblems
 
 			Console.WriteLine($"Min ratio: AT n = {num}");
 		}
+
+		/// <summary>
+		/// PROBLEM 71.
+		/// Consider the fraction, n/d, where n and d are positive integers. If n<d and HCF(n,d)=1, it is called a reduced proper fraction.
+		/// If we list the set of reduced proper fractions for d ≤ 8 in ascending order of size, we get:
+		/// 1/8, 1/7, 1/6, 1/5, 1/4, 2/7, 1/3, 3/8, 2/5, 3/7, 1/2, 4/7, 3/5, 5/8, 2/3, 5/7, 3/4, 4/5, 5/6, 6/7, 7/8
+		/// It can be seen that 2/5 is the fraction immediately to the left of 3/7.
+		/// By listing the set of reduced proper fractions for d ≤ 1,000,000 in ascending order of size, find the numerator of the fraction immediately to the left of 3/7.
+		/// </summary>
+		public static void p071_OrderedFractions()
+		{
+			double three7 = 3/7.0;
+			double best_left = 100;
+			double numerator = 0;
+			double denominator = 0;
+			double div = 0;
+			double abs = 0;
+			for ( int i = 999_999; i > 1; i-=2 )
+			{
+				if ( i % 7 == 0 )
+				{
+					for ( double j = i / 3; j <= i / 2; j += 2 )
+					{
+						div = j / i;
+						if ( div > three7 )
+						{
+							break;
+						}
+						abs = three7 - div;
+						numerator = abs < best_left ? j : numerator;
+						best_left = abs < best_left ? abs : best_left;
+					}
+					denominator = i;
+					break;
+				}
+			}
+			Console.WriteLine($"{numerator} / {denominator} is left of 3/7");
+		}
+
+		
+
+
 	}
 
 }
-
-
