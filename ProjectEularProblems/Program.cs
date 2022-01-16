@@ -19,12 +19,12 @@ namespace ProjectEularProblems
 	public static class Problems
 	{
 
-		static void Main( string[] args )
+		static void Main(string[] args)
 		{
 
 			Stopwatch sp = new Stopwatch();
 			sp.Start();
-			p072_CountingFractions();
+			p075_SingularIntegerRightTriangles();
 			sp.Stop();
 			Console.WriteLine("\nruntime: " + sp.ElapsedMilliseconds / 1000.0 + "s");
 			Console.ReadLine();
@@ -38,7 +38,7 @@ namespace ProjectEularProblems
 		public static void p001_MultiplesOf3and5below1000()
 		{
 			int sum = 0;
-			for ( int i = 0; i < 1000; i++ )
+			for (int i = 0; i < 1000; i++)
 			{
 				sum = i % 3 == 0 ? sum + i : i % 5 == 0 ? sum + i : sum;
 			}
@@ -55,20 +55,20 @@ namespace ProjectEularProblems
 		{
 			List<int> Numbers = new List<int> { 1, 1 };
 
-			for ( int i = 2; i <= 100; i++ )
+			for (int i = 2; i <= 100; i++)
 			{
-				if ( Numbers[ Numbers.Count - 1 ] < 4000000 )
+				if (Numbers[Numbers.Count - 1] < 4000000)
 				{
-					Numbers.Add(Numbers[ Numbers.Count - 1 ] + Numbers[ Numbers.Count - 2 ]);
+					Numbers.Add(Numbers[Numbers.Count - 1] + Numbers[Numbers.Count - 2]);
 				}
 			}
 
 			Numbers.RemoveAt(Numbers.Count - 1);
 			int SumOfEvenNums = 0;
 
-			foreach ( int n in Numbers )
+			foreach (int n in Numbers)
 			{
-				if ( n % 2 == 0 )
+				if (n % 2 == 0)
 				{
 					SumOfEvenNums += n;
 				}
@@ -82,10 +82,10 @@ namespace ProjectEularProblems
 		/// </summary>
 		public static void p003_LargestPrimeFactor()
 		{
-			for ( Int64 i = 10000; ; i-- )
+			for (Int64 i = 10000; ; i--)
 			{
 				Int64 res = 600851475143 % i;
-				if ( res == 0 )
+				if (res == 0)
 				{
 					Console.WriteLine(i);
 					break;
@@ -101,13 +101,13 @@ namespace ProjectEularProblems
 		{
 			int i;
 			List<int> PalindromNums = new List<int>();
-			for ( int k = 999; k >= 100; k-- )
+			for (int k = 999; k >= 100; k--)
 			{
-				for ( int j = 999; j >= 100; j-- )
+				for (int j = 999; j >= 100; j--)
 				{
 					i = k * j;
 					string s = i.ToString();
-					if ( s[ s.Length - 1 ] == s[ 0 ] && s[ s.Length - 2 ] == s[ 1 ] && s[ s.Length - 3 ] == s[ 2 ] )
+					if (s[s.Length - 1] == s[0] && s[s.Length - 2] == s[1] && s[s.Length - 3] == s[2])
 					{
 						PalindromNums.Add(i);
 					}
@@ -124,10 +124,10 @@ namespace ProjectEularProblems
 		public static void p005_SmallestMultipleBy1_20()
 		{
 			int x = 10;
-			while ( true )
+			while (true)
 			{
 
-				if ( x % 1 == 0 &&
+				if (x % 1 == 0 &&
 					x % 2 == 0 &&
 					x % 3 == 0 &&
 					x % 4 == 0 &&
@@ -146,7 +146,7 @@ namespace ProjectEularProblems
 					x % 17 == 0 &&
 					x % 18 == 0 &&
 					x % 19 == 0 &&
-					x % 20 == 0 )
+					x % 20 == 0)
 				{
 					Console.WriteLine(x);
 					break;
@@ -163,14 +163,14 @@ namespace ProjectEularProblems
 		public static int p006_SumSquareDifference()
 		{
 			int x = 0;
-			for ( int i = 0; i <= 100; i++ )
+			for (int i = 0; i <= 100; i++)
 			{
 				x += i;
 			}
 			x *= x;
 
 			int y = 0;
-			for ( int i = 0; i <= 100; i++ )
+			for (int i = 0; i <= 100; i++)
 			{
 				int k = i * i;
 				y += k;
@@ -186,21 +186,21 @@ namespace ProjectEularProblems
 		{
 			int c = 2;
 
-			for ( int i = 5; ; i++ )
+			for (int i = 5; ; i++)
 			{
 				int less = i / 2;
-				for ( int j = 2; j <= less; j++ )
+				for (int j = 2; j <= less; j++)
 				{
-					if ( i % j == 0 )
+					if (i % j == 0)
 					{
 						break;
 					}
-					else if ( j == less )
+					else if (j == less)
 					{
 						c++;
 					}
 				}
-				if ( c == 10001 )
+				if (c == 10001)
 				{
 					Console.WriteLine(i);
 					break;
@@ -238,35 +238,35 @@ namespace ProjectEularProblems
 												0,5,8,8,6,1,1,6,4,6,7,1,0,9,4,0,5,0,7,7,5,4,1,0,0,2,2,5,6,9,8,3,1,5,5,2,0,0,0,5,5,9,3,5,7,2,9,7,2,5,
 												7,1,6,3,6,2,6,9,5,6,1,8,8,2,6,7,0,4,2,8,2,5,2,4,8,3,6,0,0,8,2,3,2,5,7,5,3,0,4,2,0,7,5,2,9,6,3,4,5,0 };
 
-			for ( int i = 0; i < Series.Count - 12; i++ )
+			for (int i = 0; i < Series.Count - 12; i++)
 			{
-				Int64 Product = Series[ i ] *
-							  Series[ i + 1 ] *
-							  Series[ i + 2 ] *
-							  Series[ i + 3 ] *
-							  Series[ i + 4 ] *
-							  Series[ i + 5 ] *
-							  Series[ i + 6 ] *
-							  Series[ i + 7 ] *
-							  Series[ i + 8 ] *
-							  Series[ i + 9 ] *
-							  Series[ i + 10 ] *
-							  Series[ i + 11 ] *
-							  Series[ i + 12 ];
+				Int64 Product = Series[i] *
+							  Series[i + 1] *
+							  Series[i + 2] *
+							  Series[i + 3] *
+							  Series[i + 4] *
+							  Series[i + 5] *
+							  Series[i + 6] *
+							  Series[i + 7] *
+							  Series[i + 8] *
+							  Series[i + 9] *
+							  Series[i + 10] *
+							  Series[i + 11] *
+							  Series[i + 12];
 
 				Products.Add(Product);
-				if ( Product >= Products.Max() )
+				if (Product >= Products.Max())
 				{
 					AdjacentNums.Clear();
-					for ( int j = 0; j < 13; j++ )
+					for (int j = 0; j < 13; j++)
 					{
-						AdjacentNums.Add(Series[ i + j ]);
+						AdjacentNums.Add(Series[i + j]);
 					}
 				}
 			}
 
 			Console.Write("Adjacent numbers are : ");
-			foreach ( Int64 k in AdjacentNums )
+			foreach (Int64 k in AdjacentNums)
 			{
 				Console.Write(k + ", ");
 			}
@@ -285,27 +285,27 @@ namespace ProjectEularProblems
 			List<int> Squares = new List<int>();
 
 			//loop to add items to squares list
-			for ( int i = 1; i <= 450; i++ )
+			for (int i = 1; i <= 450; i++)
 			{
 				Squares.Add(i);
 			}
-			for ( int i = 0; i < Squares.Count; i++ )
+			for (int i = 0; i < Squares.Count; i++)
 			{
-				if ( exit == false )
+				if (exit == false)
 				{
-					for ( int j = 1; j < Squares.Count; j++ )
+					for (int j = 1; j < Squares.Count; j++)
 					{
 						//int SumOfTwo = Squares[ i ] + Squares[ j ];
-						for ( int k = 0; k < Squares.Count; k++ )
+						for (int k = 0; k < Squares.Count; k++)
 						{
 							//a^ + b^ = c^; {Pythagorean theory}
-							if ( ( Squares[ i ] * Squares[ i ] ) + ( Squares[ j ] * Squares[ j ] ) == ( Squares[ k ] * Squares[ k ] ) )
+							if ((Squares[i] * Squares[i]) + (Squares[j] * Squares[j]) == (Squares[k] * Squares[k]))
 							{
 								//check if sum == 1000
-								if ( Squares[ i ] + Squares[ j ] + Squares[ k ] == 1000 )
+								if (Squares[i] + Squares[j] + Squares[k] == 1000)
 								{
-									Result = Squares[ i ] * Squares[ j ] * Squares[ k ];
-									Console.WriteLine($"first number: {Squares[ i ]} \nsecond number: {Squares[ j ]} \nthird number: {Squares[ k ]}\n");
+									Result = Squares[i] * Squares[j] * Squares[k];
+									Console.WriteLine($"first number: {Squares[i]} \nsecond number: {Squares[j]} \nthird number: {Squares[k]}\n");
 									Console.WriteLine(Result);
 									exit = true;
 									break;
@@ -326,15 +326,15 @@ namespace ProjectEularProblems
 		{
 			Int64 c = 5;
 
-			for ( int i = 2; i < 2000000; i++ )
+			for (int i = 2; i < 2000000; i++)
 			{
-				for ( int j = 2; j <= i / 2; j++ )
+				for (int j = 2; j <= i / 2; j++)
 				{
-					if ( i % j == 0 )
+					if (i % j == 0)
 					{
 						break;
 					}
-					else if ( j == i / 2 )
+					else if (j == i / 2)
 					{
 						c += i;
 						Console.WriteLine(i);
@@ -352,18 +352,18 @@ namespace ProjectEularProblems
 		static public void p012_TriangleNumWithOver500Factors()
 		{
 			int c = 0;
-			for ( int i = 1; ; i++ )
+			for (int i = 1; ; i++)
 			{
 				int d = 2;
 				c += i;
-				for ( int j = 2; j <= c / 2; j++ )
+				for (int j = 2; j <= c / 2; j++)
 				{
-					if ( c % j == 0 )
+					if (c % j == 0)
 					{
 						d++;
 					}
 				}
-				if ( d >= 500 )
+				if (d >= 500)
 				{
 					Console.WriteLine($"{c} has {d} factors.");
 					break;
@@ -380,19 +380,19 @@ namespace ProjectEularProblems
 			//eular problem 13
 			string a = "";
 			int c = 0;
-			for ( int p = 49; p >= 0; p-- )
+			for (int p = 49; p >= 0; p--)
 			{
-				using ( StreamReader sw = new StreamReader("./Problem13.txt") )
+				using (StreamReader sw = new StreamReader("./Problem13.txt"))
 				{
 					int r = c;
 
-					for ( int i = 0; i < 100; i++ )
+					for (int i = 0; i < 100; i++)
 					{
 						string s = sw.ReadLine();
-						int j = int.Parse(s[ p ].ToString());
+						int j = int.Parse(s[p].ToString());
 						r += j;
 					}
-					a += r.ToString()[ r.ToString().Length - 1 ];
+					a += r.ToString()[r.ToString().Length - 1];
 					c = Convert.ToInt32(r.ToString().Substring(0, r.ToString().Length - 1));
 				}
 			}
@@ -413,11 +413,11 @@ namespace ProjectEularProblems
 
 			int max = 0;
 			int res = 0;
-			for ( int i = 13; i < 1000000; i++ )
+			for (int i = 13; i < 1000000; i++)
 			{
 				int c = 1;
 				Int64 n = i;
-				while ( n > 1 )
+				while (n > 1)
 				{
 					n = n % 2 == 0 ? n / 2 : n * 3 + 1;
 					c++;
@@ -433,7 +433,7 @@ namespace ProjectEularProblems
 		/// By moving only right & down in a 20x20 grid. how many possible moves are there?
 		/// </summary>
 		/// <param name="grid">Number of columns and rows.</param>
-		public static async void p015_MovesInGrid( int grid )
+		public static async void p015_MovesInGrid(int grid)
 		{
 			//use the combination formula [n! / r! (n - r)!]
 			/*
@@ -447,7 +447,7 @@ namespace ProjectEularProblems
 			string n = "1";
 			Task t = new Task(() =>
 			{
-				for ( int i = grid * 2; i > 1; i-- )
+				for (int i = grid * 2; i > 1; i--)
 				{
 					n = MultiplyLongNums(i.ToString(), n);
 				}
@@ -460,7 +460,7 @@ namespace ProjectEularProblems
 
 			Task t2 = new Task(() =>
 			{
-				for ( int i = grid; i > 1; i-- )
+				for (int i = grid; i > 1; i--)
 				{
 					r = MultiplyLongNums(i.ToString(), r);
 				}
@@ -469,10 +469,10 @@ namespace ProjectEularProblems
 			t2.Start();
 			await t2;
 
-			if ( t.IsCompleted && t2.IsCompleted )
+			if (t.IsCompleted && t2.IsCompleted)
 			{
 
-				n = n.Insert(n.Length - ( rbyr.Length - 1 ), ".");
+				n = n.Insert(n.Length - (rbyr.Length - 1), ".");
 				rbyr = rbyr.Insert(1, ".");
 
 				double d = double.Parse(n) / double.Parse(rbyr);
@@ -484,23 +484,23 @@ namespace ProjectEularProblems
 			}
 		}
 
-		public static UInt64 p015( UInt64 m, UInt64 n, Dictionary<string, UInt64> memo )
+		public static UInt64 p015(UInt64 m, UInt64 n, Dictionary<string, UInt64> memo)
 		{
 			string key = $"{m},{n}";
-			if ( memo.ContainsKey(key) )
+			if (memo.ContainsKey(key))
 			{
-				return memo[ key ];
+				return memo[key];
 			}
-			if ( m == 0 || n == 0 )
+			if (m == 0 || n == 0)
 			{
 				return 0;
 			}
-			if ( m == 1 && n == 1 )
+			if (m == 1 && n == 1)
 			{
 				return 1;
 			}
 			memo.Add(key, p015(m - 1, n, memo) + p015(m, n - 1, memo));
-			return memo[ key ];
+			return memo[key];
 		}
 
 		/// <summary>
@@ -510,7 +510,7 @@ namespace ProjectEularProblems
 		public static void p016_FindPowerDigitSum()
 		{
 			string R = "2";
-			for ( int i = 1; i < 1000; i++ )
+			for (int i = 1; i < 1000; i++)
 			{
 				R = MultiplyLongNums(R, "2");
 			}
@@ -526,28 +526,28 @@ namespace ProjectEularProblems
 		/// <param name="a">First number.</param>
 		/// <param name="b">Second number.</param>
 		/// <returns>Product of first and second number.</returns>
-		private static string MultiplyLongNums( string a, string b )
+		private static string MultiplyLongNums(string a, string b)
 		{
 			string num1 = a.Length == b.Length ? a : a.Length > b.Length ? a : b;
 			string num2 = b.Length == a.Length ? b : b.Length < a.Length ? b : a;
 			string main_res = "0";
 
-			for ( int i = 0; i < num2.Length; i++ )
+			for (int i = 0; i < num2.Length; i++)
 			{
-				int multiplier = int.Parse(num2[ i ].ToString());
+				int multiplier = int.Parse(num2[i].ToString());
 				int carry = 0;
 				string _res = "";
 
-				for ( int k = 0; k < num2.Length - ( i + 1 ); k++ )
+				for (int k = 0; k < num2.Length - (i + 1); k++)
 				{
 					_res += "0";
 				}
 
-				for ( int j = num1.Length - 1; j >= 0; j-- )
+				for (int j = num1.Length - 1; j >= 0; j--)
 				{
-					string temp_res = ( int.Parse(num1[ j ].ToString()) * multiplier + carry ).ToString();
+					string temp_res = (int.Parse(num1[j].ToString()) * multiplier + carry).ToString();
 					carry = j == 0 ? 0 : temp_res.Length > 1 ? int.Parse(temp_res.Substring(0, temp_res.Length - 1)) : 0;
-					_res = j == 0 ? temp_res + _res : temp_res.Length > 1 ? temp_res[ temp_res.Length - 1 ].ToString() + _res : temp_res + _res;
+					_res = j == 0 ? temp_res + _res : temp_res.Length > 1 ? temp_res[temp_res.Length - 1].ToString() + _res : temp_res + _res;
 
 				}
 				main_res = AddLongNums(main_res, _res);
@@ -561,7 +561,7 @@ namespace ProjectEularProblems
 		/// <param name="num1">First number.</param>
 		/// <param name="num2">Second number.</param>
 		/// <returns>Sum of first and second number.</returns>
-		private static string AddLongNums( string num1, string num2 )
+		private static string AddLongNums(string num1, string num2)
 		{
 			//make sure bigger num is at the top
 			string bger_num = num1.Length == num2.Length ? num1 : num1.Length > num2.Length ? num1 : num2;
@@ -569,18 +569,18 @@ namespace ProjectEularProblems
 			string _res = "";
 			string sum = "";
 			int carry = 0;
-			for ( int j = 1; j <= bger_num.Length; j++ )
+			for (int j = 1; j <= bger_num.Length; j++)
 			{
 				try
 				{
-					sum = ( int.Parse(bger_num[ bger_num.Length - j ].ToString()) + int.Parse(smlr_num[ smlr_num.Length - j ].ToString()) + carry ).ToString();
+					sum = (int.Parse(bger_num[bger_num.Length - j].ToString()) + int.Parse(smlr_num[smlr_num.Length - j].ToString()) + carry).ToString();
 				}
 				catch
 				{
-					sum = ( int.Parse(bger_num[ bger_num.Length - j ].ToString()) + carry ).ToString();
+					sum = (int.Parse(bger_num[bger_num.Length - j].ToString()) + carry).ToString();
 				}
 				carry = j == 0 ? 0 : sum.Length > 1 ? int.Parse(sum.Substring(0, sum.Length - 1)) : 0;
-				_res = j == bger_num.Length ? sum + _res : sum[ sum.Length - 1 ].ToString() + _res;
+				_res = j == bger_num.Length ? sum + _res : sum[sum.Length - 1].ToString() + _res;
 			}
 			return _res;
 		}
@@ -599,50 +599,50 @@ namespace ProjectEularProblems
 			string[] tens = { "eleven", "twelve", "thirteen", "fourteen", "fifteen", "sixteen", "seventeen", "eighteen", "nineteen" };
 			string[] hundreds = { "twenty", "thirty", "forty", "fifty", "sixty", "seventy", "eighty", "ninety" };
 
-			for ( int number = 1; number <= 1000; number++ )
+			for (int number = 1; number <= 1000; number++)
 			{
-				if ( number <= 10 )
+				if (number <= 10)
 				{
-					result = ones[ number - 1 ];
+					result = ones[number - 1];
 				}
-				else if ( number <= 19 )
+				else if (number <= 19)
 				{
-					result = tens[ number - 11 ];
+					result = tens[number - 11];
 				}
-				else if ( number <= 99 )
+				else if (number <= 99)
 				{
 					string num = number.ToString();
-					result = num[ 1 ] == '0' ? $"{hundreds[ int.Parse(num[ 0 ].ToString()) - 2 ] }" : $"{hundreds[ int.Parse(num[ 0 ].ToString()) - 2 ] } {ones[ int.Parse(num[ 1 ].ToString()) - 1 ]}";
+					result = num[1] == '0' ? $"{hundreds[int.Parse(num[0].ToString()) - 2] }" : $"{hundreds[int.Parse(num[0].ToString()) - 2] } {ones[int.Parse(num[1].ToString()) - 1]}";
 				}
-				else if ( number <= 999 )
+				else if (number <= 999)
 				{
 					string num = number.ToString();
-					string first_part = ones[ int.Parse(num[ 0 ].ToString()) - 1 ] + " hundred";
+					string first_part = ones[int.Parse(num[0].ToString()) - 1] + " hundred";
 					string second_part = "";
 
-					if ( num.Substring(1, 2) != "00" )
+					if (num.Substring(1, 2) != "00")
 					{
 
-						if ( num[ 1 ] == '0' )
+						if (num[1] == '0')
 						{
-							second_part = "and " + $"{ones[ int.Parse(num[ 2 ].ToString()) - 1 ]}";
+							second_part = "and " + $"{ones[int.Parse(num[2].ToString()) - 1]}";
 
 						}
-						else if ( num[ 2 ] == '0' )
+						else if (num[2] == '0')
 						{
-							second_part = num[ 1 ] == '1' ? $"and {ones[ 9 ]}" : "and " + $"{hundreds[ int.Parse(num[ 1 ].ToString()) - 2 ] }";
+							second_part = num[1] == '1' ? $"and {ones[9]}" : "and " + $"{hundreds[int.Parse(num[1].ToString()) - 2] }";
 						}
 
 						else
 						{
 							int n = int.Parse(num.Substring(1, 2));
-							if ( n <= 19 )
+							if (n <= 19)
 							{
-								second_part = $"and {tens[ n - 11 ]}";
+								second_part = $"and {tens[n - 11]}";
 							}
-							else if ( n <= 99 )
+							else if (n <= 99)
 							{
-								second_part = $"and {hundreds[ int.Parse(num[ 1 ].ToString()) - 2 ] } {ones[ int.Parse(num[ 2 ].ToString()) - 1 ]}";
+								second_part = $"and {hundreds[int.Parse(num[1].ToString()) - 2] } {ones[int.Parse(num[2].ToString()) - 1]}";
 							}
 						}
 					}
@@ -650,7 +650,7 @@ namespace ProjectEularProblems
 					result = $"{first_part} {second_part}";
 
 				}
-				else if ( number == 1000 )
+				else if (number == 1000)
 				{
 					result = "one thousand";
 				}
@@ -671,10 +671,10 @@ namespace ProjectEularProblems
 			//brute force <by comparing all the possible paths> 2 ^ rows - 1 
 			List<int[]> lstNums = new List<int[]>();
 			//store all nums in an array
-			using ( StreamReader sr = new StreamReader("./Problem18.txt") )
+			using (StreamReader sr = new StreamReader("./Problem18.txt"))
 			{
 				string num = "";
-				while ( ( num = sr.ReadLine() ) != null )
+				while ((num = sr.ReadLine()) != null)
 				{
 					lstNums.Add(Array.ConvertAll(num.Trim().Split(' '), a => int.Parse(a)));
 				}
@@ -689,14 +689,14 @@ namespace ProjectEularProblems
 
             hence just iterate all natural nums from 0 to 2^depth-1 [and covert them to a 15 digit binary num] ==> the binary equiv is the route 
             */
-			int max = ( int ) Math.Pow(2, lstNums.Count - 1);
+			int max = (int)Math.Pow(2, lstNums.Count - 1);
 			int best_res = 0;
 			string best_route = "";
-			for ( int i = 0; i < max; i++ )
+			for (int i = 0; i < max; i++)
 			{
 				//prepend needed zeros so bin has 15 digits
 				string pholder = "";
-				for ( int l = 0; l < lstNums.Count; l++ )
+				for (int l = 0; l < lstNums.Count; l++)
 				{
 					pholder += "0";
 				}
@@ -707,14 +707,14 @@ namespace ProjectEularProblems
 				int res = 0;
 				string route = "";
 
-				for ( int j = 0; j < lstNums.Count; j++ )
+				for (int j = 0; j < lstNums.Count; j++)
 				{
 					int total = 0;
-					for ( int k = 0; k < j; k++ )
+					for (int k = 0; k < j; k++)
 					{
-						total += route_array[ k ];
+						total += route_array[k];
 					}
-					int n = lstNums[ j ][ route_array[ j ] + total ];
+					int n = lstNums[j][route_array[j] + total];
 					res += n;
 					route += n.ToString() + " ";
 				}
@@ -726,17 +726,17 @@ namespace ProjectEularProblems
 			best_route = best_route.Trim();
 			int[] correct_route_nums = Array.ConvertAll(best_route.Split(' ').ToArray(), a => int.Parse(a.ToString()));
 
-			for ( int i = 0; i < lstNums.Count; i++ )
+			for (int i = 0; i < lstNums.Count; i++)
 			{
-				int[] nums = lstNums[ i ];
-				for ( int j = 0; j < lstNums.Count - nums.Length; j++ )
+				int[] nums = lstNums[i];
+				for (int j = 0; j < lstNums.Count - nums.Length; j++)
 				{
 					Console.Write("  ");
 				}
-				for ( int k = 0; k < nums.Length; k++ )
+				for (int k = 0; k < nums.Length; k++)
 				{
-					int n = nums[ k ];
-					if ( n == correct_route_nums[ i ] )
+					int n = nums[k];
+					if (n == correct_route_nums[i])
 					{
 						Console.ForegroundColor = ConsoleColor.Red;
 					}
@@ -761,9 +761,9 @@ namespace ProjectEularProblems
 			DateTime date = new DateTime(1901, 1, 1);
 			DateTime d = new DateTime(2000, 12, 31);
 			int c = 0;
-			while ( date <= d )
+			while (date <= d)
 			{
-				if ( date.Day == 1 && date.DayOfWeek == DayOfWeek.Sunday )
+				if (date.Day == 1 && date.DayOfWeek == DayOfWeek.Sunday)
 				{
 					c++;
 				}
@@ -781,10 +781,10 @@ namespace ProjectEularProblems
 			/*using recursive function is slower*/
 			/*use loop*/
 			string res = "100";
-			for ( int i = int.Parse(res); i > 2; i-- )
+			for (int i = int.Parse(res); i > 2; i--)
 			{
 				//this is a custome method for mul long nums
-				res = MultiplyLongNums(res, ( i - 1 ).ToString());
+				res = MultiplyLongNums(res, (i - 1).ToString());
 			}
 
 			Console.WriteLine("100! = " + res);
@@ -803,28 +803,28 @@ namespace ProjectEularProblems
 		{
 			int res = 0;
 
-			for ( int i = 1; i <= 10000; i++ )
+			for (int i = 1; i <= 10000; i++)
 			{
 				//find divisors of i and add them together
 				int sum = 0;
-				for ( int j = 1; j <= i / 2; j++ )
+				for (int j = 1; j <= i / 2; j++)
 				{
-					if ( i % j == 0 )
+					if (i % j == 0)
 					{
 						sum += j;
 					}
 				}
 				//find divisors of [sum of divisors of i] and add them together
 				int new_sum = 0;
-				for ( int k = 1; k <= sum / 2; k++ )
+				for (int k = 1; k <= sum / 2; k++)
 				{
-					if ( sum % k == 0 )
+					if (sum % k == 0)
 					{
 						new_sum += k;
 					}
 				}
 				//determine if d(i) == sum && d(sum) == i && i != sum
-				if ( i == new_sum && i != sum )
+				if (i == new_sum && i != sum)
 				{
 					res += sum + new_sum;
 					i = sum + 1;
@@ -843,25 +843,25 @@ namespace ProjectEularProblems
 		public static void p022_NameScores()
 		{
 			List<string> names = new List<string>();
-			using ( StreamReader sr = new StreamReader("./Problem22.txt") )
+			using (StreamReader sr = new StreamReader("./Problem22.txt"))
 			{
 				string[] str = sr.ReadToEnd().Split(',');
-				foreach ( string name in str )
+				foreach (string name in str)
 				{
 					names.Add(name.Replace("\"", ""));
 				}
 			}
 			names.Sort();
 			long c = 0;
-			for ( int i = 0; i < names.Count; i++ )
+			for (int i = 0; i < names.Count; i++)
 			{
-				string name = names[ i ];
+				string name = names[i];
 				int sum = 0;
-				foreach ( char cha in name )
+				foreach (char cha in name)
 				{
-					sum += ( int ) cha - 64;
+					sum += (int)cha - 64;
 				}
-				c += sum * ( i + 1 );
+				c += sum * (i + 1);
 
 			}
 			Console.WriteLine(c);
@@ -879,15 +879,15 @@ namespace ProjectEularProblems
 		{
 			List<int> AbundantNumbers = new List<int>();
 			//get all abundant num below limit 28123
-			for ( int i = 2; i <= 28123; i++ )
+			for (int i = 2; i <= 28123; i++)
 			{
 				int j_limit = i / 2;
 				int divisors_sum = 0;
-				for ( int j = 1; j <= j_limit; j++ )
+				for (int j = 1; j <= j_limit; j++)
 				{
 					divisors_sum = i % j == 0 ? divisors_sum + j : divisors_sum;
 				}
-				if ( divisors_sum > i )
+				if (divisors_sum > i)
 				{
 					AbundantNumbers.Add(i);
 				}
@@ -895,17 +895,17 @@ namespace ProjectEularProblems
 
 			HashSet<int> NumsMadeBy_Abundant = new HashSet<int>();
 			//get all nums made my 2 abundant nums
-			for ( int a = 0; a < AbundantNumbers.Count; a++ )
+			for (int a = 0; a < AbundantNumbers.Count; a++)
 			{
-				for ( int b = a; b < AbundantNumbers.Count; b++ )
+				for (int b = a; b < AbundantNumbers.Count; b++)
 				{
-					NumsMadeBy_Abundant.Add(AbundantNumbers[ a ] + AbundantNumbers[ b ]);
+					NumsMadeBy_Abundant.Add(AbundantNumbers[a] + AbundantNumbers[b]);
 				}
 			}
 
 			//count non-abundant nums
 			int count = 0;
-			for ( int c = 1; c <= 28123; c++ )
+			for (int c = 1; c <= 28123; c++)
 			{
 				count = NumsMadeBy_Abundant.Contains(c) ? count : count + c;
 			}
@@ -917,15 +917,27 @@ namespace ProjectEularProblems
 		/// </summary>
 		/// <param name="i">Number</param>
 		/// <returns>Factorial of a number.</returns>
-		private static long Factorial( long i )
+		private static long Factorial(long i)
 		{
-			if ( i <= 1 )
+			if (i <= 1)
 			{
 				return 1;
 			}
 			return i * Factorial(i - 1);
 		}
-
+		/// <summary>
+		/// Calculates the factorial of a number less than Int64.MaxValue. 
+		/// </summary>
+		/// <param name="i">Number</param>
+		/// <returns>Factorial of a number.</returns>
+		private static int Factorial(int i)
+		{
+			if (i <= 1)
+			{
+				return 1;
+			}
+			return i * Factorial(i - 1);
+		}
 		/// <summary>
 		/// PROBLEM 24.
 		/// The lexicographic permutations of 1,2,3 are 123 132 213 231 312 321.
@@ -934,56 +946,56 @@ namespace ProjectEularProblems
 		public static void p024_LexicographicPermutations()
 		{
 			int[] P = { 0, 1, 2, 3, 4, 5, 6, 7, 8, 9 };
-			int times = ( int ) Factorial(( long ) P.Length);
+			int times = (int)Factorial((long)P.Length);
 
-			for ( int j = 0; j < times; j++ )
+			for (int j = 0; j < times; j++)
 			{
 				//STEP 1: Find the largest x such that P[x]<P[x+1].
 				//( If there is no such x, P is the last permutation.)
 				int x = -1;
-				for ( int i = 0; i < P.Length - 1; i++ )
+				for (int i = 0; i < P.Length - 1; i++)
 				{
-					x = P[ i ] < P[ i + 1 ] ? i : x;
+					x = P[i] < P[i + 1] ? i : x;
 				}
-				if ( x == -1 )
+				if (x == -1)
 				{
 					break;
 				}
 
 				//STEP 2 Find the largest y such that P[x]<P[y]
 				int y = 0;
-				for ( int i = 0; i < P.Length; i++ )
+				for (int i = 0; i < P.Length; i++)
 				{
-					if ( P[ x ] < P[ i ] )
+					if (P[x] < P[i])
 					{
 						y = i;
 					}
 				}
 
 				//STEP 3 Swap P[x] and P[y].
-				int index_x = P[ x ];
-				int index_y = P[ y ];
-				P[ x ] = index_y;
-				P[ y ] = index_x;
+				int index_x = P[x];
+				int index_y = P[y];
+				P[x] = index_y;
+				P[y] = index_x;
 
 				//STEP 4 Reverse P[x+1 .. n].
-				int[] new_P = new int[ P.Length ];
-				for ( int i = 0; i <= x; i++ )
+				int[] new_P = new int[P.Length];
+				for (int i = 0; i <= x; i++)
 				{
-					new_P[ i ] = P[ i ];
+					new_P[i] = P[i];
 				}
 				int c = 1;
-				for ( int i = P.Length - 1; i > x; i-- )
+				for (int i = P.Length - 1; i > x; i--)
 				{
-					new_P[ x + c ] = P[ i ];
+					new_P[x + c] = P[i];
 					c++;
 				}
 
 				P = new_P;
-				if ( j + 2 == 1000000 )
+				if (j + 2 == 1000000)
 				{
-					Console.Write("index: " + ( j + 2 ) + " is ");
-					foreach ( int n in new_P )
+					Console.Write("index: " + (j + 2) + " is ");
+					foreach (int n in new_P)
 					{
 						Console.Write(n);
 					}
@@ -1002,12 +1014,12 @@ namespace ProjectEularProblems
 			string x = "1";
 			string y = "2";
 			string f = null;
-			for ( int i = 3; n.Length < 1000; i++ )
+			for (int i = 3; n.Length < 1000; i++)
 			{
 				n = AddLongNums(x, y);
 				x = y;
 				y = n;
-				f = "F" + ( i + 1 );
+				f = "F" + (i + 1);
 			}
 			Console.WriteLine(f + " is: " + n);
 		}
@@ -1031,38 +1043,38 @@ namespace ProjectEularProblems
 		{
 			string re = "";
 			int res = 0;
-			for ( int i = 2; i < 1000; i++ )
+			for (int i = 2; i < 1000; i++)
 			{
 				int Numerator = 1;
 				string result = "";
 				int Denominator = i;
 				int div_res = 0;
-				int[] count = new int[ 10 ];
-				while ( result.Length <= 1000 )
+				int[] count = new int[10];
+				while (result.Length <= 1000)
 				{
 
 					div_res = Numerator / Denominator;
 
 					result += div_res;
-					count[ div_res ]++;
+					count[div_res]++;
 
-					if ( Numerator % Denominator == 0 )
+					if (Numerator % Denominator == 0)
 					{
 
 						break;
 					}
 
-					Numerator = ( Numerator % Denominator ) * 10;
+					Numerator = (Numerator % Denominator) * 10;
 				}
 				result = result.Substring(1);
 				//Console.WriteLine($"1/{Denominator} = {result}");
-				count[ 0 ]--;//exclude first zero (its the 0 before the comma)
-							 //foreach ( int n in count )
-							 //{
-							 //	Console.Write(n +", ");
-							 //}
+				count[0]--;//exclude first zero (its the 0 before the comma)
+						   //foreach ( int n in count )
+						   //{
+						   //	Console.Write(n +", ");
+						   //}
 				count = count.Where(x => x != 0).ToArray();
-				int average = ( int ) count.Average();
+				int average = (int)count.Average();
 				int c = count.Where(x => x >= average).Count();
 				//Console.WriteLine("\n"+c);
 				string l = result.Substring(0, c);
@@ -1089,15 +1101,15 @@ namespace ProjectEularProblems
 			int val_n = 0;
 			int best_primes = 0;
 
-			for ( int a = -999; a < 1000; a++ )
+			for (int a = -999; a < 1000; a++)
 			{
-				for ( int b = -1000; b <= 1000; b++ )
+				for (int b = -1000; b <= 1000; b++)
 				{
 					int primes = 0;
-					for ( int n = 0; ; n++ )
+					for (int n = 0; ; n++)
 					{
-						int res = Math.Abs(( n * n ) + ( a * n ) + b);
-						if ( !CheckPrime(res) )
+						int res = Math.Abs((n * n) + (a * n) + b);
+						if (!CheckPrime(res))
 						{
 							bool is_big = primes > best_primes;
 							coe_a = is_big ? a : coe_a;
@@ -1119,13 +1131,13 @@ namespace ProjectEularProblems
 		/// </summary>
 		/// <param name="number">The number to check</param>
 		/// <returns>True if prime or False if even</returns>
-		private static bool is_prime( int number )
+		private static bool is_prime(int number)
 		{
 
 			int count = 0;
-			for ( int i = 1; i <= number / 2; i++ )
+			for (int i = 1; i <= number / 2; i++)
 			{
-				if ( number % i == 0 )
+				if (number % i == 0)
 				{
 					count++;
 				}
@@ -1150,7 +1162,7 @@ namespace ProjectEularProblems
 			int checker = 0;
 			int counter = 2;
 			int sum = 0;
-			for ( int i = 3; i <= end; i += counter )
+			for (int i = 3; i <= end; i += counter)
 			{
 				sum += i;
 				checker += 1;
@@ -1176,9 +1188,9 @@ namespace ProjectEularProblems
 			HashSet<double> res = new HashSet<double>();
 			int start = 2;
 			int end = 100;
-			for ( int a = start; a <= end; a++ )
+			for (int a = start; a <= end; a++)
 			{
-				for ( int b = start; b <= end; b++ )
+				for (int b = start; b <= end; b++)
 				{
 					res.Add(Math.Pow(a, b));
 				}
@@ -1201,15 +1213,15 @@ namespace ProjectEularProblems
 			string n = "";
 			int res = 0;
 			double sum = 0;
-			for ( int i = 2; i <= 1000000; i++ )
+			for (int i = 2; i <= 1000000; i++)
 			{
 				n = i.ToString();
 				sum = 0;
-				for ( int j = 0; j < n.Length; j++ )
+				for (int j = 0; j < n.Length; j++)
 				{
-					sum += Math.Pow(int.Parse(n[ j ].ToString()), 5);
+					sum += Math.Pow(int.Parse(n[j].ToString()), 5);
 				}
-				res = ( int ) sum == i ? res + i : res;
+				res = (int)sum == i ? res + i : res;
 			}
 			Console.WriteLine(res);
 		}
@@ -1227,7 +1239,7 @@ namespace ProjectEularProblems
 			List<int> coins = new List<int> { 100, 50, 20, 10, 5, 2, 1 };
 			List<int> total = new List<int>();
 
-			for ( int j = 1; j <= 7; j++ )
+			for (int j = 1; j <= 7; j++)
 			{
 				int res = PairNumber(j, coins);
 				Console.WriteLine(res);
@@ -1245,30 +1257,30 @@ namespace ProjectEularProblems
 		/// <param name="pair_in">Number to pair the coins in.</param>
 		/// <param name="coins">The coins to pair</param>
 		/// <returns>Total pairs that can be made.</returns>
-		private static int PairNumber( int pair_in, List<int> coins )
+		private static int PairNumber(int pair_in, List<int> coins)
 		{
 			int res = 0;
 
 			//for pairing each coin by itself
-			if ( pair_in == 1 )
+			if (pair_in == 1)
 			{
 				return coins.Count + 1;
 			}
 			//for pairing every coin by 1 other coin
-			else if ( pair_in == 2 )
+			else if (pair_in == 2)
 			{
-				for ( int a = 0; a < coins.Count - 1; a++ )
+				for (int a = 0; a < coins.Count - 1; a++)
 				{
-					for ( int b = a + 1; b < coins.Count; b++ )
+					for (int b = a + 1; b < coins.Count; b++)
 					{
-						int iend = 200 / coins[ a ];
-						for ( int i = 1; i <= iend; i++ )
+						int iend = 200 / coins[a];
+						for (int i = 1; i <= iend; i++)
 						{
-							int jend = ( 200 - ( coins[ a ] * i ) ) / coins[ b ];
-							for ( int j = 1; j <= jend; j++ )
+							int jend = (200 - (coins[a] * i)) / coins[b];
+							for (int j = 1; j <= jend; j++)
 							{
-								int sum = ( coins[ a ] * i ) + ( coins[ b ] * j );
-								if ( sum == 200 )
+								int sum = (coins[a] * i) + (coins[b] * j);
+								if (sum == 200)
 								{
 									res++;
 									//Console.WriteLine($"{i}x{coins[ a ]}p + {j}x{coins[ b ]}p");
@@ -1281,25 +1293,25 @@ namespace ProjectEularProblems
 				return res;
 			}
 
-			else if ( pair_in == 3 )
+			else if (pair_in == 3)
 			{
-				for ( int a = 0; a < coins.Count - 2; a++ )
+				for (int a = 0; a < coins.Count - 2; a++)
 				{
-					for ( int b = a + 1; b < coins.Count - 1; b++ )
+					for (int b = a + 1; b < coins.Count - 1; b++)
 					{
-						for ( int c = b + 1; c < coins.Count; c++ )
+						for (int c = b + 1; c < coins.Count; c++)
 						{
-							int iend = 200 / coins[ a ];
-							for ( int i = 1; i <= iend; i++ )
+							int iend = 200 / coins[a];
+							for (int i = 1; i <= iend; i++)
 							{
-								int jend = ( 200 - ( coins[ a ] * i ) ) / coins[ b ];
-								for ( int j = 1; j <= jend; j++ )
+								int jend = (200 - (coins[a] * i)) / coins[b];
+								for (int j = 1; j <= jend; j++)
 								{
-									int kend = ( 200 - ( coins[ a ] * i ) - ( coins[ b ] * j ) ) / coins[ c ];
-									for ( int k = 1; k <= kend; k++ )
+									int kend = (200 - (coins[a] * i) - (coins[b] * j)) / coins[c];
+									for (int k = 1; k <= kend; k++)
 									{
-										int sum = ( coins[ a ] * i ) + ( coins[ b ] * j ) + ( coins[ c ] * k );
-										if ( sum == 200 )
+										int sum = (coins[a] * i) + (coins[b] * j) + (coins[c] * k);
+										if (sum == 200)
 										{
 											res++;
 											//Console.WriteLine($"{i}x{coins[a]}p + {j}x{coins[ b ]}p + {k}x{coins[ c ]}p");
@@ -1313,30 +1325,30 @@ namespace ProjectEularProblems
 				return res;
 			}
 
-			else if ( pair_in == 4 )
+			else if (pair_in == 4)
 			{
-				for ( int a = 0; a < coins.Count - 3; a++ )
+				for (int a = 0; a < coins.Count - 3; a++)
 				{
-					for ( int b = a + 1; b < coins.Count - 2; b++ )
+					for (int b = a + 1; b < coins.Count - 2; b++)
 					{
-						for ( int c = b + 1; c < coins.Count - 1; c++ )
+						for (int c = b + 1; c < coins.Count - 1; c++)
 						{
-							for ( int d = c + 1; d < coins.Count; d++ )
+							for (int d = c + 1; d < coins.Count; d++)
 							{
-								int iend = 200 / coins[ a ];
-								for ( int i = 1; i <= iend; i++ )
+								int iend = 200 / coins[a];
+								for (int i = 1; i <= iend; i++)
 								{
-									int jend = ( 200 - ( coins[ a ] * i ) ) / coins[ b ];
-									for ( int j = 1; j <= jend; j++ )
+									int jend = (200 - (coins[a] * i)) / coins[b];
+									for (int j = 1; j <= jend; j++)
 									{
-										int kend = ( 200 - ( coins[ a ] * i ) - ( coins[ b ] * j ) ) / coins[ c ];
-										for ( int k = 1; k <= kend; k++ )
+										int kend = (200 - (coins[a] * i) - (coins[b] * j)) / coins[c];
+										for (int k = 1; k <= kend; k++)
 										{
-											int lend = ( 200 - ( coins[ a ] * i ) - ( coins[ b ] * j ) - ( coins[ c ] * k ) ) / coins[ d ];
-											for ( int l = 1; l <= lend; l++ )
+											int lend = (200 - (coins[a] * i) - (coins[b] * j) - (coins[c] * k)) / coins[d];
+											for (int l = 1; l <= lend; l++)
 											{
-												int sum = ( coins[ a ] * i ) + ( coins[ b ] * j ) + ( coins[ c ] * k ) + ( coins[ d ] * l );
-												if ( sum == 200 )
+												int sum = (coins[a] * i) + (coins[b] * j) + (coins[c] * k) + (coins[d] * l);
+												if (sum == 200)
 												{
 													res++;
 													//Console.WriteLine($"{i}x{coins[ a ]}p + {j}x{coins[ b ]}p + {k}x{coins[ c ]}p + {l}x{coins[ d ]}p");
@@ -1352,36 +1364,36 @@ namespace ProjectEularProblems
 				return res;
 			}
 
-			else if ( pair_in == 5 )
+			else if (pair_in == 5)
 			{
-				for ( int a = 0; a < coins.Count - 4; a++ )
+				for (int a = 0; a < coins.Count - 4; a++)
 				{
-					for ( int b = a + 1; b < coins.Count - 3; b++ )
+					for (int b = a + 1; b < coins.Count - 3; b++)
 					{
-						for ( int c = b + 1; c < coins.Count - 2; c++ )
+						for (int c = b + 1; c < coins.Count - 2; c++)
 						{
-							for ( int d = c + 1; d < coins.Count - 1; d++ )
+							for (int d = c + 1; d < coins.Count - 1; d++)
 							{
-								for ( int e = d + 1; e < coins.Count; e++ )
+								for (int e = d + 1; e < coins.Count; e++)
 								{
-									int iend = 200 / coins[ a ];
-									for ( int i = 1; i <= iend; i++ )
+									int iend = 200 / coins[a];
+									for (int i = 1; i <= iend; i++)
 									{
-										int jend = ( 200 - ( coins[ a ] * i ) ) / coins[ b ];
-										for ( int j = 1; j <= jend; j++ )
+										int jend = (200 - (coins[a] * i)) / coins[b];
+										for (int j = 1; j <= jend; j++)
 										{
-											int kend = ( 200 - ( coins[ a ] * i ) - ( coins[ b ] * j ) ) / coins[ c ];
-											for ( int k = 1; k <= kend; k++ )
+											int kend = (200 - (coins[a] * i) - (coins[b] * j)) / coins[c];
+											for (int k = 1; k <= kend; k++)
 											{
-												int lend = ( 200 - ( coins[ a ] * i ) - ( coins[ b ] * j ) - ( coins[ c ] * k ) ) / coins[ d ];
-												for ( int l = 1; l <= lend; l++ )
+												int lend = (200 - (coins[a] * i) - (coins[b] * j) - (coins[c] * k)) / coins[d];
+												for (int l = 1; l <= lend; l++)
 												{
-													int mend = ( 200 - ( coins[ a ] * i ) - ( coins[ b ] * j ) - ( coins[ c ] * k ) - ( coins[ d ] * l ) ) / coins[ e ];
-													for ( int m = 1; m <= mend; m++ )
+													int mend = (200 - (coins[a] * i) - (coins[b] * j) - (coins[c] * k) - (coins[d] * l)) / coins[e];
+													for (int m = 1; m <= mend; m++)
 													{
 
-														int sum = ( coins[ a ] * i ) + ( coins[ b ] * j ) + ( coins[ c ] * k ) + ( coins[ d ] * l ) + ( coins[ e ] * m );
-														if ( sum == 200 )
+														int sum = (coins[a] * i) + (coins[b] * j) + (coins[c] * k) + (coins[d] * l) + (coins[e] * m);
+														if (sum == 200)
 														{
 															res++;
 															//Console.WriteLine($"{i}x{coins[ a ]}p + {j}x{coins[ b ]}p + {k}x{coins[ c ]}p + {l}x{coins[ d ]}p + {m}x{coins[ e ]}p");
@@ -1399,43 +1411,43 @@ namespace ProjectEularProblems
 				return res;
 			}
 
-			else if ( pair_in == 6 )
+			else if (pair_in == 6)
 			{
-				for ( int a = 0; a < coins.Count - 5; a++ )
+				for (int a = 0; a < coins.Count - 5; a++)
 				{
-					for ( int b = a + 1; b < coins.Count - 4; b++ )
+					for (int b = a + 1; b < coins.Count - 4; b++)
 					{
-						for ( int c = b + 1; c < coins.Count - 3; c++ )
+						for (int c = b + 1; c < coins.Count - 3; c++)
 						{
-							for ( int d = c + 1; d < coins.Count - 2; d++ )
+							for (int d = c + 1; d < coins.Count - 2; d++)
 							{
-								for ( int e = d + 1; e < coins.Count - 1; e++ )
+								for (int e = d + 1; e < coins.Count - 1; e++)
 								{
-									for ( int f = e + 1; f < coins.Count; f++ )
+									for (int f = e + 1; f < coins.Count; f++)
 									{
 
-										int iend = 200 / coins[ a ];
-										for ( int i = 1; i <= iend; i++ )
+										int iend = 200 / coins[a];
+										for (int i = 1; i <= iend; i++)
 										{
-											int jend = ( 200 - ( coins[ a ] * i ) ) / coins[ b ];
-											for ( int j = 1; j <= jend; j++ )
+											int jend = (200 - (coins[a] * i)) / coins[b];
+											for (int j = 1; j <= jend; j++)
 											{
-												int kend = ( 200 - ( coins[ a ] * i ) - ( coins[ b ] * j ) ) / coins[ c ];
-												for ( int k = 1; k <= kend; k++ )
+												int kend = (200 - (coins[a] * i) - (coins[b] * j)) / coins[c];
+												for (int k = 1; k <= kend; k++)
 												{
-													int lend = ( 200 - ( coins[ a ] * i ) - ( coins[ b ] * j ) - ( coins[ c ] * k ) ) / coins[ d ];
-													for ( int l = 1; l <= lend; l++ )
+													int lend = (200 - (coins[a] * i) - (coins[b] * j) - (coins[c] * k)) / coins[d];
+													for (int l = 1; l <= lend; l++)
 													{
-														int mend = ( 200 - ( coins[ a ] * i ) - ( coins[ b ] * j ) - ( coins[ c ] * k ) - ( coins[ d ] * l ) ) / coins[ e ];
-														for ( int m = 1; m <= mend; m++ )
+														int mend = (200 - (coins[a] * i) - (coins[b] * j) - (coins[c] * k) - (coins[d] * l)) / coins[e];
+														for (int m = 1; m <= mend; m++)
 														{
-															int nend = ( 200 - ( coins[ a ] * i ) - ( coins[ b ] * j ) - ( coins[ c ] * k ) - ( coins[ d ] * l ) - ( coins[ e ] * m ) ) / coins[ f ];
-															for ( int n = 1; n <= nend; n++ )
+															int nend = (200 - (coins[a] * i) - (coins[b] * j) - (coins[c] * k) - (coins[d] * l) - (coins[e] * m)) / coins[f];
+															for (int n = 1; n <= nend; n++)
 															{
 
 
-																int sum = ( coins[ a ] * i ) + ( coins[ b ] * j ) + ( coins[ c ] * k ) + ( coins[ d ] * l ) + ( coins[ e ] * m ) + ( coins[ f ] * n );
-																if ( sum == 200 )
+																int sum = (coins[a] * i) + (coins[b] * j) + (coins[c] * k) + (coins[d] * l) + (coins[e] * m) + (coins[f] * n);
+																if (sum == 200)
 																{
 																	res++;
 																	//Console.WriteLine($"{i}x{coins[ a ]}p + {j}x{coins[ b ]}p + {k}x{coins[ c ]}p + {l}x{coins[ d ]}p + {m}x{coins[ e ]}p + {n}x{coins[ f ]}p");
@@ -1455,49 +1467,49 @@ namespace ProjectEularProblems
 				return res;
 			}
 
-			else if ( pair_in == 7 )
+			else if (pair_in == 7)
 			{
-				for ( int a = 0; a < coins.Count - 6; a++ )
+				for (int a = 0; a < coins.Count - 6; a++)
 				{
-					for ( int b = a + 1; b < coins.Count - 5; b++ )
+					for (int b = a + 1; b < coins.Count - 5; b++)
 					{
-						for ( int c = b + 1; c < coins.Count - 4; c++ )
+						for (int c = b + 1; c < coins.Count - 4; c++)
 						{
-							for ( int d = c + 1; d < coins.Count - 3; d++ )
+							for (int d = c + 1; d < coins.Count - 3; d++)
 							{
-								for ( int e = d + 1; e < coins.Count - 2; e++ )
+								for (int e = d + 1; e < coins.Count - 2; e++)
 								{
-									for ( int f = e + 1; f < coins.Count - 1; f++ )
+									for (int f = e + 1; f < coins.Count - 1; f++)
 									{
-										for ( int g = f + 1; g < coins.Count; g++ )
+										for (int g = f + 1; g < coins.Count; g++)
 										{
 
 
 
-											int iend = 200 / coins[ a ];
-											for ( int i = 1; i <= iend; i++ )
+											int iend = 200 / coins[a];
+											for (int i = 1; i <= iend; i++)
 											{
-												int jend = ( 200 - ( coins[ a ] * i ) ) / coins[ b ];
-												for ( int j = 1; j <= jend; j++ )
+												int jend = (200 - (coins[a] * i)) / coins[b];
+												for (int j = 1; j <= jend; j++)
 												{
-													int kend = ( 200 - ( coins[ a ] * i ) - ( coins[ b ] * j ) ) / coins[ c ];
-													for ( int k = 1; k <= kend; k++ )
+													int kend = (200 - (coins[a] * i) - (coins[b] * j)) / coins[c];
+													for (int k = 1; k <= kend; k++)
 													{
-														int lend = ( 200 - ( coins[ a ] * i ) - ( coins[ b ] * j ) - ( coins[ c ] * k ) ) / coins[ d ];
-														for ( int l = 1; l <= lend; l++ )
+														int lend = (200 - (coins[a] * i) - (coins[b] * j) - (coins[c] * k)) / coins[d];
+														for (int l = 1; l <= lend; l++)
 														{
-															int mend = ( 200 - ( coins[ a ] * i ) - ( coins[ b ] * j ) - ( coins[ c ] * k ) - ( coins[ d ] * l ) ) / coins[ e ];
-															for ( int m = 1; m <= mend; m++ )
+															int mend = (200 - (coins[a] * i) - (coins[b] * j) - (coins[c] * k) - (coins[d] * l)) / coins[e];
+															for (int m = 1; m <= mend; m++)
 															{
-																int nend = ( 200 - ( coins[ a ] * i ) - ( coins[ b ] * j ) - ( coins[ c ] * k ) - ( coins[ d ] * l ) - ( coins[ e ] * m ) ) / coins[ f ];
-																for ( int n = 1; n <= nend; n++ )
+																int nend = (200 - (coins[a] * i) - (coins[b] * j) - (coins[c] * k) - (coins[d] * l) - (coins[e] * m)) / coins[f];
+																for (int n = 1; n <= nend; n++)
 																{
 
-																	int oend = ( 200 - ( coins[ a ] * i ) - ( coins[ b ] * j ) - ( coins[ c ] * k ) - ( coins[ d ] * l ) - ( coins[ e ] * m ) - ( coins[ f ] * n ) ) / coins[ g ];
-																	for ( int o = 1; o <= oend; o++ )
+																	int oend = (200 - (coins[a] * i) - (coins[b] * j) - (coins[c] * k) - (coins[d] * l) - (coins[e] * m) - (coins[f] * n)) / coins[g];
+																	for (int o = 1; o <= oend; o++)
 																	{
-																		int sum = ( coins[ a ] * i ) + ( coins[ b ] * j ) + ( coins[ c ] * k ) + ( coins[ d ] * l ) + ( coins[ e ] * m ) + ( coins[ f ] * n ) + ( coins[ g ] * o );
-																		if ( sum == 200 )
+																		int sum = (coins[a] * i) + (coins[b] * j) + (coins[c] * k) + (coins[d] * l) + (coins[e] * m) + (coins[f] * n) + (coins[g] * o);
+																		if (sum == 200)
 																		{
 																			res++;
 																			//Console.WriteLine($"{i}x{coins[ a ]}p + {j}x{coins[ b ]}p + {k}x{coins[ c ]}p + {l}x{coins[ d ]}p + {m}x{coins[ e ]}p + {n}x{coins[ f ]}p");
@@ -1539,43 +1551,43 @@ namespace ProjectEularProblems
 			HashSet<int> Identity = new HashSet<int>();
 			HashSet<int> sum = new HashSet<int>();
 
-			for ( int i = 1; i <= 99; i++ )
+			for (int i = 1; i <= 99; i++)
 			{
-				for ( int j = i + 1; j <= 9999; j++ )
+				for (int j = i + 1; j <= 9999; j++)
 				{
 					string i_num = i.ToString();
 					string j_num = j.ToString();
 					int product = i * j;
 					string product_num = product.ToString();
 					string s = $"{i_num}{j_num}{product_num}";
-					if ( s.Contains("0") || s.Length < 9 )
+					if (s.Contains("0") || s.Length < 9)
 					{
 						goto end;
 					}
 
 					//check if multiplicand is pandigital
-					foreach ( char num in i_num )
+					foreach (char num in i_num)
 					{
 						int x = int.Parse(num.ToString());
-						if ( !Identity.Add(x) )
+						if (!Identity.Add(x))
 						{
 							goto end;
 						}
 					}
 					//check if multiplier is pandigital
-					foreach ( char num in j_num )
+					foreach (char num in j_num)
 					{
 						int x = int.Parse(num.ToString());
-						if ( !Identity.Add(x) )
+						if (!Identity.Add(x))
 						{
 							goto end;
 						}
 					}
 					//check if product is pandigital
-					foreach ( char num in product_num )
+					foreach (char num in product_num)
 					{
 						int x = int.Parse(num.ToString());
-						if ( !Identity.Add(x) )
+						if (!Identity.Add(x))
 						{
 							goto end;
 						}
@@ -1583,7 +1595,7 @@ namespace ProjectEularProblems
 
 					bool isPanDig = Identity.Contains(0) ? false : Identity.Sum() == 45 ? true : false;
 
-					if ( isPanDig && sum.Add(product) )
+					if (isPanDig && sum.Add(product))
 					{
 						Console.WriteLine($"{i} x {j} = {product}");
 					}
@@ -1604,18 +1616,18 @@ namespace ProjectEularProblems
 			long sum = 0;
 			long prod, compiled;
 
-			for ( long m = 2; m < 100; m++ )
+			for (long m = 2; m < 100; m++)
 			{
-				long nbegin = ( m > 9 ) ? 123 : 1234;
+				long nbegin = (m > 9) ? 123 : 1234;
 				long nend = 10000 / m + 1;
 
-				for ( long n = nbegin; n < nend; n++ )
+				for (long n = nbegin; n < nend; n++)
 				{
 					prod = m * n;
 					compiled = concat(concat(prod, n), m);
-					if ( compiled >= 1E8 && compiled < 1E9 && isPandigital(compiled) )
+					if (compiled >= 1E8 && compiled < 1E9 && isPandigital(compiled))
 					{
-						if ( !products.Contains(prod) )
+						if (!products.Contains(prod))
 						{
 							Console.WriteLine($"{m} x {n} = {prod}");
 							products.Add(prod);
@@ -1624,18 +1636,18 @@ namespace ProjectEularProblems
 				}
 			}
 
-			for ( int i = 0; i < products.Count; i++ )
+			for (int i = 0; i < products.Count; i++)
 			{
-				sum += products[ i ];
+				sum += products[i];
 			}
 
 			Console.WriteLine("The sum of all pan digital number from 1-9 is {0}", sum);
 		}
-		private static long concat( long a, long b )
+		private static long concat(long a, long b)
 		{
 
 			long c = b;
-			while ( c > 0 )
+			while (c > 0)
 			{
 				a *= 10;
 				c /= 10;
@@ -1643,17 +1655,17 @@ namespace ProjectEularProblems
 
 			return a + b;
 		}
-		private static bool isPandigital( long n )
+		private static bool isPandigital(long n)
 		{
 			int digits = 0;
 			int count = 0;
 			int tmp;
 
-			while ( n > 0 )
+			while (n > 0)
 			{
 				tmp = digits;
-				digits = digits | 1 << ( int ) ( ( n % 10 ) - 1 ); //The minus one is there to make 1 fill the first bit and so on
-				if ( tmp == digits )
+				digits = digits | 1 << (int)((n % 10) - 1); //The minus one is there to make 1 fill the first bit and so on
+				if (tmp == digits)
 				{ //Check to see if the same digit is found multiple times
 					return false;
 				}
@@ -1662,7 +1674,7 @@ namespace ProjectEularProblems
 				n /= 10;
 			}
 
-			return digits == ( 1 << count ) - 1;
+			return digits == (1 << count) - 1;
 		}
 
 		/// <summary>
@@ -1675,11 +1687,11 @@ namespace ProjectEularProblems
 		public static void p033_DigitCancellingFracts()
 		{
 			double res = 1.0d;
-			for ( int n = 10; n < 100; n++ )//numerator
+			for (int n = 10; n < 100; n++)//numerator
 			{
-				for ( int d = n + 1; d < 100; d++ )//denominator
+				for (int d = n + 1; d < 100; d++)//denominator
 				{
-					if ( n % 10 == 0 || d % 10 == 0 )//If the numerator or denominator are mod 10, skip it
+					if (n % 10 == 0 || d % 10 == 0)//If the numerator or denominator are mod 10, skip it
 					{
 						continue;
 					}
@@ -1687,26 +1699,26 @@ namespace ProjectEularProblems
 					char common = 'a';
 					bool shares = false;
 					string[] n_d = new string[] { n.ToString(), d.ToString() };
-					foreach ( char item in n_d[ 0 ] )
+					foreach (char item in n_d[0])
 					{
-						if ( n_d[ 1 ].Contains(item) )
+						if (n_d[1].Contains(item))
 						{
 							shares = true;
 							common = item;
 							break;
 						}
 					}
-					if ( shares )
+					if (shares)
 					{
 						//divide numerator and denominator and store the result in ‘expected’
-						double expected = ( double ) n / ( double ) d;
+						double expected = (double)n / (double)d;
 						//remove the common digit from numerator and denominator (generating num’ and denom’)
-						n_d[ 0 ] = n_d[ 0 ].Remove(n_d[ 0 ].IndexOf(common), 1);
-						n_d[ 1 ] = n_d[ 1 ].Remove(n_d[ 1 ].IndexOf(common), 1);
+						n_d[0] = n_d[0].Remove(n_d[0].IndexOf(common), 1);
+						n_d[1] = n_d[1].Remove(n_d[1].IndexOf(common), 1);
 
 						//divide num’ and denom’ and compare the result to ‘expected
-						double exp = double.Parse(n_d[ 0 ]) / double.Parse(n_d[ 1 ]);
-						if ( expected == exp )//if the results match then I have found one of the four answers
+						double exp = double.Parse(n_d[0]) / double.Parse(n_d[1]);
+						if (expected == exp)//if the results match then I have found one of the four answers
 						{
 							Console.WriteLine($"{n}/{d}");
 							res *= exp;
@@ -1729,23 +1741,23 @@ namespace ProjectEularProblems
 		public static void p034_DigitFactorials()
 		{
 			//calculate factorials of 0 - 9
-			int[] facts = new int[ 10 ];
-			for ( int i = 0; i < 10; i++ )
+			int[] facts = new int[10];
+			for (int i = 0; i < 10; i++)
 			{
-				facts[ i ] = ( int ) Factorial(( long ) i);
+				facts[i] = (int)Factorial((long)i);
 			}
 			int res = 0;
 			//find curious numbers
-			for ( int i = 10; i < 100000; i++ )
+			for (int i = 10; i < 100000; i++)
 			{
 				string num = i.ToString();
 				int sum = 0;
 				//add values
-				foreach ( char item in num )
+				foreach (char item in num)
 				{
-					sum += facts[ int.Parse(item.ToString()) ];
+					sum += facts[int.Parse(item.ToString())];
 				}
-				if ( sum == i )
+				if (sum == i)
 				{
 					res += sum;
 					Console.WriteLine(i);
@@ -1764,36 +1776,36 @@ namespace ProjectEularProblems
 		public static void p035_CircularPrimes()
 		{
 			int max = 1000000;
-			int[] primes = new int[ max ];
+			int[] primes = new int[max];
 			int count = 0;
 			//find all primes below 1million
-			for ( int i = 2; i < max; i++ )
+			for (int i = 2; i < max; i++)
 			{
 				bool isp = true;
-				if ( primes[ i ] != i )
+				if (primes[i] != i)
 				{
 					isp = CheckPrime(i);
 				}
 
-				if ( isp )
+				if (isp)
 				{
 					//store primes
-					primes[ i ] = i;
+					primes[i] = i;
 					List<char> num = i.ToString().ToList();
-					for ( int j = 1; j < num.Count; j++ )
+					for (int j = 1; j < num.Count; j++)
 					{
 						//rotate the number
-						num.Add(num[ 0 ]);
+						num.Add(num[0]);
 						num.RemoveAt(0);
 
 						//check if rotations are circular primes
 						int rot = int.Parse(new string(num.ToArray()));
 
-						if ( primes[ rot ] == 0 )//not in array and could be prime
+						if (primes[rot] == 0)//not in array and could be prime
 						{
-							if ( CheckPrime(rot) )//is prime
+							if (CheckPrime(rot))//is prime
 							{
-								primes[ rot ] = rot;//add to array
+								primes[rot] = rot;//add to array
 							}
 							else//not prime 
 							{
@@ -1812,20 +1824,20 @@ namespace ProjectEularProblems
 		/// </summary>
 		/// <param name="number">NUmber to check</param>
 		/// <returns>True if the number is a prime number else False.</returns>
-		private static bool CheckPrime( int number )
+		private static bool CheckPrime(int number)
 		{
-			if ( number == 2 )
+			if (number == 2)
 			{
 				return true;
 			}
-			if ( number % 2 == 0 || number == 1 )
+			if (number % 2 == 0 || number == 1)
 			{
 				return false;
 			}
 			double sq = Math.Sqrt(number);
-			for ( int i = 3; i <= sq; i += 2 )
+			for (int i = 3; i <= sq; i += 2)
 			{
-				if ( number % i == 0 )
+				if (number % i == 0)
 				{
 					return false;
 				}
@@ -1842,24 +1854,24 @@ namespace ProjectEularProblems
 		private static void p036_DoubleBasePalindromes()
 		{
 			int sum = 0;
-			for ( int i = 0; i < 1000000; i++ )
+			for (int i = 0; i < 1000000; i++)
 			{
 				string straight = i.ToString();
 				string reverse = null;
-				for ( int j = straight.Length - 1; j >= 0; j-- )//reverse number
+				for (int j = straight.Length - 1; j >= 0; j--)//reverse number
 				{
-					reverse += straight[ j ];
+					reverse += straight[j];
 				}
 
-				if ( i == int.Parse(reverse) )//if palindromic in base 10
+				if (i == int.Parse(reverse))//if palindromic in base 10
 				{
 					string bin_straight = Convert.ToString(i, 2);
 					string bin_reverse = null;
-					for ( int k = bin_straight.Length - 1; k >= 0; k-- )//reverse binary number
+					for (int k = bin_straight.Length - 1; k >= 0; k--)//reverse binary number
 					{
-						bin_reverse += bin_straight[ k ];
+						bin_reverse += bin_straight[k];
 					}
-					if ( i == Convert.ToInt32(bin_reverse, 2) )//if palindromic in base 2
+					if (i == Convert.ToInt32(bin_reverse, 2))//if palindromic in base 2
 					{
 						Console.WriteLine($"{i} = {bin_straight}");
 						sum += i;
@@ -1879,52 +1891,52 @@ namespace ProjectEularProblems
 		public static void p037_TrancactiblePrimes()
 		{
 			int max = 1000000;
-			int[] primes = new int[ max ];
+			int[] primes = new int[max];
 			int sum = 0;
 			//find all primes below 1million
-			for ( int i = 10; i < max; i++ )
+			for (int i = 10; i < max; i++)
 			{
 				bool isp = true;
-				if ( primes[ i ] != i )
+				if (primes[i] != i)
 				{
 					isp = CheckPrime(i);
 				}
 
-				if ( isp )
+				if (isp)
 				{
-					primes[ i ] = i;
+					primes[i] = i;
 
 					//remove digits left to right
 					string num = i.ToString();
-					for ( int j = 0; j < num.Length - 1; j++ )
+					for (int j = 0; j < num.Length - 1; j++)
 					{
 						string n = null;
-						for ( int k = j + 1; k < num.Length; k++ )
+						for (int k = j + 1; k < num.Length; k++)
 						{
-							n += num[ k ];
+							n += num[k];
 						}
 						int new_n = int.Parse(n);
-						if ( primes[ new_n ] == 0 )
+						if (primes[new_n] == 0)
 						{
-							if ( CheckPrime(new_n) )
+							if (CheckPrime(new_n))
 							{
-								primes[ new_n ] = new_n;
+								primes[new_n] = new_n;
 							}
 							else goto end;
 						}
 					}
 					//remove digits right to left
-					for ( int j = 0; j < num.Length - 1; j++ )
+					for (int j = 0; j < num.Length - 1; j++)
 					{
 						string n = num.Remove(num.Length - 1 - j);
-						if ( n != null )
+						if (n != null)
 						{
 							int new_n = int.Parse(n);
-							if ( primes[ new_n ] == 0 )//either not prime or not calculated
+							if (primes[new_n] == 0)//either not prime or not calculated
 							{
-								if ( CheckPrime(new_n) )//is it prime
+								if (CheckPrime(new_n))//is it prime
 								{
-									primes[ new_n ] = new_n;
+									primes[new_n] = new_n;
 								}
 								else goto end;
 							}
@@ -1954,20 +1966,20 @@ namespace ProjectEularProblems
 		public static void p038_PandigitalMultiples()
 		{
 			HashSet<int> pandigits = new HashSet<int>();
-			for ( int i = 1; i < 10000; i++ )
+			for (int i = 1; i < 10000; i++)
 			{
-				for ( int n = 1; n < 10; n++ )
+				for (int n = 1; n < 10; n++)
 				{
-					string prod = ( i * n ).ToString();
-					for ( int item = 0; item < prod.Length; item++ )
+					string prod = (i * n).ToString();
+					for (int item = 0; item < prod.Length; item++)
 					{
-						if ( prod[ item ] == '0' ) { goto next; }
-						if ( pandigits.Add(int.Parse(prod[ item ].ToString())) )
+						if (prod[item] == '0') { goto next; }
+						if (pandigits.Add(int.Parse(prod[item].ToString())))
 						{
-							if ( pandigits.Count == 9 && item == prod.Length - 1 )
+							if (pandigits.Count == 9 && item == prod.Length - 1)
 							{
 								Console.Write($"{i} when n == {n} : ");
-								foreach ( int num in pandigits )
+								foreach (int num in pandigits)
 								{
 									Console.Write(num);
 								}
@@ -1997,15 +2009,15 @@ namespace ProjectEularProblems
 
 			double res = 0;
 			double count = 0;
-			for ( int p = 1; p <= 1000; p++ )
+			for (int p = 1; p <= 1000; p++)
 			{
 				int solutions_count = 0;
-				for ( int a = p / 6; a < p / 2; a++ )
+				for (int a = p / 6; a < p / 2; a++)
 				{
-					for ( int b = a + 1; b < ( p / 2 ); b++ )
+					for (int b = a + 1; b < (p / 2); b++)
 					{
-						double c = p - ( a + b );
-						if ( ( a * a ) + ( b * b ) == c * c )
+						double c = p - (a + b);
+						if ((a * a) + (b * b) == c * c)
 						{
 							solutions_count++;
 							//Console.WriteLine($"p: {p} ==> {{{a},{b},{c}}}");
@@ -2037,28 +2049,28 @@ namespace ProjectEularProblems
 			int z = 1;
 			double end = 0;
 			//find how far we need to iterate to have 1 million terms
-			for ( int i = 9; i <= 99999; i = int.Parse($"{ i}9 ") )
+			for (int i = 9; i <= 99999; i = int.Parse($"{ i}9 "))
 			{
-				int x = ( i.ToString().Length ) * ( i - z );
+				int x = (i.ToString().Length) * (i - z);
 				digits_count += x;
 				z *= 10;
 
-				end = i == 99999 ? Math.Ceiling(( ( 1000000.0d - digits_count ) * ( double.Parse($"{ i}9 ") - z ) / ( ( double.Parse($"{ i}9 ") - z ) * 6.0d ) )) + z : 0;
+				end = i == 99999 ? Math.Ceiling(((1000000.0d - digits_count) * (double.Parse($"{ i}9 ") - z) / ((double.Parse($"{ i}9 ") - z) * 6.0d))) + z : 0;
 			}
 
 			//store sequence of terms
-			for ( int i = 1; i <= end; i++ )
+			for (int i = 1; i <= end; i++)
 			{
 				st.Append(i);
 			}
 
 			//get 10, 100, 1000, 10000, 1000000 term and multiply together
 			int res = 1;
-			for ( int i = 9; i <= 999999; i = int.Parse($"{ i}9 ") )
+			for (int i = 9; i <= 999999; i = int.Parse($"{ i}9 "))
 			{
-				res *= int.Parse(st[ i ].ToString());
+				res *= int.Parse(st[i].ToString());
 			}
-			Console.WriteLine($"{st[ 0 ]}x{st[ 9 ]}x{st[ 99 ]}x{st[ 999 ]}x{st[ 9999 ]}x{st[ 99999 ]}x{st[ 999999 ]} ==> {res}");
+			Console.WriteLine($"{st[0]}x{st[9]}x{st[99]}x{st[999]}x{st[9999]}x{st[99999]}x{st[999999]} ==> {res}");
 		}
 
 		/// <summary>
@@ -2070,7 +2082,7 @@ namespace ProjectEularProblems
 		{
 			List<int> nums = new List<int>(1000);
 			string minus = "1111111111";
-			for ( int i = 123456789; i >= 10; i -= int.Parse(minus) )
+			for (int i = 123456789; i >= 10; i -= int.Parse(minus))
 			{
 				stringPermutation(i.ToString(), 0, i.ToString().Length - 1, nums);
 
@@ -2087,12 +2099,12 @@ namespace ProjectEularProblems
 		/// <param name="left">start of string</param>
 		/// <param name="right">end of string</param>
 		/// <param name="ls">container </param>
-		private static void stringPermutation( string str, int left, int right, List<int> ls )
+		private static void stringPermutation(string str, int left, int right, List<int> ls)
 		{
-			if ( left == right )
+			if (left == right)
 			{
 				//Console.WriteLine(str);
-				if ( CheckPrime(int.Parse(str)) )
+				if (CheckPrime(int.Parse(str)))
 				{
 					ls.Add(int.Parse(str));
 					//Console.WriteLine($"Largest pandigital prime : {str}");
@@ -2101,21 +2113,21 @@ namespace ProjectEularProblems
 			}
 			else
 			{
-				for ( int i = left; i <= right; i++ )
+				for (int i = left; i <= right; i++)
 				{
 					//swap(str[ left ], str[ i ]);
 					char[] lft = str.ToCharArray();
-					char c = str[ i ];
-					lft[ i ] = lft[ left ];
-					lft[ left ] = c;
+					char c = str[i];
+					lft[i] = lft[left];
+					lft[left] = c;
 					str = new string(lft);
 
 					stringPermutation(str, left + 1, right, ls);
 					//swap(str[ left ], str[ i ]); //swap back for backtracking
 					lft = str.ToCharArray();
-					c = str[ i ];
-					lft[ i ] = lft[ left ];
-					lft[ left ] = c;
+					c = str[i];
+					lft[i] = lft[left];
+					lft[left] = c;
 					str = new string(lft);
 				}
 			}
@@ -2132,18 +2144,18 @@ namespace ProjectEularProblems
 		{
 			int res = 0;
 			//end at 1300 bcoz the longest word cant be bigger than 50 letters i.e 50 * 26(the largest possible value a letter can be) == 1300)
-			int[] sequence = new int[ 1300 ];
-			for ( int i = 1; i < 1300; i++ )
+			int[] sequence = new int[1300];
+			for (int i = 1; i < 1300; i++)
 			{
-				sequence[ i ] = ( int ) ( ( 1.0 / 2.0 * i ) * ( i + 1.0 ) );
+				sequence[i] = (int)((1.0 / 2.0 * i) * (i + 1.0));
 			}
-			using ( StreamReader sr = new StreamReader("./p042_words.txt") )
+			using (StreamReader sr = new StreamReader("./p042_words.txt"))
 			{
 				string[] words = sr.ReadToEnd().Split(',');
-				foreach ( string word in words )
+				foreach (string word in words)
 				{
 					int count = 0;
-					foreach ( char c in word.Replace("\"", "") )
+					foreach (char c in word.Replace("\"", ""))
 					{
 						count += c - 64;//utf-8 code minus 'A' which is 64
 					}
@@ -2173,19 +2185,19 @@ namespace ProjectEularProblems
 			int[] primes = { 0, 2, 3, 5, 7, 11, 13, 17 };
 			string sum = "0";
 			bool passd = true;
-			for ( int i = 0; i < PanDigits.Count; i++ )
+			for (int i = 0; i < PanDigits.Count; i++)
 			{
 				passd = true;
-				for ( int j = 1; j < PanDigits[ i ].Length - 2; j++ )
+				for (int j = 1; j < PanDigits[i].Length - 2; j++)
 				{
-					string substr = PanDigits[ i ].Substring(j, 3);
-					if ( int.Parse(substr) % primes[ j ] != 0 )
+					string substr = PanDigits[i].Substring(j, 3);
+					if (int.Parse(substr) % primes[j] != 0)
 					{
 						passd = false;
 						break;
 					}
 				}
-				sum = passd ? AddLongNums(sum, PanDigits[ i ]) : sum;
+				sum = passd ? AddLongNums(sum, PanDigits[i]) : sum;
 			}
 			Console.WriteLine($"Sum of 0 - 9 pandigital numbers: {sum}");
 		}
@@ -2197,29 +2209,29 @@ namespace ProjectEularProblems
 		/// <param name="left">start of string</param>
 		/// <param name="right">end of string</param>
 		/// <param name="ls">container </param>
-		private static void FindPanDig0_9( string str, int left, int right, List<string> ls )
+		private static void FindPanDig0_9(string str, int left, int right, List<string> ls)
 		{
-			if ( left == right )
+			if (left == right)
 			{
 				ls.Add(str);
 			}
 			else
 			{
-				for ( int i = left; i <= right; i++ )
+				for (int i = left; i <= right; i++)
 				{
 					//swap(str[ left ], str[ i ]);
 					char[] lft = str.ToCharArray();
-					char c = str[ i ];
-					lft[ i ] = lft[ left ];
-					lft[ left ] = c;
+					char c = str[i];
+					lft[i] = lft[left];
+					lft[left] = c;
 					str = new string(lft);
 
 					FindPanDig0_9(str, left + 1, right, ls);
 					//swap(str[ left ], str[ i ]); //swap back for backtracking
 					lft = str.ToCharArray();
-					c = str[ i ];
-					lft[ i ] = lft[ left ];
-					lft[ left ] = c;
+					c = str[i];
+					lft[i] = lft[left];
+					lft[left] = c;
 					str = new string(lft);
 				}
 			}
@@ -2239,17 +2251,17 @@ namespace ProjectEularProblems
 			int diff = 0;
 			int sum = 0;
 			double p = 0;
-			for ( int i = 1; i < 3000; i++ )
+			for (int i = 1; i < 3000; i++)
 			{
-				pJ = ( i * ( ( ( 3 * i ) - 1 ) ) ) / 2;
+				pJ = (i * (((3 * i) - 1))) / 2;
 
-				for ( int j = i + 1; j < 3000; j++ )
+				for (int j = i + 1; j < 3000; j++)
 				{
-					pK = ( j * ( ( ( 3 * j ) - 1 ) ) ) / 2;
+					pK = (j * (((3 * j) - 1))) / 2;
 					diff = pK - pJ;
 					sum = pJ + pK;
 
-					if ( isPent(diff, ref p) && isPent(sum, ref p) )//check if the sum and diff are pentagon nums
+					if (isPent(diff, ref p) && isPent(sum, ref p))//check if the sum and diff are pentagon nums
 					{
 						Console.WriteLine($"D is p{i}(pJ - Pk)p{j} |{pJ} - {pK}|  = {Math.Abs(pJ - pK)}");
 						goto end;
@@ -2277,12 +2289,12 @@ namespace ProjectEularProblems
 			double h = 0;
 			double p = 0;
 
-			for ( long n = 286; ; n++ )// Tn
+			for (long n = 286; ; n++)// Tn
 			{
-				T = ( n * ( n + 1 ) ) / 2;//triangular num
+				T = (n * (n + 1)) / 2;//triangular num
 				P = isPent(T, ref p) ? true : false;//is it a pentagonal num too
 				H = P ? isHexa(T, ref h) : false;//is it hexagonal too
-				if ( H )
+				if (H)
 				{
 					Console.WriteLine($"T{n} = P{Math.Abs(p)} = H{Math.Abs(h)} = {Math.Abs(T)}");
 					break;
@@ -2297,17 +2309,17 @@ namespace ProjectEularProblems
 		/// <param name="triangular">The triangular number</param>
 		/// <param name="P">the resulting number</param>
 		/// <returns>True if the number is a pantagonal number else False and stores 'n' in referenced int P</returns>
-		private static bool isPent( long triangular, ref double P )
+		private static bool isPent(long triangular, ref double P)
 		{
 			//use the quadratic expression to check is sum is a pantagon num
 			double a = 3.0d;
 			double b = -1.0d;
-			double c = -( triangular * 2.0 );
+			double c = -(triangular * 2.0);
 
-			double root = Math.Sqrt(( b * b ) - ( 4 * a * c ));//quadratic equation
+			double root = Math.Sqrt((b * b) - (4 * a * c));//quadratic equation
 
 			//note use minus on (+ / -)
-			double res = ( b - root ) / ( 2 * a );
+			double res = (b - root) / (2 * a);
 			P = !res.ToString().Contains('.') ? res : 0;
 
 			return !res.ToString().Contains('.');
@@ -2320,17 +2332,17 @@ namespace ProjectEularProblems
 		/// <param name="triangular">The triangular number</param>
 		/// <param name="P">the resulting number</param>
 		/// <returns>True if the number is a hexagonal number else False.</returns>
-		private static bool isHexa( long triangular, ref double H )
+		private static bool isHexa(long triangular, ref double H)
 		{
 			//use the quadratic expression to check is sum is a pantagon num
 			double a = 2.0d;
 			double b = 1.0d;
-			double c = -( triangular );
+			double c = -(triangular);
 
-			double root = Math.Sqrt(( b * b ) - ( 4 * a * c ));
+			double root = Math.Sqrt((b * b) - (4 * a * c));
 
 			//note use minus on (+ / -)
-			double res = ( b + root ) / ( 2 * a );
+			double res = (b + root) / (2 * a);
 			H = !res.ToString().Contains('.') ? res : 0;
 			return !res.ToString().Contains('.');
 		}
@@ -2349,29 +2361,29 @@ namespace ProjectEularProblems
 		/// </summary>
 		public static void p046_GoldbachOtherConjecture()
 		{
-			int[] primes = new int[ 1000000 ];
+			int[] primes = new int[1000000];
 			bool is_odd_combosite = false;
 			//find odd composite numbers e.g 9 , 15 , 21 (divisible by numbers other than 1 and itself, and odd)
-			for ( int i = 9; ; i++ )
+			for (int i = 9; ; i++)
 			{
 				is_odd_combosite = i % 2 != 0 ? !CheckPrime(i) : false;
-				if ( is_odd_combosite )
+				if (is_odd_combosite)
 				{
-					for ( int j = 2; j < i; j++ )//loop prime numbers
+					for (int j = 2; j < i; j++)//loop prime numbers
 					{
-						bool pr = primes[ j ] != 0 ? true : CheckPrime(j);
-						if ( pr )
+						bool pr = primes[j] != 0 ? true : CheckPrime(j);
+						if (pr)
 						{
-							primes[ j ] = j;
-							int sqr = ( int ) Math.Sqrt(i);
-							for ( int k = 1; k < sqr; k++ )//loop possible squares
+							primes[j] = j;
+							int sqr = (int)Math.Sqrt(i);
+							for (int k = 1; k < sqr; k++)//loop possible squares
 							{
-								if ( j + ( ( k * k ) * 2 ) == i )
+								if (j + ((k * k) * 2) == i)
 								{
 									//Console.WriteLine($"{i} = {j} + 2 x {k}^2");
 									goto nxt_i;
 								}
-								if ( j + ( ( k * k ) * 2 ) != i && j == i - 1 && k == sqr - 1 )
+								if (j + ((k * k) * 2) != i && j == i - 1 && k == sqr - 1)
 								{
 									Console.ForegroundColor = ConsoleColor.Green;
 									Console.WriteLine($"{i} cannot be written as the sum of a prime and twice a square.");
@@ -2383,7 +2395,7 @@ namespace ProjectEularProblems
 					}
 
 				}
-				primes[ i ] = i;
+				primes[i] = i;
 			nxt_i:
 				continue;
 			}
@@ -2402,29 +2414,29 @@ namespace ProjectEularProblems
 		/// </summary>
 		public static void p047_DistinctPrimesFactors()
 		{
-			int[] primes = new int[ 1001 ];
-			for ( int i = 1; i <= 1000; i++ )//have at least a thousand primes (just a guess)
+			int[] primes = new int[1001];
+			for (int i = 1; i <= 1000; i++)//have at least a thousand primes (just a guess)
 			{
-				if ( CheckPrime(i) ) { primes[ i ] = i; }
+				if (CheckPrime(i)) { primes[i] = i; }
 			}
 
 			int distinct_count = 4;
 			List<int> consecutive = new List<int>(distinct_count);//store the consecutive numbers
 
-			for ( int i = 2; ; i++ )
+			for (int i = 2; ; i++)
 			{
 				HashSet<int> divisors = new HashSet<int>(); //store the divisors for i
 				int[] p = primes.Where(a => a <= i / 2 && a > 0).ToArray();//store prime below i
 				int division_result = i;//store the division result
 
 				//first find the prime factors of i
-				for ( int n = 0; n < p.Length; )//iterate all primes below i (then divide them into i) 
+				for (int n = 0; n < p.Length;)//iterate all primes below i (then divide them into i) 
 				{
-					if ( division_result % p[ n ] == 0 )//if prime can divide into i
+					if (division_result % p[n] == 0)//if prime can divide into i
 					{
-						divisors.Add(p[ n ]);
-						division_result = division_result / p[ n ];
-						if ( division_result == 1 )//if the division result is 1 (we are done finding the prime factors)
+						divisors.Add(p[n]);
+						division_result = division_result / p[n];
+						if (division_result == 1)//if the division result is 1 (we are done finding the prime factors)
 						{
 							break;
 						}
@@ -2432,15 +2444,15 @@ namespace ProjectEularProblems
 					else { n++; }
 				}
 
-				if ( divisors.Count == distinct_count )//if has required amount of divisors 
+				if (divisors.Count == distinct_count)//if has required amount of divisors 
 				{
 					consecutive.Add(i);
-					if ( consecutive.Count == distinct_count )//if has required amount of consecutive numbers 
+					if (consecutive.Count == distinct_count)//if has required amount of consecutive numbers 
 					{
 
-						if ( consecutive.Max() - consecutive.Min() + 1 == consecutive.Count() )//if numbers are consecutive
+						if (consecutive.Max() - consecutive.Min() + 1 == consecutive.Count())//if numbers are consecutive
 						{
-							foreach ( int item in consecutive )
+							foreach (int item in consecutive)
 							{
 								Console.WriteLine($"{item} has {distinct_count} distinct prime factors.");
 							}
@@ -2467,7 +2479,7 @@ namespace ProjectEularProblems
 		public static void p048_SelfPowers()
 		{
 			BigInteger res = 0;
-			for ( int i = 1000; i > 0; i-- )
+			for (int i = 1000; i > 0; i--)
 			{
 				res += BigInteger.Pow(i, i);
 			}
@@ -2484,34 +2496,34 @@ namespace ProjectEularProblems
 		public static void p049_PrimePermutations()
 		{
 			//find the first 1k primes
-			int[] primes = new int[ 9999 ];
-			for ( int i = 2; i < primes.Length; i++ )
+			int[] primes = new int[9999];
+			for (int i = 2; i < primes.Length; i++)
 			{
-				primes[ i ] = CheckPrime(i) ? i : 0;
+				primes[i] = CheckPrime(i) ? i : 0;
 			}
-			for ( int one = 1001; one < primes.Length; one++ )
+			for (int one = 1001; one < primes.Length; one++)
 			{
-				if ( primes[ one ] == 0 )
+				if (primes[one] == 0)
 				{
 					continue;
 				}
-				int end = ( primes.Max() - one ) / 2;
-				for ( int increment = 1; increment <= end; increment++ )
+				int end = (primes.Max() - one) / 2;
+				for (int increment = 1; increment <= end; increment++)
 				{
 					//add the possible increment value
-					int two = primes[ primes[ one ] + increment ] != 0 ? primes[ primes[ one ] + increment ] : 0;
-					if ( two != 0 )
+					int two = primes[primes[one] + increment] != 0 ? primes[primes[one] + increment] : 0;
+					if (two != 0)
 					{
-						int three = primes[ two + increment ] != 0 ? primes[ two + increment ] : 0;
-						if ( three != 0 )//if passed means all three are prime
+						int three = primes[two + increment] != 0 ? primes[two + increment] : 0;
+						if (three != 0)//if passed means all three are prime
 						{
 							//check if numbers are permutes
 							char[] first = one.ToString().ToCharArray().OrderBy(a => a).ToArray();
 							char[] sec = two.ToString().ToCharArray().OrderBy(a => a).ToArray();
 							char[] third = three.ToString().ToCharArray().OrderBy(a => a).ToArray();
-							for ( int j = 0; j < 4; j++ )
+							for (int j = 0; j < 4; j++)
 							{
-								if ( first[ j ] != sec[ j ] || sec[ j ] != third[ j ] )
+								if (first[j] != sec[j] || sec[j] != third[j])
 								{
 									goto next;
 								}
@@ -2539,42 +2551,42 @@ namespace ProjectEularProblems
 		/// </summary>
 		public static void p050_ConsecutivePrimeSum()
 		{
-			int[] res = new int[ 2 ];
-			int[] primes = new int[ 1000000 ];
+			int[] res = new int[2];
+			int[] primes = new int[1000000];
 			//get primes below 100
-			for ( int i = 0; i < primes.Length; i++ )
+			for (int i = 0; i < primes.Length; i++)
 			{
-				primes[ i ] = CheckPrime(i) ? i : 0;
+				primes[i] = CheckPrime(i) ? i : 0;
 			}
 			int[] stripped_primes = primes.Where(a => a != 0).ToArray();//remove zeros for easy iteration
 
-			for ( int k = 22; ; k++ )//add consecutive numbers in pairs of k till biggest sum is found
+			for (int k = 22; ; k++)//add consecutive numbers in pairs of k till biggest sum is found
 			{//k starts from 22 because we know a sum of 21-terms was found already
-				for ( int i = 0; i < stripped_primes.Length; i++ )//iterate primes
+				for (int i = 0; i < stripped_primes.Length; i++)//iterate primes
 				{
 					int sum = 0;
-					sum += stripped_primes[ i ];
+					sum += stripped_primes[i];
 
-					for ( int j = i; j < i + k - 1; j++ )
+					for (int j = i; j < i + k - 1; j++)
 					{
-						if ( j == stripped_primes.Length - 1 )//dont add to sum when j == number of items in array
+						if (j == stripped_primes.Length - 1)//dont add to sum when j == number of items in array
 						{
 							sum = 0;
 							break;
 						}
-						sum += stripped_primes[ j + 1 ];
+						sum += stripped_primes[j + 1];
 					}
-					if ( sum <= stripped_primes[ stripped_primes.Length - 1 ] )//if sum is less the biggest prime
+					if (sum <= stripped_primes[stripped_primes.Length - 1])//if sum is less the biggest prime
 					{
-						if ( sum == primes[ sum ] && sum != 0 )
+						if (sum == primes[sum] && sum != 0)
 						{
-							res[ 0 ] = sum;//save total sum
-							res[ 1 ] = k;//save number of consecutive primes added
+							res[0] = sum;//save total sum
+							res[1] = k;//save number of consecutive primes added
 						}
 					}
-					else if ( i == 0 )//if k consecutive primes where added starting from i = 0 and sum > biggest prime ==> its done.
+					else if (i == 0)//if k consecutive primes where added starting from i = 0 and sum > biggest prime ==> its done.
 					{
-						Console.Write($"{res[ 0 ]} can be written as sum of {res[ 1 ]} consecutive primes.");
+						Console.Write($"{res[0]} can be written as sum of {res[1]} consecutive primes.");
 						return;
 					}
 					else
@@ -2594,20 +2606,20 @@ namespace ProjectEularProblems
 		/// </summary>
 		public static void p051_PrimeDigitReplacements()
 		{
-			int[] primes = new int[ 1000000 ];
+			int[] primes = new int[1000000];
 			//get primes below 100
-			for ( int i = 10; i < primes.Length; i++ )
+			for (int i = 10; i < primes.Length; i++)
 			{
-				primes[ i ] = CheckPrime(i) ? i : 0;
+				primes[i] = CheckPrime(i) ? i : 0;
 			}
 			int[] stripped_primes = primes.Where(a => a != 0 && a > 1000).ToArray();//remove zeros for easy iteration
 			List<int> res = new List<int>(10);
 
-			for ( int i = stripped_primes.ToList().IndexOf(56003); i < stripped_primes.Length; i++ )
+			for (int i = stripped_primes.ToList().IndexOf(56003); i < stripped_primes.Length; i++)
 			{
 
 				//replace 1 upto length - 1 digits
-				StringBuilder num_string = new StringBuilder(stripped_primes[ i ].ToString());
+				StringBuilder num_string = new StringBuilder(stripped_primes[i].ToString());
 
 				//for ( int n = num_string.Length - 1; n > 2; n-- )
 				//if(num_string.Length > 3)
@@ -2685,40 +2697,40 @@ namespace ProjectEularProblems
 				//if ( n == 3 )
 				//{
 
-				for ( int k = 0; k < num_string.Length - 2; k++ )
+				for (int k = 0; k < num_string.Length - 2; k++)
 				{
-					for ( int l = k + 1; l < num_string.Length - 1; l++ )
+					for (int l = k + 1; l < num_string.Length - 1; l++)
 					{
-						for ( int p = l + 1; p < num_string.Length; p++ )
+						for (int p = l + 1; p < num_string.Length; p++)
 						{
 							count_family = 0;
 							res.Clear();
 
-							for ( int m = 0; m < 10; m++ )
+							for (int m = 0; m < 10; m++)
 							{
-								if ( k == 0 && m == 0 ) { continue; }
+								if (k == 0 && m == 0) { continue; }
 
 								StringBuilder num_temp = new StringBuilder(num_string.ToString());
 
-								int new_num = int.Parse(num_temp.Replace(num_temp[ k ].ToString(), m.ToString(), k, 1).Replace(num_temp[ l ].ToString(), m.ToString(), l, 1).Replace(num_temp[ p ].ToString(), m.ToString(), p, 1).ToString());
+								int new_num = int.Parse(num_temp.Replace(num_temp[k].ToString(), m.ToString(), k, 1).Replace(num_temp[l].ToString(), m.ToString(), l, 1).Replace(num_temp[p].ToString(), m.ToString(), p, 1).ToString());
 								//int new_num = int.Parse(_num.Replace(_num[ k ].ToString(), m.ToString(), l, n).ToString());
 
-								count_family = primes[ new_num ] != 0 ? count_family + 1 : count_family;
-								if ( primes[ new_num ] != 0 )
+								count_family = primes[new_num] != 0 ? count_family + 1 : count_family;
+								if (primes[new_num] != 0)
 								{
 
 									res.Add(new_num);
 								}
 							}
-							if ( count_family == 8 )
+							if (count_family == 8)
 							{
-								foreach ( int item in res )
+								foreach (int item in res)
 								{
 									Console.WriteLine(item);
 								}
 								Console.ForegroundColor = ConsoleColor.Green;
 
-								Console.WriteLine($"{res[ 0 ]} is the smallest prime part of a 8 prime value family. ");
+								Console.WriteLine($"{res[0]} is the smallest prime part of a 8 prime value family. ");
 								return;
 							}
 						}
@@ -2737,17 +2749,17 @@ namespace ProjectEularProblems
 		/// </summary>
 		public static void p052_PermutedMultiples()
 		{
-			for ( int i = 125874; ; i++ )
+			for (int i = 125874; ; i++)
 			{
-				if ( new string(i.ToString().OrderBy(a => Convert.ToInt32(a)).ToArray()) == new string(( i * 2 ).ToString().OrderBy(a => Convert.ToInt32(a)).ToArray()) )
+				if (new string(i.ToString().OrderBy(a => Convert.ToInt32(a)).ToArray()) == new string((i * 2).ToString().OrderBy(a => Convert.ToInt32(a)).ToArray()))
 				{
-					if ( new string(( i * 2 ).ToString().OrderBy(a => Convert.ToInt32(a)).ToArray()) == new string(( i * 3 ).ToString().OrderBy(a => Convert.ToInt32(a)).ToArray()) )
+					if (new string((i * 2).ToString().OrderBy(a => Convert.ToInt32(a)).ToArray()) == new string((i * 3).ToString().OrderBy(a => Convert.ToInt32(a)).ToArray()))
 					{
-						if ( new string(( i * 3 ).ToString().OrderBy(a => Convert.ToInt32(a)).ToArray()) == new string(( i * 4 ).ToString().OrderBy(a => Convert.ToInt32(a)).ToArray()) )
+						if (new string((i * 3).ToString().OrderBy(a => Convert.ToInt32(a)).ToArray()) == new string((i * 4).ToString().OrderBy(a => Convert.ToInt32(a)).ToArray()))
 						{
-							if ( new string(( i * 4 ).ToString().OrderBy(a => Convert.ToInt32(a)).ToArray()) == new string(( i * 5 ).ToString().OrderBy(a => Convert.ToInt32(a)).ToArray()) )
+							if (new string((i * 4).ToString().OrderBy(a => Convert.ToInt32(a)).ToArray()) == new string((i * 5).ToString().OrderBy(a => Convert.ToInt32(a)).ToArray()))
 							{
-								if ( new string(( i * 5 ).ToString().OrderBy(a => Convert.ToInt32(a)).ToArray()) == new string(( i * 6 ).ToString().OrderBy(a => Convert.ToInt32(a)).ToArray()) )
+								if (new string((i * 5).ToString().OrderBy(a => Convert.ToInt32(a)).ToArray()) == new string((i * 6).ToString().OrderBy(a => Convert.ToInt32(a)).ToArray()))
 								{
 									Console.ForegroundColor = ConsoleColor.Green;
 									Console.WriteLine(i);
@@ -2779,11 +2791,11 @@ namespace ProjectEularProblems
 		public static void p053_CombinatoricSelections()
 		{
 			int count = 0;
-			for ( int n = 23; n <= 100; n++ )
+			for (int n = 23; n <= 100; n++)
 			{
-				for ( int r = 1; r <= n; r++ )
+				for (int r = 1; r <= n; r++)
 				{
-					if ( FactBig(n) / ( FactBig(r) * FactBig(n - r) ) > 1000000 )
+					if (FactBig(n) / (FactBig(r) * FactBig(n - r)) > 1000000)
 					{
 						count++;
 					}
@@ -2797,9 +2809,9 @@ namespace ProjectEularProblems
 		/// </summary>
 		/// <param name="n">Number to calculate.</param>
 		/// <returns>The factorial of a number: (n x n-1 x n - 2 x ... x 1).</returns>
-		private static BigInteger FactBig( BigInteger n )
+		private static BigInteger FactBig(BigInteger n)
 		{
-			if ( n <= 1 ) { return 1; }
+			if (n <= 1) { return 1; }
 			return n * FactBig(n - 1);
 		}
 
@@ -2808,9 +2820,9 @@ namespace ProjectEularProblems
 		/// </summary>
 		/// <param name="n">Number to calculate as string.</param>
 		/// <returns>The factorial of a number: (n x n-1 x n - 2 x ... x 1).</returns>
-		private static string FactString( string n )
+		private static string FactString(string n)
 		{
-			if ( n == "1" || n == "0" ) { return "1"; }
+			if (n == "1" || n == "0") { return "1"; }
 			return MultiplyLongNums(n, FactString(SubLongNumbers(n, "1")));
 		}
 
@@ -2821,24 +2833,24 @@ namespace ProjectEularProblems
 		/// <param name="first">First number.</param>
 		/// <param name="sec">Second number.</param>
 		/// <returns>Subtraction of two numbers.</returns>
-		private static string SubLongNumbers( string first, string sec )
+		private static string SubLongNumbers(string first, string sec)
 		{
 			string res = "";
 			string big = "";
 			string small = "";
 
 			//determine   number
-			if ( first.Length == sec.Length )
+			if (first.Length == sec.Length)
 			{
-				for ( int i = 0; i < first.Length; i++ )
+				for (int i = 0; i < first.Length; i++)
 				{
-					if ( first[ i ] > sec[ i ] )
+					if (first[i] > sec[i])
 					{
 						big = first;
 						small = sec;
 						break;
 					}
-					else if ( first[ i ] < sec[ i ] )
+					else if (first[i] < sec[i])
 					{
 						big = sec;
 						small = first;
@@ -2846,7 +2858,7 @@ namespace ProjectEularProblems
 					}
 					else
 					{
-						if ( i == first.Length - 1 )//numbers are the same
+						if (i == first.Length - 1)//numbers are the same
 						{
 							big = first;
 							small = sec;
@@ -2858,7 +2870,7 @@ namespace ProjectEularProblems
 			else
 			{
 				big = first.Length > sec.Length ? first : sec;
-				for ( int i = 0; i < Math.Max(first.Length, sec.Length) - Math.Min(first.Length, sec.Length); i++ )
+				for (int i = 0; i < Math.Max(first.Length, sec.Length) - Math.Min(first.Length, sec.Length); i++)
 				{
 					small += "0";
 				}
@@ -2869,19 +2881,19 @@ namespace ProjectEularProblems
 			string[] sml = Array.ConvertAll(small.ToArray(), a => a.ToString());
 
 			//int carry = 0;
-			for ( int i = bg.Length - 1; i >= 0; i-- )
+			for (int i = bg.Length - 1; i >= 0; i--)
 			{
 
 
-				res += int.Parse(bg[ i ]) < int.Parse(sml[ i ]) ? ( Convert.ToInt32(bg[ i ]) + 10 ) - Convert.ToInt32(sml[ i ]) : Convert.ToInt32(bg[ i ]) - Convert.ToInt32(sml[ i ]);
-				if ( i > 0 && int.Parse(bg[ i ]) < int.Parse(sml[ i ]) )
+				res += int.Parse(bg[i]) < int.Parse(sml[i]) ? (Convert.ToInt32(bg[i]) + 10) - Convert.ToInt32(sml[i]) : Convert.ToInt32(bg[i]) - Convert.ToInt32(sml[i]);
+				if (i > 0 && int.Parse(bg[i]) < int.Parse(sml[i]))
 				{
 
-					sml[ i - 1 ] = int.Parse(bg[ i ]) < int.Parse(sml[ i ]) ? ( 1 + Convert.ToInt32(sml[ i - 1 ]) ).ToString() : "0";
+					sml[i - 1] = int.Parse(bg[i]) < int.Parse(sml[i]) ? (1 + Convert.ToInt32(sml[i - 1])).ToString() : "0";
 				}
 			}
 			res = new string(res.Reverse().ToArray());
-			while ( res.ElementAt(0) == '0' )
+			while (res.ElementAt(0) == '0')
 			{
 
 				res = res.Remove(0, 1);
@@ -2897,47 +2909,47 @@ namespace ProjectEularProblems
 		/// </summary>
 		public static void p054_PokerHands()
 		{
-			string[] hands = new string[ 2 ];
+			string[] hands = new string[2];
 			string s = null;
 			int player1_wins = 0;
 			string cards_seq = "23456789TJQKA";
-			using ( StreamReader sr = new StreamReader("./p054_poker.txt") )
+			using (StreamReader sr = new StreamReader("./p054_poker.txt"))
 			{
-				while ( ( s = sr.ReadLine() ) != null )
+				while ((s = sr.ReadLine()) != null)
 				{
-					hands[ 0 ] = s.Replace(" ", "").Substring(0, 10);
-					hands[ 1 ] = s.Replace(" ", "").Substring(10, 10);
+					hands[0] = s.Replace(" ", "").Substring(0, 10);
+					hands[1] = s.Replace(" ", "").Substring(10, 10);
 
-					int p1_hands_points = CheckHand(hands[ 0 ]);
-					int p2_hands_points = CheckHand(hands[ 1 ]);
+					int p1_hands_points = CheckHand(hands[0]);
+					int p2_hands_points = CheckHand(hands[1]);
 
-					if ( p1_hands_points > p2_hands_points )
+					if (p1_hands_points > p2_hands_points)
 					{
 						player1_wins++;
 
 					}
-					else if ( p1_hands_points == p2_hands_points )
+					else if (p1_hands_points == p2_hands_points)
 					{
-						if ( p1_hands_points < 0 )
+						if (p1_hands_points < 0)
 						{
 							string h1 = "";
 							string h2 = "";
 							//check for hand with big values
-							for ( int i = cards_seq.Length - 1; i >= 0; i-- )
+							for (int i = cards_seq.Length - 1; i >= 0; i--)
 							{
-								h1 = hands[ 0 ].Contains(cards_seq[ i ]) ? h1 + cards_seq[ i ] : h1;
-								h2 = hands[ 1 ].Contains(cards_seq[ i ]) ? h2 + cards_seq[ i ] : h2;
+								h1 = hands[0].Contains(cards_seq[i]) ? h1 + cards_seq[i] : h1;
+								h2 = hands[1].Contains(cards_seq[i]) ? h2 + cards_seq[i] : h2;
 							}
 
-							for ( int j = 0; j < h1.Length; j++ )
+							for (int j = 0; j < h1.Length; j++)
 							{
-								if ( cards_seq.IndexOf(h1[ j ]) > cards_seq.IndexOf(h2[ j ]) )//player 1 has high card
+								if (cards_seq.IndexOf(h1[j]) > cards_seq.IndexOf(h2[j]))//player 1 has high card
 								{
 									player1_wins++;
 
 									goto end;
 								}
-								else if ( cards_seq.IndexOf(h2[ j ]) > cards_seq.IndexOf(h1[ j ]) )//player 2 has high card
+								else if (cards_seq.IndexOf(h2[j]) > cards_seq.IndexOf(h1[j]))//player 2 has high card
 								{
 
 									goto end;
@@ -2946,32 +2958,32 @@ namespace ProjectEularProblems
 						}
 						else
 						{
-							string p1 = hands[ 0 ];//player 1
-							for ( int i = 1; i < p1.Length; i++ )
+							string p1 = hands[0];//player 1
+							for (int i = 1; i < p1.Length; i++)
 							{
 								p1 = p1.Remove(i, 1);//remove suits
 							}
 
-							string p2 = hands[ 1 ];//player 2
-							for ( int i = 1; i < p2.Length; i++ )
+							string p2 = hands[1];//player 2
+							for (int i = 1; i < p2.Length; i++)
 							{
 								p2 = p2.Remove(i, 1);//remove suits
 							}
 
-							for ( int k = cards_seq.Length - 1; k >= 0; k-- )
+							for (int k = cards_seq.Length - 1; k >= 0; k--)
 							{
-								char suit = cards_seq[ k ];
+								char suit = cards_seq[k];
 
 								//check higher straight flush (all cards are consecutive values in same suit)
-								if ( p1_hands_points == 9 )
+								if (p1_hands_points == 9)
 								{
-									if ( p1.Contains(suit) && !p2.Contains(suit) )
+									if (p1.Contains(suit) && !p2.Contains(suit))
 									{
 
 										player1_wins++;
 										goto end;
 									}
-									else if ( !p1.Contains(suit) && p2.Contains(suit) )
+									else if (!p1.Contains(suit) && p2.Contains(suit))
 									{
 
 										goto end;
@@ -2979,15 +2991,15 @@ namespace ProjectEularProblems
 								}
 
 								//check higher 4 of a kind
-								else if ( p1_hands_points == 8 )
+								else if (p1_hands_points == 8)
 								{
-									if ( p1.Count(a => a == suit) == 4 )
+									if (p1.Count(a => a == suit) == 4)
 									{
-										if ( p2.Count(a => a == suit) == 4 )
+										if (p2.Count(a => a == suit) == 4)
 										{
 											p1 = p1.Replace(suit.ToString(), "");
 											p2 = p2.Replace(suit.ToString(), "");
-											if ( cards_seq.IndexOf(p1[ 0 ]) > cards_seq.IndexOf(p2[ 0 ]) )
+											if (cards_seq.IndexOf(p1[0]) > cards_seq.IndexOf(p2[0]))
 											{
 												player1_wins++;
 
@@ -3007,7 +3019,7 @@ namespace ProjectEularProblems
 										}
 
 									}
-									else if ( p2.Count(a => a == suit) == 4 )
+									else if (p2.Count(a => a == suit) == 4)
 									{
 
 										goto end;
@@ -3015,16 +3027,16 @@ namespace ProjectEularProblems
 								}
 
 								//check higher full house (three of a kind and a pair)
-								else if ( p1_hands_points == 7 )
+								else if (p1_hands_points == 7)
 								{
-									if ( p1.Count(a => a == suit) == 3 )
+									if (p1.Count(a => a == suit) == 3)
 									{
-										if ( p2.Count(a => a == suit) == 3 )//they have same 3 of a kind
+										if (p2.Count(a => a == suit) == 3)//they have same 3 of a kind
 										{
 											//check 2 of a kind
 											p2 = p2.Replace(suit.ToString(), "");
 											p1 = p1.Replace(suit.ToString(), "");
-											if ( p1[ 0 ] > p2[ 0 ] )
+											if (p1[0] > p2[0])
 											{
 
 												player1_wins++;
@@ -3038,7 +3050,7 @@ namespace ProjectEularProblems
 											goto end;
 										}
 									}
-									else if ( p2.Count(a => a == suit) == 3 )
+									else if (p2.Count(a => a == suit) == 3)
 									{
 
 										goto end;
@@ -3046,15 +3058,15 @@ namespace ProjectEularProblems
 								}
 
 								//check higher flush (all cards of the same suit)
-								else if ( p1_hands_points == 6 )
+								else if (p1_hands_points == 6)
 								{
-									if ( p1.Contains(suit) && !p2.Contains(suit) )
+									if (p1.Contains(suit) && !p2.Contains(suit))
 									{
 
 										player1_wins++;
 										goto end;
 									}
-									else if ( !p1.Contains(suit) && p2.Contains(suit) )
+									else if (!p1.Contains(suit) && p2.Contains(suit))
 									{
 
 										goto end;
@@ -3062,15 +3074,15 @@ namespace ProjectEularProblems
 								}
 
 								//check higher straight (all cards are consecutive values)
-								else if ( p1_hands_points == 5 )
+								else if (p1_hands_points == 5)
 								{
-									if ( p1.Contains(suit) && !p2.Contains(suit) )
+									if (p1.Contains(suit) && !p2.Contains(suit))
 									{
 
 										player1_wins++;
 										goto end;
 									}
-									else if ( !p1.Contains(suit) && p2.Contains(suit) )
+									else if (!p1.Contains(suit) && p2.Contains(suit))
 									{
 
 										goto end;
@@ -3078,22 +3090,22 @@ namespace ProjectEularProblems
 								}
 
 								//check higher three of a kind )
-								else if ( p1_hands_points == 4 )
+								else if (p1_hands_points == 4)
 								{
-									if ( p1.Count(a => a == suit) == 3 )
+									if (p1.Count(a => a == suit) == 3)
 									{
-										if ( p2.Count(a => a == suit) == 3 )
+										if (p2.Count(a => a == suit) == 3)
 										{
 											//check high card
 											p1 = p1.Replace(suit.ToString(), "");
 											p2 = p2.Replace(suit.ToString(), "");
-											if ( cards_seq.IndexOf(p1[ 0 ]) > cards_seq.IndexOf(p2[ 0 ]) || cards_seq.IndexOf(p1[ 0 ]) > cards_seq.IndexOf(p2[ 1 ]) )
+											if (cards_seq.IndexOf(p1[0]) > cards_seq.IndexOf(p2[0]) || cards_seq.IndexOf(p1[0]) > cards_seq.IndexOf(p2[1]))
 											{
 
 												player1_wins++;
 												goto end;
 											}
-											else if ( cards_seq.IndexOf(p1[ 1 ]) > cards_seq.IndexOf(p2[ 0 ]) || cards_seq.IndexOf(p1[ 1 ]) > cards_seq.IndexOf(p2[ 1 ]) )
+											else if (cards_seq.IndexOf(p1[1]) > cards_seq.IndexOf(p2[0]) || cards_seq.IndexOf(p1[1]) > cards_seq.IndexOf(p2[1]))
 											{
 
 												player1_wins++;
@@ -3107,7 +3119,7 @@ namespace ProjectEularProblems
 											goto end;
 										}
 									}
-									else if ( p2.Count(a => a == suit) == 3 )
+									else if (p2.Count(a => a == suit) == 3)
 									{
 
 										goto end;
@@ -3115,49 +3127,49 @@ namespace ProjectEularProblems
 								}
 
 								//check higher 2 pairs
-								else if ( p1_hands_points == 3 )
+								else if (p1_hands_points == 3)
 								{
-									if ( p1.Count(a => a == suit) == 2 && p2.Count(a => a == suit) != 2 )
+									if (p1.Count(a => a == suit) == 2 && p2.Count(a => a == suit) != 2)
 									{
 										player1_wins++;
 
 										goto end;
 									}
-									else if ( p2.Count(a => a == suit) == 2 && p1.Count(a => a == suit) != 2 )
+									else if (p2.Count(a => a == suit) == 2 && p1.Count(a => a == suit) != 2)
 									{
 
 										goto end;
 									}
-									else if ( p2.Count(a => a == suit) == 2 && p1.Count(a => a == suit) == 2 )
+									else if (p2.Count(a => a == suit) == 2 && p1.Count(a => a == suit) == 2)
 									{
 										p1 = p1.Replace(suit.ToString(), "");
 										p2 = p2.Replace(suit.ToString(), "");
 
-										for ( int i = cards_seq.IndexOf(suit) - 1; i >= 0; i-- )
+										for (int i = cards_seq.IndexOf(suit) - 1; i >= 0; i--)
 										{
-											char st = cards_seq[ i ];
-											if ( p1.Count(a => a == st) == 2 && p2.Count(a => a == st) != 2 )
+											char st = cards_seq[i];
+											if (p1.Count(a => a == st) == 2 && p2.Count(a => a == st) != 2)
 											{
 												player1_wins++;
 
 												goto end;
 											}
-											else if ( p2.Count(a => a == st) == 2 && p1.Count(a => a == st) != 2 )
+											else if (p2.Count(a => a == st) == 2 && p1.Count(a => a == st) != 2)
 											{
 
 												goto end;
 											}
-											else if ( p2.Count(a => a == st) == 2 && p1.Count(a => a == st) == 2 )
+											else if (p2.Count(a => a == st) == 2 && p1.Count(a => a == st) == 2)
 											{
 												p1 = p1.Replace(st.ToString(), "");
 												p2 = p2.Replace(st.ToString(), "");
-												if ( cards_seq.IndexOf(p1[ 0 ]) > cards_seq.IndexOf(p2[ 0 ]) )
+												if (cards_seq.IndexOf(p1[0]) > cards_seq.IndexOf(p2[0]))
 												{
 													player1_wins++;
 
 													goto end;
 												}
-												else if ( cards_seq.IndexOf(p1[ 0 ]) < cards_seq.IndexOf(p2[ 0 ]) )
+												else if (cards_seq.IndexOf(p1[0]) < cards_seq.IndexOf(p2[0]))
 												{
 
 													goto end;
@@ -3169,23 +3181,23 @@ namespace ProjectEularProblems
 								}
 
 								//check higher 1 pairs
-								else if ( p1_hands_points == 2 )
+								else if (p1_hands_points == 2)
 								{
-									if ( p1.Count(a => a == suit) == 2 )
+									if (p1.Count(a => a == suit) == 2)
 									{
-										if ( p2.Count(a => a == suit) == 2 )
+										if (p2.Count(a => a == suit) == 2)
 										{
 											p1 = p1.Replace(suit.ToString(), "");
 											p2 = p2.Replace(suit.ToString(), "");
-											for ( int i = cards_seq.Length - 1; i >= 0; i-- )
+											for (int i = cards_seq.Length - 1; i >= 0; i--)
 											{
-												if ( p1.Contains(cards_seq[ i ]) && !p2.Contains(cards_seq[ i ]) )
+												if (p1.Contains(cards_seq[i]) && !p2.Contains(cards_seq[i]))
 												{
 
 													player1_wins++;
 													goto end;
 												}
-												if ( p2.Contains(cards_seq[ i ]) && !p1.Contains(cards_seq[ i ]) )
+												if (p2.Contains(cards_seq[i]) && !p1.Contains(cards_seq[i]))
 												{
 
 													goto end;
@@ -3199,7 +3211,7 @@ namespace ProjectEularProblems
 											goto end;
 										}
 									}
-									else if ( p2.Count(a => a == suit) == 2 )
+									else if (p2.Count(a => a == suit) == 2)
 									{
 
 										goto end;
@@ -3229,35 +3241,35 @@ namespace ProjectEularProblems
 		/// </summary>
 		/// <param name="hand">The string of the five cards separarted by a single space eg "AD TH 2S 2C QD".</param>
 		/// <returns>Score between 10 to 2 or -1 to -13, positive score is One Pair - Royal Flush, nagative score is a High Card (-1 for Ace, -13 for 2). </returns>
-		private static int CheckHand( string hand )
+		private static int CheckHand(string hand)
 		{
 			//int points = 0;
 			string cards_seq = "23456789TJQKA";
 
 			//check same suit
-			if ( hand.Count(a => a == 'H') == 5 || hand.Count(a => a == 'D') == 5 || hand.Count(a => a == 'S') == 5 || hand.Count(a => a == 'C') == 5 )//if same suit
+			if (hand.Count(a => a == 'H') == 5 || hand.Count(a => a == 'D') == 5 || hand.Count(a => a == 'S') == 5 || hand.Count(a => a == 'C') == 5)//if same suit
 			{
 				//check royal flush
-				if ( hand.TakeWhile(a => a > 57).Sum(b => b) == 'T' + 'J' + 'Q' + 'K' + 'A' )
+				if (hand.TakeWhile(a => a > 57).Sum(b => b) == 'T' + 'J' + 'Q' + 'K' + 'A')
 				{
 					return 10;//royal flush (Ten - Ace in same suit)
 				}
 
 				//check straight flush
-				string p1_ = new string(hand.Replace(hand[ 1 ].ToString(), "").ToArray());
+				string p1_ = new string(hand.Replace(hand[1].ToString(), "").ToArray());
 				string p1_hand = string.Empty;
-				for ( int i = 0; i < cards_seq.Length; i++ )
+				for (int i = 0; i < cards_seq.Length; i++)
 				{
-					int c = hand.Count(a => a == cards_seq[ i ]);
-					for ( int j = 0; j < c; j++ )
+					int c = hand.Count(a => a == cards_seq[i]);
+					for (int j = 0; j < c; j++)
 					{
-						p1_hand += cards_seq[ i ];
+						p1_hand += cards_seq[i];
 					}
 				}
-				int index = cards_seq.IndexOf(p1_hand[ 0 ]);
+				int index = cards_seq.IndexOf(p1_hand[0]);
 				int count = 13 - index >= 5 ? 5 : 13 - index;
 				string compare = cards_seq.Substring(index, count);
-				if ( p1_hand == compare )
+				if (p1_hand == compare)
 				{
 					return 9;//straight flush (all cards are consecutive values of same suit)
 				}
@@ -3267,41 +3279,41 @@ namespace ProjectEularProblems
 			else
 			{
 				string p1_hand = string.Empty;
-				for ( int i = 0; i < cards_seq.Length; i++ )
+				for (int i = 0; i < cards_seq.Length; i++)
 				{
-					int c = hand.Count(a => a == cards_seq[ i ]);
-					for ( int j = 0; j < c; j++ )
+					int c = hand.Count(a => a == cards_seq[i]);
+					for (int j = 0; j < c; j++)
 					{
-						p1_hand += cards_seq[ i ];
+						p1_hand += cards_seq[i];
 					}
 				}
-				int index = cards_seq.IndexOf(p1_hand[ 0 ]);
+				int index = cards_seq.IndexOf(p1_hand[0]);
 				int count = 13 - index >= 5 ? 5 : 13 - index;
 				string compare = cards_seq.Substring(index, count);
-				if ( p1_hand == compare )
+				if (p1_hand == compare)
 				{
 					return 5;//straight (all cards are consecutive values)
 				}
 
 				//check others
-				for ( int k = cards_seq.Length - 1; k >= 0; k-- )
+				for (int k = cards_seq.Length - 1; k >= 0; k--)
 				{
-					char suit = cards_seq[ k ];
-					if ( p1_hand.Count(a => a == suit) == 4 )
+					char suit = cards_seq[k];
+					if (p1_hand.Count(a => a == suit) == 4)
 					{
 						return 8;//four of a kind (4 cards of same value)
 					}
 				}
 
-				for ( int k = cards_seq.Length - 1; k >= 0; k-- )
+				for (int k = cards_seq.Length - 1; k >= 0; k--)
 				{
-					char suit = cards_seq[ k ];
+					char suit = cards_seq[k];
 
-					if ( p1_hand.Count(a => a == suit) == 3 )
+					if (p1_hand.Count(a => a == suit) == 3)
 					{
 						//check if theres a pair
 						string new_p1 = p1_hand.Replace(suit.ToString(), "");
-						if ( new_p1[ 0 ] == new_p1[ 1 ] )
+						if (new_p1[0] == new_p1[1])
 						{
 							return 7;//full house (three of a kind and a pair)
 						}
@@ -3309,17 +3321,17 @@ namespace ProjectEularProblems
 					}
 				}
 
-				for ( int k = cards_seq.Length - 1; k >= 0; k-- )
+				for (int k = cards_seq.Length - 1; k >= 0; k--)
 				{
-					char suit = cards_seq[ k ];
-					if ( p1_hand.Count(a => a == suit) == 2 )
+					char suit = cards_seq[k];
+					if (p1_hand.Count(a => a == suit) == 2)
 					{
 						string new_p1 = p1_hand.Replace(suit.ToString(), "");
-						if ( new_p1.Count(a => a == new_p1[ 0 ]) == 2 )
+						if (new_p1.Count(a => a == new_p1[0]) == 2)
 						{
 							return 3; //two pairs
 						}
-						else if ( new_p1.Count(a => a == new_p1[ 1 ]) == 2 )
+						else if (new_p1.Count(a => a == new_p1[1]) == 2)
 						{
 							return 3; //two pairs
 						}
@@ -3327,9 +3339,9 @@ namespace ProjectEularProblems
 					}
 				}
 				//check high card
-				for ( int i = cards_seq.Length - 1; i >= 0; i-- )
+				for (int i = cards_seq.Length - 1; i >= 0; i--)
 				{
-					if ( hand.Contains(cards_seq[ i ]) )
+					if (hand.Contains(cards_seq[i]))
 					{
 						return i - 13;
 					}
@@ -3353,7 +3365,7 @@ namespace ProjectEularProblems
 		public static void p055_LychrelNumbers()
 		{
 			int lychrel = 0;
-			for ( int i = 11; i < 10000; i++ )//take a number
+			for (int i = 11; i < 10000; i++)//take a number
 			{
 				int iterations = 1;
 				//reverse i
@@ -3363,9 +3375,9 @@ namespace ProjectEularProblems
 				//check if sum is a palindrome
 				reverse = BigInteger.Parse(new string(sum.ToString().Reverse().ToArray()));
 
-				while ( sum != reverse )//while not palindrome
+				while (sum != reverse)//while not palindrome
 				{
-					if ( iterations == 50 )
+					if (iterations == 50)
 					{
 						lychrel++;
 						break;
@@ -3388,9 +3400,9 @@ namespace ProjectEularProblems
 			BigInteger x;
 			int max_sum = 0;
 			int sum = 0;
-			for ( int i = 1; i < 100; i++ )
+			for (int i = 1; i < 100; i++)
 			{
-				for ( int j = 0; j < 100; j++ )
+				for (int j = 0; j < 100; j++)
 				{
 					x = BigInteger.Pow(i, j);
 					sum = x.ToString().Sum(a => int.Parse(a.ToString()));
@@ -3420,7 +3432,7 @@ namespace ProjectEularProblems
 			BigInteger count = 0;
 			BigInteger n = 3;
 			BigInteger d = 2;
-			for ( int i = 1; i < 1000; i++ )
+			for (int i = 1; i < 1000; i++)
 			{
 				n = n + 2 * d;
 				d = n - d;
@@ -3453,18 +3465,18 @@ namespace ProjectEularProblems
 			int center = 1;
 			int adder = 2;
 			int counter = 0;
-			while ( true )
+			while (true)
 			{
 				center = center + adder;
 				dia_prime = CheckPrime(center) ? dia_prime + 1 : dia_prime;
 
 				counter++;
 				adder = counter == 4 ? adder + 2 : adder;
-				dia_count = counter == 4 ? ( float ) ( Math.Sqrt(center) * 2 ) - 1 : dia_count;
+				dia_count = counter == 4 ? (float)(Math.Sqrt(center) * 2) - 1 : dia_count;
 				counter = counter == 4 ? 0 : counter;
 
-				res = ( dia_prime / dia_count ) * 100;
-				if ( res <= 10 )
+				res = (dia_prime / dia_count) * 100;
+				if (res <= 10)
 				{
 					double grid = Math.Sqrt(center);
 					Console.WriteLine($"a {grid} x {grid} grid has {res}% prime numbers");
@@ -3484,7 +3496,7 @@ namespace ProjectEularProblems
 		/// </summary>
 		public static void p059_XORDecryption()
 		{
-			using ( StreamReader sr = new StreamReader("p059_cipher.txt") )
+			using (StreamReader sr = new StreamReader("p059_cipher.txt"))
 			{
 				int[] cipher = Array.ConvertAll(sr.ReadToEnd().Split(','), a => int.Parse(a));//text to be decrypted
 				string alphabet = "abcdefghijklmnopqrstuvwxyz";
@@ -3492,25 +3504,25 @@ namespace ProjectEularProblems
 				string found = string.Empty;
 
 				//generate combinations in 3s then permute those combinations
-				for ( int i = 0; i < alphabet.Length - 2; i++ )
+				for (int i = 0; i < alphabet.Length - 2; i++)
 				{
-					for ( int j = i + 1; j < alphabet.Length - 1; j++ )
+					for (int j = i + 1; j < alphabet.Length - 1; j++)
 					{
-						for ( int k = j + 1; k < alphabet.Length; k++ )
+						for (int k = j + 1; k < alphabet.Length; k++)
 						{
-							Permutation($"{alphabet[ i ]}{alphabet[ j ]}{alphabet[ k ]}", 0, 2, keys);//permutation of the combination
-							foreach ( string key in keys )
+							Permutation($"{alphabet[i]}{alphabet[j]}{alphabet[k]}", 0, 2, keys);//permutation of the combination
+							foreach (string key in keys)
 							{
 								string sb = "";
 								int count = 0;//for repeating key cyclically
-								foreach ( int letter in cipher )
+								foreach (int letter in cipher)
 								{
-									sb += char.ConvertFromUtf32(letter ^ key[ count ]);//xor cipher text with possible key
+									sb += char.ConvertFromUtf32(letter ^ key[count]);//xor cipher text with possible key
 									count++;
 									count = count == 3 ? 0 : count;
 								}
 
-								if ( sb.Contains(" the ") )
+								if (sb.Contains(" the "))
 								{
 									found = sb;
 									Console.WriteLine(sb);
@@ -3529,61 +3541,62 @@ namespace ProjectEularProblems
 				Console.WriteLine(found.ToCharArray().Sum(a => a));
 			}
 		}
-		private static void Permutation( string str, int left, int right, List<string> res )
+		private static void Permutation(string str, int left, int right, List<string> res)
 		{
-			if ( left == right )
+			if (left == right)
 			{
 				res.Add(str);
 			}
 			else
 			{
-				for ( int i = left; i <= right; i++ )
+				for (int i = left; i <= right; i++)
 				{
 					//swap(str[ left ], str[ i ]);
 					char[] lft = str.ToCharArray();
-					char c = str[ i ];
-					lft[ i ] = lft[ left ];
-					lft[ left ] = c;
+					char c = str[i];
+					lft[i] = lft[left];
+					lft[left] = c;
 					str = new string(lft);
 
 					Permutation(str, left + 1, right, res);
 					//swap(str[ left ], str[ i ]); //swap back for backtracking
 					lft = str.ToCharArray();
-					c = str[ i ];
-					lft[ i ] = lft[ left ];
-					lft[ left ] = c;
+					c = str[i];
+					lft[i] = lft[left];
+					lft[left] = c;
 					str = new string(lft);
 				}
 			}
 		}
 
-		private static void Permutation( string str, int left, int right, HashSet<ulong> res, string original_number, string n )
+		private static void Permutation(string str, int left, int right, HashSet<ulong> res, string original_number, string n)
 		{
-			if ( left == right )
+			if (left == right)
 			{
 				//ulong i = ulong.Parse(str);
-				if (str[0] >= original_number[0] &&  Math.Pow(ulong.Parse(str), ( double ) 1 / 3).ToString().Length == n.Length ){
+				if (str[0] >= original_number[0] && Math.Pow(ulong.Parse(str), (double)1 / 3).ToString().Length == n.Length)
+				{
 
 					res.Add(ulong.Parse(str));
 				}
 			}
 			else
 			{
-				for ( int i = left; i <= right; i++ )
+				for (int i = left; i <= right; i++)
 				{
 					//swap(str[ left ], str[ i ]);
 					char[] lft = str.ToCharArray();
-					char c = str[ i ];
-					lft[ i ] = lft[ left ];
-					lft[ left ] = c;
+					char c = str[i];
+					lft[i] = lft[left];
+					lft[left] = c;
 					str = new string(lft);
 
 					Permutation(str, left + 1, right, res, original_number, n);
 					//swap(str[ left ], str[ i ]); //swap back for backtracking
 					lft = str.ToCharArray();
-					c = str[ i ];
-					lft[ i ] = lft[ left ];
-					lft[ left ] = c;
+					c = str[i];
+					lft[i] = lft[left];
+					lft[left] = c;
 					str = new string(lft);
 				}
 			}
@@ -3600,103 +3613,103 @@ namespace ProjectEularProblems
 
 			//get primes
 			List<int> primes = new List<int>();
-			int[] mapped_primes = new int[ 1000000 ];
-			for ( int i = 0; i < 10000; i++ )
+			int[] mapped_primes = new int[1000000];
+			for (int i = 0; i < 10000; i++)
 			{
-				if ( CheckPrime(i) )
+				if (CheckPrime(i))
 				{
 					primes.Add(i);
-					mapped_primes[ i ] = i;
+					mapped_primes[i] = i;
 				}
 			}
-			for ( int i = 10001; i < 1000000; i++ )
+			for (int i = 10001; i < 1000000; i++)
 			{
-				if ( CheckPrime(i) )
+				if (CheckPrime(i))
 				{
-					mapped_primes[ i ] = i;
+					mapped_primes[i] = i;
 				}
 			}
 
 			int concat1, concat2 = 0;
-			int[] five = new int[ 5 ];
+			int[] five = new int[5];
 
-			for ( int a = 0; a < primes.Count - 3; a++ )
+			for (int a = 0; a < primes.Count - 3; a++)
 			{
-				for ( int b = a + 1; b < primes.Count - 2; b++ )
+				for (int b = a + 1; b < primes.Count - 2; b++)
 				{
-					concat1 = int.Parse($"{primes[ a ]}{primes[ b ]}");
-					concat2 = int.Parse($"{primes[ b ]}{primes[ a ]}");
+					concat1 = int.Parse($"{primes[a]}{primes[b]}");
+					concat2 = int.Parse($"{primes[b]}{primes[a]}");
 
-					if ( concat1 < 1000000 && concat2 < 1000000 )
+					if (concat1 < 1000000 && concat2 < 1000000)
 					{
-						if ( mapped_primes[ concat1 ] != concat1 || mapped_primes[ concat2 ] != concat2 )
+						if (mapped_primes[concat1] != concat1 || mapped_primes[concat2] != concat2)
 						{
 							continue;//failed check next
 						}
 
 					}
-					else if ( !CheckPrime(concat1) || !CheckPrime(concat2) )
+					else if (!CheckPrime(concat1) || !CheckPrime(concat2))
 					{
 						continue;//failed check next
 					}
 
-					for ( int c = b + 1; c < primes.Count - 1; c++ )
+					for (int c = b + 1; c < primes.Count - 1; c++)
 					{
-						concat1 = int.Parse($"{primes[ b ]}{primes[ c ]}");
-						concat2 = int.Parse($"{primes[ c ]}{primes[ b ]}");
+						concat1 = int.Parse($"{primes[b]}{primes[c]}");
+						concat2 = int.Parse($"{primes[c]}{primes[b]}");
 
-						if ( concat1 < 1000000 && concat2 < 1000000 )
+						if (concat1 < 1000000 && concat2 < 1000000)
 						{
-							if ( mapped_primes[ concat1 ] != concat1 || mapped_primes[ concat2 ] != concat2 )
+							if (mapped_primes[concat1] != concat1 || mapped_primes[concat2] != concat2)
 							{
 								continue;//failed check next
 							}
 
 						}
-						else if ( !CheckPrime(concat1) || !CheckPrime(concat2) )
+						else if (!CheckPrime(concat1) || !CheckPrime(concat2))
 						{
 							continue;//failed check next
 						}
 
-						for ( int d = c + 1; d < primes.Count; d++ )
+						for (int d = c + 1; d < primes.Count; d++)
 						{
-							concat1 = int.Parse($"{primes[ c ]}{primes[ d ]}");
-							concat2 = int.Parse($"{primes[ d ]}{primes[ c ]}");
+							concat1 = int.Parse($"{primes[c]}{primes[d]}");
+							concat2 = int.Parse($"{primes[d]}{primes[c]}");
 
-							if ( concat1 < 1000000 && concat2 < 1000000 )
+							if (concat1 < 1000000 && concat2 < 1000000)
 							{
-								if ( mapped_primes[ concat1 ] != concat1 || mapped_primes[ concat2 ] != concat2 )
+								if (mapped_primes[concat1] != concat1 || mapped_primes[concat2] != concat2)
 								{
 									continue;//failed check next
 								}
 
 							}
-							else if ( !CheckPrime(concat1) || !CheckPrime(concat2) )
+							else if (!CheckPrime(concat1) || !CheckPrime(concat2))
 							{
 								continue;//failed check next
 							}
 
-							five[ 0 ] = primes[ a ];
-							five[ 1 ] = primes[ b ];
-							five[ 2 ] = primes[ c ];
-							five[ 3 ] = primes[ d ];
+							five[0] = primes[a];
+							five[1] = primes[b];
+							five[2] = primes[c];
+							five[3] = primes[d];
 
 							//checking if the 4 numbers concact and still produce a prime
-							for ( int i = 0; i < five.Length - 1; i++ )
+							for (int i = 0; i < five.Length - 1; i++)
 							{
-								for ( int j = i + 2; j < five.Length - 1; j++ )
+								for (int j = i + 2; j < five.Length - 1; j++)
 								{
 									//if ( i == j ) { continue; }
-									concat1 = int.Parse($"{five[ i ]}{five[ j ]}");
-									concat2 = int.Parse($"{five[ j ]}{five[ i ]}");
-									if ( concat1 < 1000000 && concat2 < 1000000 )
+									concat1 = int.Parse($"{five[i]}{five[j]}");
+									concat2 = int.Parse($"{five[j]}{five[i]}");
+									if (concat1 < 1000000 && concat2 < 1000000)
 									{
-										if ( mapped_primes[ concat1 ] != concat1 || mapped_primes[ concat2 ] != concat2 )
+										if (mapped_primes[concat1] != concat1 || mapped_primes[concat2] != concat2)
 										{
 											goto nxt;//failed check next
 										}
 									}
-									else if ( !CheckPrime(concat1) || !CheckPrime(concat2) )
+									else if (!CheckPrime(concat1) || !CheckPrime(concat2))
 									{
 										goto nxt;//failed check next
 									}
@@ -3704,22 +3717,22 @@ namespace ProjectEularProblems
 							}
 
 							//find the fifth prime
-							for ( int i = primes.IndexOf(primes[ d ]) + 1; i < primes.Count; i++ )
+							for (int i = primes.IndexOf(primes[d]) + 1; i < primes.Count; i++)
 							{
-								five[ 4 ] = primes[ i ];
+								five[4] = primes[i];
 								//concat posible 5 primes 
-								for ( int k = 0; k < five.Length - 1; k++ )
+								for (int k = 0; k < five.Length - 1; k++)
 								{
-									concat1 = int.Parse($"{five[ k ]}{five[ 4 ]}");
-									concat2 = int.Parse($"{five[ 4 ]}{five[ k ]}");
-									if ( concat1 < 1000000 && concat2 < 1000000 )
+									concat1 = int.Parse($"{five[k]}{five[4]}");
+									concat2 = int.Parse($"{five[4]}{five[k]}");
+									if (concat1 < 1000000 && concat2 < 1000000)
 									{
-										if ( mapped_primes[ concat1 ] != concat1 || mapped_primes[ concat2 ] != concat2 )
+										if (mapped_primes[concat1] != concat1 || mapped_primes[concat2] != concat2)
 										{
 											goto nxts;//failed check next
 										}
 									}
-									else if ( !CheckPrime(concat1) || !CheckPrime(concat2) )
+									else if (!CheckPrime(concat1) || !CheckPrime(concat2))
 									{
 										goto nxts;//failed check next
 									}
@@ -3737,7 +3750,7 @@ namespace ProjectEularProblems
 				}
 			}
 		end:
-			Console.WriteLine($"Five primes are: {five[ 0 ]}, {five[ 1 ]}, {five[ 2 ]}, {five[ 3 ]}, {five[ 4 ]}");
+			Console.WriteLine($"Five primes are: {five[0]}, {five[1]}, {five[2]}, {five[3]}, {five[4]}");
 			Console.WriteLine($"Sum of primes: {five.Sum()}");
 		}
 
@@ -3765,61 +3778,61 @@ namespace ProjectEularProblems
 			HashSet<string> validator1 = new HashSet<string>();
 			HashSet<string> validator2 = new HashSet<string>();
 
-			for ( int a = 45; a <= 140; a++ )
+			for (int a = 45; a <= 140; a++)
 			{
 				//triangle
-				tri = ( ( a * ( a + 1 ) ) / 2 ).ToString();
-				container[ 0 ] = tri;
+				tri = ((a * (a + 1)) / 2).ToString();
+				container[0] = tri;
 
-				for ( int b = 32; b <= 99; b++ )
+				for (int b = 32; b <= 99; b++)
 				{
 					//square
-					sqr = ( b * b ).ToString();
-					container[ 1 ] = sqr;
+					sqr = (b * b).ToString();
+					container[1] = sqr;
 
-					for ( int c = 26; c <= 81; c++ )
+					for (int c = 26; c <= 81; c++)
 					{
 						//pentagonal
-						pent = ( ( c * ( ( 3 * c ) - 1 ) ) / 2 ).ToString();
-						container[ 2 ] = pent;
+						pent = ((c * ((3 * c) - 1)) / 2).ToString();
+						container[2] = pent;
 
-						foreach ( string value in container )
+						foreach (string value in container)
 						{
-							if ( value != null )
+							if (value != null)
 							{
 								validator1.Add(value.Substring(0, 2));
 								validator2.Add(value.Substring(2, 2));
 							}
 						}
 						validator1.IntersectWith(validator2);
-						if ( validator1.Count != 3 )
+						if (validator1.Count != 3)
 						{
 							validator1.Clear();
 							validator2.Clear();
 							continue;
 						}
 
-						for ( int d = 23; d <= 70; d++ )
+						for (int d = 23; d <= 70; d++)
 						{
 							//hexagonal
-							hex = (d * ((d * 2) - 1) ).ToString();
-							container[ 3 ] = hex;
+							hex = (d * ((d * 2) - 1)).ToString();
+							container[3] = hex;
 
-							for ( int e = 21; e <= 63; e++ )
-								{
+							for (int e = 21; e <= 63; e++)
+							{
 								//heptagonal
-								hept = ( ( e * ( ( 5 * e ) - 3 ) ) / 2 ).ToString();
-								container[ 4 ] = hept;
+								hept = ((e * ((5 * e) - 3)) / 2).ToString();
+								container[4] = hept;
 
-								for ( int f = 19; f <= 58; f++ )
+								for (int f = 19; f <= 58; f++)
 								{
 									//octagonal
-									oct = (  f * ( ( 3 * f ) - 2 ) ).ToString();
-									container[ 5 ] = oct;
+									oct = (f * ((3 * f) - 2)).ToString();
+									container[5] = oct;
 
-									foreach ( string value in container )
+									foreach (string value in container)
 									{
-										if( value.Substring(0, 2)  == value.Substring(2, 2) )
+										if (value.Substring(0, 2) == value.Substring(2, 2))
 										{
 											goto nxt;
 										}
@@ -3827,7 +3840,7 @@ namespace ProjectEularProblems
 										validator2.Add(value.Substring(2, 2));
 									}
 									validator1.IntersectWith(validator2);
-									if ( validator1.Count == 6 )
+									if (validator1.Count == 6)
 									{
 										Console.WriteLine($"P3,{a} = {tri}");
 										Console.WriteLine($"P4,{b} = {sqr}");
@@ -3838,17 +3851,17 @@ namespace ProjectEularProblems
 										Console.WriteLine($"sum: {Array.ConvertAll(new string[] { tri, sqr, pent, hex, hept, oct }, num => int.Parse(num)).Sum()}");
 										goto end;
 									}
-									nxt:
+								nxt:
 									validator1.Clear();
 									validator2.Clear();
 								}
 							}
 						}
-						
+
 					}
 				}
 			}
-			end:
+		end:
 			Console.WriteLine();
 		}
 
@@ -3859,33 +3872,33 @@ namespace ProjectEularProblems
 		/// </summary>
 		public static void p062_CubicPermutations()
 		{
-			string cube1,cube2,cube3,cube4,cube5 = "";
-			for ( BigInteger i = 5000;  ; i++ )
+			string cube1, cube2, cube3, cube4, cube5 = "";
+			for (BigInteger i = 5000; ; i++)
 			{
-				cube1 = new string(( i * i * i ).ToString().OrderBy(a => a).ToArray());
-				for ( BigInteger j = i+1; ; j++ )
+				cube1 = new string((i * i * i).ToString().OrderBy(a => a).ToArray());
+				for (BigInteger j = i + 1; ; j++)
 				{
-					cube2 = new string(( j * j * j ).ToString().OrderBy(a => a).ToArray());
-					if(cube2.Length > cube1.Length ) { break; }
-					if(cube1 == cube2 )
+					cube2 = new string((j * j * j).ToString().OrderBy(a => a).ToArray());
+					if (cube2.Length > cube1.Length) { break; }
+					if (cube1 == cube2)
 					{
-						for ( BigInteger k = j+1;  ; k++ )
+						for (BigInteger k = j + 1; ; k++)
 						{
-							cube3 = new string(( k * k * k ).ToString().OrderBy(a => a).ToArray());
-							if(cube3.Length > cube1.Length ) { break; }
-							if(cube2 == cube3 )
+							cube3 = new string((k * k * k).ToString().OrderBy(a => a).ToArray());
+							if (cube3.Length > cube1.Length) { break; }
+							if (cube2 == cube3)
 							{
-								for ( BigInteger l = k+1; ; l++ )
+								for (BigInteger l = k + 1; ; l++)
 								{
-									cube4 = new string(( l * l * l ).ToString().OrderBy(a => a).ToArray());
-									if ( cube4.Length > cube1.Length ) { break; }
-									if ( cube3 == cube4 )
+									cube4 = new string((l * l * l).ToString().OrderBy(a => a).ToArray());
+									if (cube4.Length > cube1.Length) { break; }
+									if (cube3 == cube4)
 									{
-										for ( BigInteger m = l + 1; ; m ++ )
+										for (BigInteger m = l + 1; ; m++)
 										{
-											cube5 = new string(( m * m * m ).ToString().OrderBy(a => a).ToArray());
-											if ( cube5.Length > cube1.Length ) { break; }
-											if ( cube4 == cube5 )
+											cube5 = new string((m * m * m).ToString().OrderBy(a => a).ToArray());
+											if (cube5.Length > cube1.Length) { break; }
+											if (cube4 == cube5)
 											{
 												Console.WriteLine($"{i}^3 ==> {i * i * i}");
 												Console.WriteLine($"{j}^3 ==> {j * j * j}");
@@ -3902,7 +3915,7 @@ namespace ProjectEularProblems
 					}
 				}
 			}
-			end:
+		end:
 			Console.WriteLine();
 		}
 
@@ -3915,21 +3928,21 @@ namespace ProjectEularProblems
 		{
 			BigInteger res = 0;
 			int count = 0;
-			for ( int bas = 1; bas <= 10; bas++ )
+			for (int bas = 1; bas <= 10; bas++)
 			{
-				for ( int exp = 1; exp <= 50; exp++ )
+				for (int exp = 1; exp <= 50; exp++)
 				{
 
-					res = BigInteger.Pow(bas, exp) ;
-					if( res.ToString().Length == exp )
+					res = BigInteger.Pow(bas, exp);
+					if (res.ToString().Length == exp)
 					{
 						count++;
 						//Console.WriteLine($"{bas} ^ {exp} = {res}");
 					}
-					
+
 				}
 			}
-			Console.WriteLine(count) ;
+			Console.WriteLine(count);
 		}
 
 		/// <summary>
@@ -3951,23 +3964,23 @@ namespace ProjectEularProblems
 			double count = 0;
 			List<double> a_values = new List<double>(50);
 
-			for ( int S = 2; S < 10000; S++ )
+			for (int S = 2; S < 10000; S++)
 			{
 				double root_S = Math.Sqrt(S);
-				if (root_S.ToString().Contains('.') )//if (irrational) square root
+				if (root_S.ToString().Contains('.'))//if (irrational) square root
 				{
 					m = 0;//default
 					d = 1;//default
-					a = ( int ) root_S;
-					
+					a = (int)root_S;
+
 					double a1 = a;//save first a
 
 					//find next m, d, a
-					while(a != a1 * 2 )//stop when current (a) is twice the first value of (a)
+					while (a != a1 * 2)//stop when current (a) is twice the first value of (a)
 					{
 						m = (d * a) - m;
-						d = ( S - (m * m)) / d;
-						a = (int)(( a1 + m ) / d);
+						d = (S - (m * m)) / d;
+						a = (int)((a1 + m) / d);
 
 						a_values.Add(a);
 					}
@@ -3996,7 +4009,7 @@ namespace ProjectEularProblems
 
 			//get first 100 convergents of e, 
 			//e convergents follows this pattern ==> 2,1,2,1,1,4,1,1,6,1,1,8...
-			while ( e_conv.Count <= 100 )
+			while (e_conv.Count <= 100)
 			{
 				e_conv.Add(1);
 				e_conv.Add(1);
@@ -4007,11 +4020,11 @@ namespace ProjectEularProblems
 			//compute values of continued fractions of e
 			//this algorithm starts from the last part of the continued fraction and ripples back up.
 
-			BigInteger numerator = 1 / e_conv[ 99 ] + e_conv[ 98 ];
+			BigInteger numerator = 1 / e_conv[99] + e_conv[98];
 			BigInteger denomenator = 1;
 			BigInteger prev_numerator = numerator;
 
-			for ( int i = 97; i >= 0; i-- )
+			for (int i = 97; i >= 0; i--)
 			{
 				numerator = numerator * e_conv[i] + denomenator; // prev numerator x i-th convergent (next convergent) + prev denomenator
 				denomenator = prev_numerator;
@@ -4049,25 +4062,25 @@ namespace ProjectEularProblems
 			double m, d, a = 0;
 
 			//find continued fraction of D.
-			for ( int D = 2; D < 1000 ; D++ )
+			for (int D = 2; D < 1000; D++)
 			{
 				//SEE PROBLEM 64.for below code
 				List<long> a_values = new List<long>(50);
 				double rootD = Math.Sqrt(D);
-				if (rootD % 1 != 0 )
+				if (rootD % 1 != 0)
 				{
 					m = 0;//default
 					d = 1;//default
-					a = ( int ) rootD;
+					a = (int)rootD;
 
 					double a1 = a;//save first a
 					a_values.Add((long)a);
 					//find next m, d, a
-					while ( a != a1 * 2 )//stop when current (a) is twice the first value of (a)
+					while (a != a1 * 2)//stop when current (a) is twice the first value of (a)
 					{
-						m = ( d * a ) - m;
-						d = ( D - ( m * m ) ) / d;
-						a = ( int ) ( ( a1 + m ) / d );
+						m = (d * a) - m;
+						d = (D - (m * m)) / d;
+						a = (int)((a1 + m) / d);
 
 						a_values.Add((long)a);//add next term
 					}
@@ -4079,36 +4092,36 @@ namespace ProjectEularProblems
 
 					int recur_index = 0;
 					//SEE IF NUMBER OF DIGITS IN SEQUENCE IS LINKED TO CORRECT ANSWER
-					while ( true)
+					while (true)
 					{
 						//calculate the denom and enum in the continued fraction
-						denomenator = a_values[ a_values.Count - 1 ];
-						numerator = ((denomenator * a_values[ a_values.Count - 2 ]) + 1);
+						denomenator = a_values[a_values.Count - 1];
+						numerator = ((denomenator * a_values[a_values.Count - 2]) + 1);
 						prev_numerator = numerator;
 
-						for ( int i = a_values.Count - 3; i >= 0; i-- )
+						for (int i = a_values.Count - 3; i >= 0; i--)
 						{
-							numerator = (numerator * a_values[ i ] + denomenator); // prev numerator x i-th convergent (next convergent) + prev denomenator
+							numerator = (numerator * a_values[i] + denomenator); // prev numerator x i-th convergent (next convergent) + prev denomenator
 							denomenator = prev_numerator;
 							prev_numerator = numerator;
 						}
 
 						//test the Diophantine equation x^2 + Dy^2 = 1.
-						if( (numerator * numerator ) -( D * ( denomenator * denomenator )) == 1 )
-						{ 
+						if ((numerator * numerator) - (D * (denomenator * denomenator)) == 1)
+						{
 							break;
 						}
 						else
 						{
 							//if diaphantine wasnt found add another number to a values and try again
-							if(a_leftover.Count != 0 )
+							if (a_leftover.Count != 0)
 							{
 								a_values.Add(a_leftover.Dequeue());//add leftovers first
 
 							}
 							else
 							{
-								a_values.Add(a_recur[ recur_index ]);
+								a_values.Add(a_recur[recur_index]);
 								recur_index = recur_index == a_recur.Count - 1 ? 0 : recur_index + 1;
 
 							}
@@ -4121,7 +4134,7 @@ namespace ProjectEularProblems
 			}
 			Console.ForegroundColor = ConsoleColor.Green;
 			Console.WriteLine();
-			Console.WriteLine($"largest D: {bigD}, X: {bigX}"); 
+			Console.WriteLine($"largest D: {bigD}, X: {bigX}");
 			Console.ForegroundColor = ConsoleColor.White;
 
 		}
@@ -4140,10 +4153,10 @@ namespace ProjectEularProblems
 		public static void p067_MaxPathSum_2()
 		{
 			List<int[]> numbers = new List<int[]>();
-			using(StreamReader sr = new StreamReader("./Problem67.txt") )
+			using (StreamReader sr = new StreamReader("./Problem67.txt"))
 			{
 				string text = "";
-				while((text = sr.ReadLine()) != null )
+				while ((text = sr.ReadLine()) != null)
 				{
 					numbers.Add(Array.ConvertAll(text.Split(' '), n => int.Parse(n)));
 				}
@@ -4151,35 +4164,35 @@ namespace ProjectEularProblems
 
 			List<int[]> new_numbers = new List<int[]>();
 
-			for ( int i = 0; i < numbers.Count-1; i++ )
+			for (int i = 0; i < numbers.Count - 1; i++)
 			{
 				List<int> neww = new List<int>();
-				for ( int r = 0; r < numbers[i].Length; r++ )//current row
+				for (int r = 0; r < numbers[i].Length; r++)//current row
 				{
-					for ( int R = r; R < r + 2; R++ )//next row
+					for (int R = r; R < r + 2; R++)//next row
 					{
-						neww.Add(numbers[ i ][ r ] + numbers[ i + 1 ][ R ]);
+						neww.Add(numbers[i][r] + numbers[i + 1][R]);
 					}
 				}
 
 				List<int> nu = new List<int>();
-				if ( neww.Count > 2 )//get max for inbetween numbers
+				if (neww.Count > 2)//get max for inbetween numbers
 				{
-					nu.Add(neww[ 0 ]);
-					for ( int j = 1; j <= neww.Count - 2; j += 2 )
+					nu.Add(neww[0]);
+					for (int j = 1; j <= neww.Count - 2; j += 2)
 					{
-						nu.Add(Math.Max(neww[ j ], neww[ j + 1 ]));
+						nu.Add(Math.Max(neww[j], neww[j + 1]));
 					}
-					nu.Add(neww[ neww.Count - 1 ]);
-					numbers[ i + 1 ] = nu.ToArray();
+					nu.Add(neww[neww.Count - 1]);
+					numbers[i + 1] = nu.ToArray();
 				}
 				else
 				{
-					numbers[ i + 1 ] = neww.ToArray();
+					numbers[i + 1] = neww.ToArray();
 				}
 			}
 			Console.ForegroundColor = ConsoleColor.Green;
-			Console.WriteLine("MAX: " + numbers[numbers.Count-1].Max());
+			Console.WriteLine("MAX: " + numbers[numbers.Count - 1].Max());
 			Console.ForegroundColor = ConsoleColor.White;
 
 		}
@@ -4207,17 +4220,17 @@ namespace ProjectEularProblems
 			//List<string> perm = new List<string>();
 			int[] nums = { 1, 2, 3, 4, 5, 6, 7, 8, 9, 0 };
 			List<string> FinalPerms = new List<string>();
-			for ( int a = 0; a < nums.Length-4; a++ )
+			for (int a = 0; a < nums.Length - 4; a++)
 			{
-				for ( int b = a+1; b < nums.Length-3; b++ )
+				for (int b = a + 1; b < nums.Length - 3; b++)
 				{
-					for ( int c = b+1; c < nums.Length-2; c++ )
+					for (int c = b + 1; c < nums.Length - 2; c++)
 					{
-						for ( int d = c+1; d < nums.Length-1; d++ )
+						for (int d = c + 1; d < nums.Length - 1; d++)
 						{
-							for ( int e = d+1; e < nums.Length; e++ )
+							for (int e = d + 1; e < nums.Length; e++)
 							{
-								MagicPermutation($"{nums[a]}{nums[ b ]}{nums[ c ]}{nums[ d ]}{nums[ e ]}", 0,4, FinalPerms);
+								MagicPermutation($"{nums[a]}{nums[b]}{nums[c]}{nums[d]}{nums[e]}", 0, 4, FinalPerms);
 							}
 						}
 					}
@@ -4225,105 +4238,105 @@ namespace ProjectEularProblems
 			}
 
 			FinalPerms = FinalPerms.Where(a => a.Contains('0')).ToList();//only take the ones with a 0(10) because answer should have a ten
-			for ( int p = FinalPerms.Count-1; p >=0 ; p-- )
+			for (int p = FinalPerms.Count - 1; p >= 0; p--)
 			{
 
-				string perm = FinalPerms[ p ];
+				string perm = FinalPerms[p];
 				int[] used = Array.ConvertAll(perm.ToCharArray().ToArray(), a => int.Parse(a.ToString()));
 				int[] not_used = nums.Except(used).ToArray();
-				for ( int i = 0; i < not_used.Length; i++ )
+				for (int i = 0; i < not_used.Length; i++)
 				{
-					if(used[i] == 0 )
+					if (used[i] == 0)
 					{
-						used[ i ] = 10;
+						used[i] = 10;
 					}
 
-					if ( not_used[ i ] == 0 )
+					if (not_used[i] == 0)
 					{
-						not_used[ i ] = 10;
+						not_used[i] = 10;
 					}
 				}
 
 				List<int[]> possible20 = new List<int[]>();
 
-				for ( int i = 0; i < not_used.Length; i++ )
+				for (int i = 0; i < not_used.Length; i++)
 				{
-					for ( int j = 0; j < not_used.Length; j++ )
+					for (int j = 0; j < not_used.Length; j++)
 					{
-						if ( i == j ) { continue; }
-						possible20.Add(new int[] { nums[ i ] , nums[j]});
+						if (i == j) { continue; }
+						possible20.Add(new int[] { nums[i], nums[j] });
 						//Console.WriteLine($"{nums[i]}, {nums[j]}");
 					}
 				}
 				int maxvalue = 0;
 				int minvalue = int.MaxValue;
-				
+
 				List<Dictionary<string, int>> container = new List<Dictionary<string, int>>();
-				foreach ( int item in used )
+				foreach (int item in used)
 				{
 					Dictionary<string, int> res = new Dictionary<string, int>();
-					foreach ( int[] twent in possible20 )
+					foreach (int[] twent in possible20)
 					{
-						if ( item + twent[ 0 ] + twent[ 1 ] > 12 )//12 bcoz example ended at 12
+						if (item + twent[0] + twent[1] > 12)//12 bcoz example ended at 12
 						{
-							res.Add($"{item}{twent[ 0 ]}{twent[ 1 ]}", item + twent[ 0 ] + twent[ 1 ]);
+							res.Add($"{item}{twent[0]}{twent[1]}", item + twent[0] + twent[1]);
 						}
 					}
-					
+
 					maxvalue = res.Values.Max() > maxvalue ? res.Values.Max() : maxvalue;
 					minvalue = res.Values.Min() < minvalue ? res.Values.Min() : minvalue;
 					container.Add(new Dictionary<string, int>(res));
-					
+
 				}
 				//remove sums that are not in other groups
-				for ( int i = minvalue; i <= maxvalue; i++ )
+				for (int i = minvalue; i <= maxvalue; i++)
 				{
-					for ( int j = 0; j < 5; j++ )
+					for (int j = 0; j < 5; j++)
 					{
 						//Dictionary<string, int> d = container[ j ];
-						if ( container[ j ].Values.Where(a => a == i).Count() == 0 )
+						if (container[j].Values.Where(a => a == i).Count() == 0)
 						{
-							container[0] = container[ 0 ].Where(a => a.Value != i).ToDictionary(b=>b.Key,c=>c.Value);
-							container[1] = container[ 1 ].Where(a => a.Value != i).ToDictionary(b=>b.Key,c=>c.Value);
-							container[2] = container[ 2 ].Where(a => a.Value != i).ToDictionary(b=>b.Key,c=>c.Value);
-							container[3] = container[ 3 ].Where(a => a.Value != i).ToDictionary(b=>b.Key,c=>c.Value);
-							container[4] = container[ 4 ].Where(a => a.Value != i).ToDictionary(b=>b.Key,c=>c.Value);
+							container[0] = container[0].Where(a => a.Value != i).ToDictionary(b => b.Key, c => c.Value);
+							container[1] = container[1].Where(a => a.Value != i).ToDictionary(b => b.Key, c => c.Value);
+							container[2] = container[2].Where(a => a.Value != i).ToDictionary(b => b.Key, c => c.Value);
+							container[3] = container[3].Where(a => a.Value != i).ToDictionary(b => b.Key, c => c.Value);
+							container[4] = container[4].Where(a => a.Value != i).ToDictionary(b => b.Key, c => c.Value);
 						}
-						
+
 					}
 				}
 				//find correct pairing 
-				for ( int a = 0; a < container[0].Count; a++ )
+				for (int a = 0; a < container[0].Count; a++)
 				{
-					for ( int b = 0; b < container[1].Count; b++ )
+					for (int b = 0; b < container[1].Count; b++)
 					{
-						if(container[0].Values.ElementAt(a) != container[ 1 ].Values.ElementAt(b) ) { continue; }
-						for ( int c = 0; c < container[2].Count; c++ )
+						if (container[0].Values.ElementAt(a) != container[1].Values.ElementAt(b)) { continue; }
+						for (int c = 0; c < container[2].Count; c++)
 						{
-							if(container[1].Values.ElementAt(b) != container[ 2 ].Values.ElementAt(c) ) { continue; }
-							for ( int d = 0; d < container[3].Count; d++ )
+							if (container[1].Values.ElementAt(b) != container[2].Values.ElementAt(c)) { continue; }
+							for (int d = 0; d < container[3].Count; d++)
 							{
-								if(container[2].Values.ElementAt(c) != container[ 3 ].Values.ElementAt(d) ) { continue; }
-								for ( int e = 0; e < container[4].Count; e++ )
+								if (container[2].Values.ElementAt(c) != container[3].Values.ElementAt(d)) { continue; }
+								for (int e = 0; e < container[4].Count; e++)
 								{
-									if ( container[ 3].Values.ElementAt(d) != container[ 4 ].Values.ElementAt(e) ) { continue; }
+									if (container[3].Values.ElementAt(d) != container[4].Values.ElementAt(e)) { continue; }
 
-									string aa = container[ 0 ].Keys.ElementAt(a);
-									string bb = container[ 1 ].Keys.ElementAt(b);
-									string cc = container[ 2 ].Keys.ElementAt(c);
-									string dd = container[ 3 ].Keys.ElementAt(d);
-									string ee = container[ 4 ].Keys.ElementAt(e);
+									string aa = container[0].Keys.ElementAt(a);
+									string bb = container[1].Keys.ElementAt(b);
+									string cc = container[2].Keys.ElementAt(c);
+									string dd = container[3].Keys.ElementAt(d);
+									string ee = container[4].Keys.ElementAt(e);
 									string mainstr = $"{aa}{bb}{cc}{dd}{ee}";
 
-									if(aa[aa.Length-1] == bb[ bb.Length - 2 ] && mainstr.Where(x=>x == aa[aa.Length-1]).Count() == 2)
+									if (aa[aa.Length - 1] == bb[bb.Length - 2] && mainstr.Where(x => x == aa[aa.Length - 1]).Count() == 2)
 									{
-										if ( bb[ bb.Length - 1 ] == cc[ cc.Length - 2 ] && mainstr.Where(x => x == bb[ bb.Length - 1 ]).Count() == 3 )
+										if (bb[bb.Length - 1] == cc[cc.Length - 2] && mainstr.Where(x => x == bb[bb.Length - 1]).Count() == 3)
 										{
-											if ( cc[ cc.Length - 1 ] == dd[ dd.Length - 2 ] && mainstr.Where(x => x == cc[ cc.Length - 1 ]).Count() == 2 )
+											if (cc[cc.Length - 1] == dd[dd.Length - 2] && mainstr.Where(x => x == cc[cc.Length - 1]).Count() == 2)
 											{
-												if ( dd[ dd.Length - 1 ] == ee[ ee.Length - 2 ] && mainstr.Where(x => x == dd[ dd.Length - 1 ]).Count() == 2 )
+												if (dd[dd.Length - 1] == ee[ee.Length - 2] && mainstr.Where(x => x == dd[dd.Length - 1]).Count() == 2)
 												{
-													if ( mainstr.Where(x => x == ee[ ee.Length - 1 ]).Count() == 2 )
+													if (mainstr.Where(x => x == ee[ee.Length - 1]).Count() == 2)
 													{
 														Console.WriteLine($"{aa} {bb} {cc} {dd} {ee}");
 														goto end;
@@ -4338,20 +4351,20 @@ namespace ProjectEularProblems
 					}
 				}
 			}
-			end:
+		end:
 			Console.WriteLine();
 		}
 		//for p68
-		private static void MagicPermutation( string str, int left, int right, List<string> res )
+		private static void MagicPermutation(string str, int left, int right, List<string> res)
 		{
-			if ( left == right )
+			if (left == right)
 			{
-				string zero = str[ 0 ] == '0' ? "10" : str[ 0 ].ToString();
+				string zero = str[0] == '0' ? "10" : str[0].ToString();
 				string current = "";
-				foreach ( char item in str )
+				foreach (char item in str)
 				{
 					current = item == '0' ? "10" : item.ToString();
-					if ( int.Parse(zero) > int.Parse(current) )
+					if (int.Parse(zero) > int.Parse(current))
 					{
 						goto jump;
 					}
@@ -4363,21 +4376,21 @@ namespace ProjectEularProblems
 			}
 			else
 			{
-				for ( int i = left; i <= right; i++ )
+				for (int i = left; i <= right; i++)
 				{
 					//swap(str[ left ], str[ i ]);
 					char[] lft = str.ToCharArray();
-					char c = str[ i ];
-					lft[ i ] = lft[ left ];
-					lft[ left ] = c;
+					char c = str[i];
+					lft[i] = lft[left];
+					lft[left] = c;
 					str = new string(lft);
 
 					MagicPermutation(str, left + 1, right, res);
 					//swap(str[ left ], str[ i ]); //swap back for backtracking
 					lft = str.ToCharArray();
-					c = str[ i ];
-					lft[ i ] = lft[ left ];
-					lft[ left ] = c;
+					c = str[i];
+					lft[i] = lft[left];
+					lft[left] = c;
 					str = new string(lft);
 				}
 			}
@@ -4404,33 +4417,33 @@ namespace ProjectEularProblems
 			//try only looking at even numbers
 			double max = 0;
 			int num = 0;
-			int[][] facts = new int[ 1000001 ][]; 
-			List<int> primes = new List<int>( 20 ); 
-			for ( int i = 2; i <= 20; i++ )//have at least a thousand primes (just a guess)
+			int[][] facts = new int[1000001][];
+			List<int> primes = new List<int>(20);
+			for (int i = 2; i <= 20; i++)//have at least a thousand primes (just a guess)
 			{
-				if ( CheckPrime(i) ) 
+				if (CheckPrime(i))
 				{
-					primes.Add(i); 
+					primes.Add(i);
 				}
 			}
 
-			for ( int n = 2; n < 1_000_001; n+=2 )
+			for (int n = 2; n < 1_000_001; n += 2)
 			{
 				double totient_func = 1;
 				//get factors of n
 				HashSet<int> n_factors = GetFactors(n, primes, facts);
-				for ( int i = 0; i < n_factors.Count; i++ )
+				for (int i = 0; i < n_factors.Count; i++)
 				{
-					totient_func *= ( 1 - (1 / (double)n_factors.ElementAt(i)) );
+					totient_func *= (1 - (1 / (double)n_factors.ElementAt(i)));
 				}
 				;
 				totient_func = Math.Round(totient_func * n);
 				//Console.WriteLine($"{n} / {totient_func} ==> {(double)n/totient_func}");
 
-				num = n/(double)totient_func > max ? n : num;
-				max = n/(double)totient_func > max ? n / ( double ) totient_func : max;
+				num = n / (double)totient_func > max ? n : num;
+				max = n / (double)totient_func > max ? n / (double)totient_func : max;
 			}
-			
+
 			Console.WriteLine($"Max: {max}, AT n = {num}");
 		}
 
@@ -4450,34 +4463,34 @@ namespace ProjectEularProblems
 			int division_result = number;//store the division result
 
 			//first find the prime factors of i
-			for ( int n = 0; n < primes_container.Count; )//iterate all primes below i (then divide them into i) 
+			for (int n = 0; n < primes_container.Count;)//iterate all primes below i (then divide them into i) 
 			{
-				if ( facts[ division_result ] == null )//if facts of current num hasnt been found yet
+				if (facts[division_result] == null)//if facts of current num hasnt been found yet
 				{
-					if ( division_result % primes_container[ n ] == 0 )//if prime can divide into i
+					if (division_result % primes_container[n] == 0)//if prime can divide into i
 					{
-						divisors.Add(primes_container[ n ]);
-						if ( division_result / primes_container[ n ] == 1 )//if the division result is 1 (we are done finding the prime factors)
+						divisors.Add(primes_container[n]);
+						if (division_result / primes_container[n] == 1)//if the division result is 1 (we are done finding the prime factors)
 						{
-							facts[ number ] = divisors.ToArray();
+							facts[number] = divisors.ToArray();
 							break;
 						}
-						division_result = division_result / primes_container[ n ];
+						division_result = division_result / primes_container[n];
 					}
 					else
 					{
-						if ( CheckPrime(division_result) )
+						if (CheckPrime(division_result))
 						{
 							divisors.Add(division_result);
 							break;
 						}
-						n++; 
+						n++;
 					}
 				}
 				else
 				{
-					divisors.AddRange(facts[ division_result ]);
-					facts[ number ] = divisors.ToArray();
+					divisors.AddRange(facts[division_result]);
+					facts[number] = divisors.ToArray();
 					break;
 				}
 			}
@@ -4485,16 +4498,15 @@ namespace ProjectEularProblems
 			return new HashSet<int>(divisors);
 		}
 
-
 		/// <summary>
 		/// Find the greatest common divisor of two numbers.
 		/// </summary>
 		/// <param name="a">First number.</param>
 		/// <param name="b">Second number.</param>
 		/// <returns>The highest common factor of two numbers.</returns>
-		public static int hcf( int a, int b )
+		public static int hcf(int a, int b)
 		{
-			if ( b == 0 )
+			if (b == 0)
 			{
 				return a;
 			}
@@ -4511,14 +4523,14 @@ namespace ProjectEularProblems
 		public static void p070_TotientPermutation()
 		{
 			int num = 0;
-			int[][] facts = new int[ 10000001 ][];
+			int[][] facts = new int[10000001][];
 			Dictionary<int, int> totatives = new Dictionary<int, int>(4001);
 
 			List<int> primes = new List<int>(2600);
 
-			for ( int i = 2; i <= 2500; i++ )
+			for (int i = 2; i <= 2500; i++)
 			{
-				if ( CheckPrime(i) )
+				if (CheckPrime(i))
 				{
 					primes.Add(i);
 				}
@@ -4526,23 +4538,23 @@ namespace ProjectEularProblems
 			double totient = -1;
 
 			// only look at odd numbers
-			for ( int n = 1001; n <= 4001; n += 2 )
+			for (int n = 1001; n <= 4001; n += 2)
 			{
 				double totient_func = 1.0;
 
 				//get factors of n
 				HashSet<int> n_factors = GetFactors(n, primes, facts);
-				for ( int i = 0; i < n_factors.Count; i++ )
+				for (int i = 0; i < n_factors.Count; i++)
 				{
-					totient_func *= ( 1 - ( 1 / ( double ) n_factors.ElementAt(i) ) );// Eulers Product Formula
+					totient_func *= (1 - (1 / (double)n_factors.ElementAt(i)));// Eulers Product Formula
 				}
 
-				totatives.Add(n, ( int ) Math.Round(totient_func * n));
+				totatives.Add(n, (int)Math.Round(totient_func * n));
 
-				if ( totient_func > totient && totient_func != 1 )//if has minimun ratio
+				if (totient_func > totient && totient_func != 1)//if has minimun ratio
 				{
-					if ( new string(Math.Round(totient_func * n).ToString().OrderBy(a => a).ToArray()) ==
-						new string(n.ToString().OrderBy(a => a).ToArray()) )//if is a permutation
+					if (new string(Math.Round(totient_func * n).ToString().OrderBy(a => a).ToArray()) ==
+						new string(n.ToString().OrderBy(a => a).ToArray()))//if is a permutation
 					{
 						totient = totient_func;
 
@@ -4550,23 +4562,23 @@ namespace ProjectEularProblems
 						Console.WriteLine($"n({n}) = , ({totient})");
 					}
 				}
-				if ( n >= 4000 )//calculate other totients using the 4000 totients found (faster)
+				if (n >= 4000)//calculate other totients using the 4000 totients found (faster)
 				{
-					for ( int i = 0; i < totatives.Keys.Count(); i++ )
+					for (int i = 0; i < totatives.Keys.Count(); i++)
 					{
-						for ( int j = i + 1; j < totatives.Keys.Count() - 1; j++ )
+						for (int j = i + 1; j < totatives.Keys.Count() - 1; j++)
 						{
 							//phi(mn) = phi(m) x phi(n)
 							int n_ = totatives.Keys.ElementAt(i) * totatives.Keys.ElementAt(j);
-							if ( n_ < 10_000_000 && n_ > 1_000_000 )
+							if (n_ < 10_000_000 && n_ > 1_000_000)
 							{
 								int tot = totatives.Values.ElementAt(i) * totatives.Values.ElementAt(j);
-								totient_func = ( tot ) / ( double ) n_;
+								totient_func = (tot) / (double)n_;
 
-								if ( totient_func > totient && totient_func != 1 )//if has minimum ratio
+								if (totient_func > totient && totient_func != 1)//if has minimum ratio
 								{
-									if ( new string(tot.ToString().OrderBy(a => a).ToArray()) ==
-										new string(n_.ToString().OrderBy(a => a).ToArray()) )//if its a permutation
+									if (new string(tot.ToString().OrderBy(a => a).ToArray()) ==
+										new string(n_.ToString().OrderBy(a => a).ToArray()))//if its a permutation
 									{
 										totient = totient_func;
 										num = n_;
@@ -4594,20 +4606,20 @@ namespace ProjectEularProblems
 		/// </summary>
 		public static void p071_OrderedFractions()
 		{
-			double three7 = 3/7.0;
+			double three7 = 3 / 7.0;
 			double best_left = 100;
 			double numerator = 0;
 			double denominator = 0;
 			double div = 0;
 			double abs = 0;
-			for ( int i = 999_999; i > 1; i-=2 )
+			for (int i = 999_999; i > 1; i -= 2)
 			{
-				if ( i % 7 == 0 )
+				if (i % 7 == 0)
 				{
-					for ( double j = i / 3; j <= i / 2; j += 2 )
+					for (double j = i / 3; j <= i / 2; j += 2)
 					{
 						div = j / i;
-						if ( div > three7 )
+						if (div > three7)
 						{
 							break;
 						}
@@ -4633,19 +4645,19 @@ namespace ProjectEularProblems
 		public static void p072_CountingFractions()
 		{
 			//you get the answer by adding totients of all numbers <= d
-			double max = 0;
+			//double max = 0;
 			BigInteger num = 0;
 			int d = 1000000;
-			int[][] facts = new int[ d + 1 ][];
+			int[][] facts = new int[d + 1][];
 			List<int> primes = new List<int>(d);
 			double totient_;
 
-			for ( int i = 2; i <= d; i++ )//have at least a thousand primes (just a guess)
+			for (int i = 2; i <= d; i++)//have at least a thousand primes (just a guess)
 			{
-				if ( CheckPrime(i) )
+				if (CheckPrime(i))
 				{
 					primes.Add(i);
-					facts[ i ] = new int[] { i };
+					facts[i] = new int[] { i };
 					num += i - 1;//if a number is prime the totient is number - 1
 				}
 				else
@@ -4653,13 +4665,13 @@ namespace ProjectEularProblems
 					totient_ = 1;
 					//get factors of n
 					HashSet<int> n_factors = GetFactors(i, primes, facts);
-					for ( int j = 0; j < n_factors.Count; j++ )
+					for (int j = 0; j < n_factors.Count; j++)
 					{
-						totient_ *= ( 1 - ( 1 / ( double ) n_factors.ElementAt(j) ) );//the formulae
+						totient_ *= (1 - (1 / (double)n_factors.ElementAt(j)));//the formulae
 					}
 
 					totient_ = Math.Round(totient_ * i);
-					num += ( int ) totient_;//add totient
+					num += (int)totient_;//add totient
 				}
 			}
 			Console.Write($"Number of elements <= {d}: ");
@@ -4669,7 +4681,138 @@ namespace ProjectEularProblems
 
 		}
 
+		/// <summary>
+		/// PROBLEM 73.
+		/// Consider the fraction, n/d, where n and d are positive integers. If n<d and HCF(n,d)=1, it is called a reduced proper fraction.
+		/// If we list the set of reduced proper fractions for d ≤ 8 in ascending order of size, we get:
+		/// 1/8, 1/7, 1/6, 1/5, 1/4, 2/7, 1/3, 3/8, 2/5, 3/7, 1/2, 4/7, 3/5, 5/8, 2/3, 5/7, 3/4, 4/5, 5/6, 6/7, 7/8
+		/// It can be seen that there are 3 fractions between 1/3 and 1/2.
+		/// How many fractions lie between 1/3 and 1/2 in the sorted set of reduced proper fractions for d ≤ 12,000?
+		/// </summary>
+		public static void p073_CountingFractionsInRange()
+		{
+			HashSet<double> nums = new HashSet<double>();
+			int d = 12000;
+			double div;
+			double half = 1 / 2.0;
+			double third = 1 / 3.0;
+			int reject = 0;
+			for (int i = 1; i < d; i++)
+			{
+				for (double j = i + 1.0; j <= d; j++)
+				{
+					div = i / j;
+					if (div < half && div > third)
+					{
+						if (!nums.Add(i / j))
+						{
+							reject++;
+						}
+					}
+				}
+			}
+			Console.WriteLine($"{nums.Count()} fractions are between 1/3 & 1/2");
+			Console.WriteLine($"{reject} numbers are duplicates.");
+		}
+
+		/// <summary>
+		/// PROBLEM 74.
+		/// The number 145 is well known for the property that the sum of the factorial of its digits is equal to 145:
+		/// 1! + 4! + 5! = 1 + 24 + 120 = 145
+		/// Perhaps less well known is 169, in that it produces the longest chain of numbers that link back to 169; it turns out that there are only three such loops that exist:
+		/// 169 → 363601 → 1454 → 169
+		/// 871 → 45361 → 871
+		/// 872 → 45362 → 872
+		/// It is not difficult to prove that EVERY starting number will eventually get stuck in a loop.For example,
+		/// 69 → 363600 → 1454 → 169 → 363601 (→ 1454)
+		/// 78 → 45360 → 871 → 45361 (→ 871)
+		/// 40 → 145 (→ 145)
+		/// Starting with 69 produces a chain of five non-repeating terms, but the longest non-repeating chain with a starting number below one million is sixty terms.
+		/// How many chains, with a starting number below one million, contain exactly sixty non-repeating terms?
+		/// </summary>
+		public static void p074_DigitFactorialChains()
+		{
+			//get and store factorials of 0 to 9
+			Dictionary<int, int> factorials = new Dictionary<int, int>(10);
+			for (int i = 0; i < 10; i++)
+			{
+
+				factorials.Add(i + 48, Factorial(i));
+			}
+			//int[][] all_chains = new int[][1000000];
+			char[] s;
+			int sum = 0;
+			int answer = 0;
+			for (int i = 169; i < 1_000_000; i++)
+			{
+				HashSet<int> chain = new HashSet<int>();
+				int prev = i;
+				while (chain.Add(prev))
+				{
+
+					sum = 0;
+					s = prev.ToString().ToCharArray();
+					foreach (char item in s)
+					{
+						sum += factorials[(int)item];
+					}
+
+					prev = sum;
+				}
+				answer = chain.Count() == 60 ? answer + 1 : answer;
+			}
+
+			Console.WriteLine($"{answer} chains contain exactly sixty non-repeating terms.");
+		}
+
+		/// <summary>
+		/// PROBLEM 75.
+		/// It turns out that 12 cm is the smallest length of wire that can be bent to form an integer sided right angle triangle in exactly one way, but there are many more examples.
+		/// 12 cm: (3,4,5)
+		/// 24 cm: (6,8,10)
+		/// 30 cm: (5,12,13)
+		/// 36 cm: (9,12,15)
+		/// 40 cm: (8,15,17)
+		/// 48 cm: (12,16,20)
+		/// In contrast, some lengths of wire, like 20 cm, cannot be bent to form an integer sided right angle triangle, and other lengths allow more than one solution to be found; for example, using 120 cm it is possible to form exactly three different integer sided right angle triangles.
+		/// 120 cm: (30,40,50), (20,48,52), (24,45,51)
+		/// Given that L is the length of the wire, for how many values of L ≤ 1,500,000 can exactly one integer sided right angle triangle be formed?
+		/// </summary>
+		public static void p075_SingularIntegerRightTriangles()
+		{
+			int max = 1_500_000;
+			int with_one = max;
+			int[] solutions = new int[max];
+			double limit = Math.Sqrt(max / 2.0);
+			for (int m = 2; m < limit; m++)
+			{
+				int m2 = m * m;
+				for (int n = 1; n < m; n++)
+				{
+					if ((m + n) % 2 == 1 && hcf(m, n) == 1)
+					{
+						int n2 = n * n;
+						int a = m2 - n2;
+						int b = 2 * m * n;
+						int c = m2 + n2;
+						for (int k = 1; ; k++)
+						{
+							int L = (k * a) + (k * b) + (k * c);
+							if (L < max)
+							{
+								solutions[L]++;
+							}
+							else
+							{
+								break;
+							}
+						}
+
+					}
+				}
+			}
+			Console.WriteLine($"{solutions.Where(a => a == 1).Count()} lengths have exactly one solution.");
+		}
 
 	}
-
 }
