@@ -24,7 +24,7 @@ namespace ProjectEularProblems
 
 			Stopwatch sp = new Stopwatch();
 			sp.Start();
-			p075_SingularIntegerRightTriangles();
+			p076_CountingSummations();
 			sp.Stop();
 			Console.WriteLine("\nruntime: " + sp.ElapsedMilliseconds / 1000.0 + "s");
 			Console.ReadLine();
@@ -4814,5 +4814,32 @@ namespace ProjectEularProblems
 			Console.WriteLine($"{solutions.Where(a => a == 1).Count()} lengths have exactly one solution.");
 		}
 
+		/// <summary>
+		/// PROBLEM 76.
+		/// It is possible to write five as a sum in exactly six different ways:
+		/// 4 + 1
+		/// 3 + 2
+		/// 3 + 1 + 1
+		/// 2 + 2 + 1
+		/// 2 + 1 + 1 + 1
+		/// 1 + 1 + 1 + 1 + 1
+		/// How many different ways can one hundred be written as a sum of at least two positive integers?
+		/// </summary>
+		public static void p076_CountingSummations()
+		{
+			int target = 100;
+			int[] ways = new int[target + 1];
+			ways[0] = 1;
+
+			for (int i = 1; i <= 99; i++)
+			{
+				for (int j = i; j <= target; j++)
+				{
+					ways[j] += ways[j - i];
+				}
+			}
+			Console.WriteLine(ways[ways.Length - 1]);
+		}
+		
 	}
 }
