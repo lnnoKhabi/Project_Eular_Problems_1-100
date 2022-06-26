@@ -24,7 +24,7 @@ namespace ProjectEularProblems
 
 			Stopwatch sp = new Stopwatch();
 			sp.Start();
-			p076_CountingSummations();
+			p077_CountingSummations();
 			sp.Stop();
 			Console.WriteLine("\nruntime: " + sp.ElapsedMilliseconds / 1000.0 + "s");
 			Console.ReadLine();
@@ -4827,11 +4827,11 @@ namespace ProjectEularProblems
 		/// </summary>
 		public static void p076_CountingSummations()
 		{
-			int target = 100;
+			int target = 5;
 			int[] ways = new int[target + 1];
 			ways[0] = 1;
 
-			for (int i = 1; i <= 99; i++)
+			for (int i = 1; i <= target-1; i++)
 			{
 				for (int j = i; j <= target; j++)
 				{
@@ -4840,6 +4840,133 @@ namespace ProjectEularProblems
 			}
 			Console.WriteLine(ways[ways.Length - 1]);
 		}
-		
+
+		/// <summary>
+		/// PROBLEM 77. 
+		/// It is possible to write ten as the sum of primes in exactly five different ways:
+		/// 7 + 3
+		/// 5 + 5
+		/// 5 + 3 + 2
+		/// 3 + 3 + 2 + 2
+		/// 2 + 2 + 2 + 2 + 2
+		/// What is the first value which can be written as the sum of primes in over five thousand different ways?
+		/// </summary>
+		public static void p077_CountingSummations()
+		{
+
+			Dictionary<int, List<string>> SumPairs = new Dictionary<int, List<string>>()
+			{
+				{2,new List<string>(){"2" } },
+				{3,new List<string>(){"3" } }
+			};
+
+			int[] primesContainer = new int[100];
+			primesContainer[2] = 2;
+			primesContainer[3] = 3;
+
+			for (int count = 4; ; count ++)
+			{
+				//assign x
+				int x = count;
+				SumPairs.Add(x, new List<string>());
+				if (CheckPrime(x))
+				{
+					SumPairs[x].Add(x.ToString());
+					primesContainer[x] = x;
+				}
+
+				HashSet<string> result = new HashSet<string>();
+
+				//Find two number pairs numbers that add up to x.
+				List<string> NumsAddingToX = new List<string>();
+				for (int i = 2; i <= x / 2; i++)
+				{
+					NumsAddingToX.Add($"{i} {x - i}");
+					if(x % i == 0)
+					{
+
+						if (primesContainer[i] == 0)
+						{
+							if (CheckPrime(i))
+							{
+								primesContainer[i] = i;
+
+
+								string s = "";
+								for (int j = 0; j < x / i; j++)
+								{
+									s += j == (x / i) - 1 ? i.ToString() : $"{i} ";
+								}
+								result.Add(s);
+							}
+							else primesContainer[i] = -1;
+						}
+					}
+				}
+
+				//Use SumPairs to translate two number pairs
+				foreach (string twoNumPair in NumsAddingToX)
+				{
+					string[] two_nums = twoNumPair.Split(' ');
+
+					int a = int.Parse(two_nums[0].ToString());
+					int b = int.Parse(two_nums[1].ToString());
+
+					if(primesContainer[a] == 0)
+					{
+						if (CheckPrime(a))
+						{
+							primesContainer[a] = a;
+						}
+						else primesContainer[a] = -1;
+					}
+
+					if (primesContainer[b] == 0)
+					{
+						if (CheckPrime(b))
+						{
+							primesContainer[b] = b;
+						}
+						else primesContainer[b] = -1;
+					}
+
+					if (primesContainer[a] > 0 && primesContainer[b] > 0)//if a and b are prime
+					{
+						string concat = a + " " + b;
+						result.Add(concat);
+					}
+
+
+					foreach (string pair1 in SumPairs[a])
+					{
+						foreach (string pair2 in SumPairs[b])
+						{
+							string concat = pair1 + " " + pair2;
+							List<int> concat_sorted_ = Array.ConvertAll(concat.Split(' '), to_int => int.Parse(to_int)).ToList();
+							concat_sorted_.Sort();
+							concat = string.Join(" ", concat_sorted_);
+							result.Add(concat);
+						}
+					}
+
+				}
+				SumPairs[x].AddRange(result.ToList());
+				result.Clear();
+
+				//	Console.WriteLine();
+				//	foreach (string item in SumPairs[x])
+				//	{
+				//		Console.WriteLine(item);
+				//	}
+				//	Console.WriteLine();
+
+				if(SumPairs[x].Count > 5000)
+				{
+					Console.WriteLine($"{x} has {SumPairs[x].Count} sum pairs.");
+					break;
+				}
+			}
+		}
+
 	}
 }
